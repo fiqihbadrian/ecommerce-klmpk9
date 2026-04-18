@@ -44,7 +44,7 @@ export function ProductCard({ product, compact = false }: ProductCardProps) {
               }}
               className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-700 transition hover:bg-slate-200"
             >
-              <svg viewBox="0 0 24 24" className={isFavorite ? "h-4.5 w-4.5 fill-[#ef4444] stroke-[#ef4444]" : "h-4.5 w-4.5 stroke-current"} fill="none" strokeWidth="1.8">
+              <svg viewBox="0 0 24 24" className={isFavorite ? "h-4 w-4 fill-[#ef4444] stroke-[#ef4444]" : "h-4 w-4 stroke-current"} fill="none" strokeWidth="1.8">
                 <path d="M20 8.5c0 4.6-8 10.8-8 10.8S4 13.1 4 8.5A4.5 4.5 0 0 1 12 6a4.5 4.5 0 0 1 8 2.5Z" />
               </svg>
             </button>
