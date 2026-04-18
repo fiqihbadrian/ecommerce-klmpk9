@@ -73,10 +73,7 @@ export async function fetchProducts() {
     return [];
   }
 
-  const { data, error } = await supabase
-    .from("products")
-    .select("*")
-    .order("created_at", { ascending: false });
+  const { data, error } = await supabase.from("products").select("*");
 
   if (error) {
     throw new Error(error.message);

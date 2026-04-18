@@ -26,7 +26,14 @@ export default async function SearchPage({
   searchParams: SearchParams;
 }) {
   const query = getQueryValue(searchParams.q);
-  const products: Product[] = await searchProducts(query);
+  let products: Product[] = [];
+  let errorMessage: string | null = null;
+
+  try {
+    products = await searchProducts(query);
+  } catch (error) {
+    errorMessage = error instanceof Error ? error.message : "Gagal memuat hasil pencarian.";
+  }
 
   return (
     <PageShell>
@@ -56,7 +63,14 @@ export default async function SearchPage({
         </Link>
       </div>
 
-      {products.length === 0 ? (
+      {errorMessage ? (
+        <EmptyState
+          title="Search error"
+          description={errorMessage}
+          actionLabel="Kembali ke home"
+          actionHref="/home"
+        />
+      ) : products.length === 0 ? (
         <EmptyState
           title="Tidak ada hasil"
           description="Coba kata kunci lain atau cek data produk di database Supabase."
