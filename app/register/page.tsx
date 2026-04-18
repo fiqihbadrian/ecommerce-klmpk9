@@ -1,14 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { getSupabaseClient } from "@/lib/supabaseClient";
 
 export default function RegisterPage() {
-  const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -53,7 +51,7 @@ export default function RegisterPage() {
         });
 
         if (!signInResult.error) {
-          router.replace("/home");
+          window.location.assign("/home");
           return;
         }
 
@@ -68,7 +66,7 @@ export default function RegisterPage() {
     }
 
     if (data.session) {
-      router.replace("/home");
+      window.location.assign("/home");
       return;
     }
 
@@ -76,11 +74,11 @@ export default function RegisterPage() {
       setMessage(
         "Akun berhasil dibuat. Jika verifikasi email aktif, cek inbox atau login setelah verifikasi selesai.",
       );
-      router.replace("/login?registered=1");
+      window.location.assign("/login?registered=1");
       return;
     }
 
-    router.replace("/login?registered=1");
+    window.location.assign("/login?registered=1");
   }
 
   return (
