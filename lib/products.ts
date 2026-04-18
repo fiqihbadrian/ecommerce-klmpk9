@@ -82,7 +82,7 @@ export async function fetchProducts() {
     throw new Error(error.message);
   }
 
-  return (data ?? []).map((row) => normalizeProduct(row as ProductRow));
+  return (data ?? []).map((row: ProductRow) => normalizeProduct(row));
 }
 
 export async function fetchProductById(id: string) {
@@ -109,8 +109,8 @@ export async function fetchRelatedProducts(product: Product, limit = 4) {
   const products = await fetchProducts();
 
   return products
-    .filter((candidate) => candidate.id !== product.id)
-    .filter((candidate) => candidate.category === product.category)
+    .filter((candidate: Product) => candidate.id !== product.id)
+    .filter((candidate: Product) => candidate.category === product.category)
     .slice(0, limit);
 }
 
@@ -122,7 +122,7 @@ export async function searchProducts(query: string) {
     return products;
   }
 
-  return products.filter((product) => {
+  return products.filter((product: Product) => {
     return [product.title, product.category, product.description]
       .join(" ")
       .toLowerCase()
