@@ -4,7 +4,7 @@ import { PageShell } from "@/components/layout/page-shell";
 import { ProductCard } from "@/components/product-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { searchProducts } from "@/lib/products";
+import { searchProducts, type Product } from "@/lib/products";
 
 export const dynamic = "force-dynamic";
 
@@ -26,7 +26,7 @@ export default async function SearchPage({
   searchParams: SearchParams;
 }) {
   const query = getQueryValue(searchParams.q);
-  const products = await searchProducts(query);
+  const products: Product[] = await searchProducts(query);
 
   return (
     <PageShell>

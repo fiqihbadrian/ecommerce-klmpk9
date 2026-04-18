@@ -4,7 +4,7 @@ import { PageShell } from "@/components/layout/page-shell";
 import { ProductActions } from "@/components/product-actions";
 import { ProductCard } from "@/components/product-card";
 import { formatCurrency } from "@/lib/format";
-import { fetchProductById, fetchRelatedProducts } from "@/lib/products";
+import { fetchProductById, fetchRelatedProducts, type Product } from "@/lib/products";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +19,7 @@ export default async function ProductDetailPage({
     notFound();
   }
 
-  const relatedProducts = await fetchRelatedProducts(product);
+  const relatedProducts: Product[] = await fetchRelatedProducts(product);
 
   return (
     <PageShell>
