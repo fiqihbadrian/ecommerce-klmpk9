@@ -15,6 +15,10 @@ export default function RegisterPage() {
   const [message, setMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  function isRateLimitError(errorMessage: string) {
+    return /rate limit|email rate limit|too many requests/i.test(errorMessage);
+  }
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsSubmitting(true);
@@ -32,6 +36,7 @@ export default function RegisterPage() {
       email,
       password,
       options: {
+        emailRedirectTo: `${window.location.origin}/home`,
         data: {
           full_name: name,
         },
@@ -41,6 +46,23 @@ export default function RegisterPage() {
     setIsSubmitting(false);
 
     if (error) {
+      if (isRateLimitError(error.message)) {
+        const signInResult = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+
+        if (!signInResult.error) {
+          router.replace("/home");
+          return;
+        }
+
+        setMessage(
+          "Email sedang dibatasi Supabase. Jika akun sudah pernah dibuat, coba login. Kalau belum, tunggu beberapa menit lalu daftar lagi.",
+        );
+        return;
+      }
+
       setMessage(error.message);
       return;
     }
@@ -50,7 +72,15 @@ export default function RegisterPage() {
       return;
     }
 
-    setMessage("Akun dibuat. Cek email jika verifikasi aktif.");
+    if (data.user) {
+      setMessage(
+        "Akun berhasil dibuat. Jika verifikasi email aktif, cek inbox atau login setelah verifikasi selesai.",
+      );
+      router.replace("/login?registered=1");
+      return;
+    }
+
+    router.replace("/login?registered=1");
   }
 
   return (
