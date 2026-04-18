@@ -2,12 +2,12 @@ import { EmptyState } from "@/components/empty-state";
 import { PageShell } from "@/components/layout/page-shell";
 import { StorefrontHeader } from "@/components/layout/storefront-header";
 import { ProductCard } from "@/components/product-card";
-import { fetchProducts } from "@/lib/products";
+import { fetchProducts, type Product } from "@/lib/products";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  let products: Awaited<ReturnType<typeof fetchProducts>> = [];
+  let products: Product[] = [];
   let errorMessage: string | null = null;
 
   try {
