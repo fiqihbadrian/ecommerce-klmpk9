@@ -7,7 +7,7 @@ import { fetchProducts } from "@/lib/products";
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  let products = [];
+  let products: Awaited<ReturnType<typeof fetchProducts>> = [];
   let errorMessage: string | null = null;
 
   try {
