@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { EmptyState } from "@/components/empty-state";
 import { PageShell } from "@/components/layout/page-shell";
 import { ProductCard } from "@/components/product-card";
