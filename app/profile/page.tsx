@@ -35,27 +35,51 @@ export default function ProfilePage() {
         return;
       }
 
-      const { data } = await supabase.auth.getUser();
-      const user = data.user;
+      try {
+        const { data, error } = await supabase.auth.getUser();
 
-      if (!active) {
-        return;
-      }
+        if (error) {
+          throw error;
+        }
 
-      if (!user) {
+        const user = data.user;
+
+        if (!active) {
+          return;
+        }
+
+        if (!user) {
+          setProfile(null);
+          return;
+        }
+
+        const fullName = (user.user_metadata?.full_name as string | undefined) ?? user.email ?? "";
+
+        setProfile({
+          email: user.email ?? "",
+          fullName,
+        });
+        setName(fullName);
+      } catch (error) {
+        if (!active) {
+          return;
+        }
+
+        const errorMessage = error instanceof Error ? error.message : "Gagal memuat profil.";
+        const isLockContentionError =
+          errorMessage.includes("auth-token") &&
+          (errorMessage.includes("stole it") || errorMessage.includes("not released"));
+
         setProfile(null);
-        setLoading(false);
-        return;
+
+        if (!isLockContentionError) {
+          setMessage(errorMessage);
+        }
+      } finally {
+        if (active) {
+          setLoading(false);
+        }
       }
-
-      const fullName = (user.user_metadata?.full_name as string | undefined) ?? user.email ?? "";
-
-      setProfile({
-        email: user.email ?? "",
-        fullName,
-      });
-      setName(fullName);
-      setLoading(false);
     }
 
     void loadProfile();

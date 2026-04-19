@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHouse,
   faMagnifyingGlass,
-  faStar,
+  faHeart,
   faUser,
   type IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
@@ -15,7 +15,7 @@ import {
 const items = [
   { href: "/home", label: "Home", icon: faHouse },
   { href: "/search", label: "Search", icon: faMagnifyingGlass },
-  { href: "/favorites", label: "Favorites", icon: faStar },
+  { href: "/favorites", label: "Favorites", icon: faHeart },
   { href: "/profile", label: "Profile", icon: faUser },
 ];
 

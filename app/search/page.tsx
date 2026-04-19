@@ -49,13 +49,13 @@ export default async function SearchPage({
       </section>
 
       <div className="mb-4 flex items-center justify-between gap-3">
-        <p className="text-sm text-[#5f6771]">
+        <p className="text-sm text-white">
           {query ? (
             <>
-              Hasil untuk <span className="font-semibold text-[#343a40]">“{query}”</span>
+              Hasil untuk <span className="font-semibold text-white">“{query}”</span>
             </>
           ) : (
-            "Gunakan pencarian untuk memfilter produk dari Supabase."
+            "Gunakan pencarian untuk memfilter produk."
           )}
         </p>
         <Link href="/home" className="text-sm font-semibold text-[#495057]">
