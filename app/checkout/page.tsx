@@ -92,7 +92,7 @@ export default function CheckoutPage() {
             <div className="mt-3 grid grid-cols-2 gap-2">
               <Button
                 type="button"
-                className="h-10 text-xs"
+                className="h-10 text-xs text-white"
                 onClick={() => {
                   clearCart();
                   setComplete(true);
@@ -100,8 +100,8 @@ export default function CheckoutPage() {
               >
                 Place order
               </Button>
-              <Button asChild variant="secondary" className="h-10 text-xs">
-                <Link href="/cart">Kembali ke cart</Link>
+              <Button asChild variant="secondary" className="h-10 text-xs text-[#343a40]">
+                <Link href="/cart?from=checkout">Kembali ke cart</Link>
               </Button>
             </div>
           </div>
