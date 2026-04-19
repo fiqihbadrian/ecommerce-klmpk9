@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useCartStore } from "@/store/cart";
 
 type StorefrontHeaderProps = {
   title?: string;
@@ -9,6 +12,8 @@ export function StorefrontHeader({
   title = "K9 Mart",
   subtitle = "Temukan produk favoritmu di sini.",
 }: StorefrontHeaderProps) {
+  const itemCount = useCartStore((state) => state.getItemCount());
+
   return (
     <header className="mb-5 rounded-[28px] bg-[#6c757d] p-3 text-white shadow-[0_24px_60px_rgba(0,0,0,0.2)]">
       <div className="flex items-center gap-3">
@@ -30,13 +35,18 @@ export function StorefrontHeader({
         <Link
           href="/cart"
           aria-label="Open cart"
-          className="flex h-12 w-12 items-center justify-center rounded-[18px] bg-white text-[#495057] transition hover:bg-white/90"
+          className="relative flex h-12 w-12 items-center justify-center rounded-[18px] bg-white text-[#495057] transition hover:bg-white/90"
         >
           <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
             <path d="M3.5 5h2l2.2 10.5a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.5l1.6-7.1H7" />
             <circle cx="10" cy="20" r="1.4" />
             <circle cx="17" cy="20" r="1.4" />
           </svg>
+          {itemCount > 0 ? (
+            <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#ef4444] px-1 text-[10px] font-bold text-white">
+              {itemCount > 99 ? "99+" : itemCount}
+            </span>
+          ) : null}
         </Link>
       </div>
 

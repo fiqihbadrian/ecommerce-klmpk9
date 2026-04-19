@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { EmptyState } from "@/components/empty-state";
+import { BackButton } from "@/components/back-button";
 import { PageShell } from "@/components/layout/page-shell";
 import { ProductActions } from "@/components/product-actions";
 import { ProductCard } from "@/components/product-card";
@@ -31,7 +32,10 @@ export default async function ProductDetailPage({
   return (
     <PageShell noTopPadding>
       <section className="sticky top-0 z-20 -mx-4 mb-4 bg-[#fffbfb] px-4 py-3 shadow-[0_8px_16px_rgba(0,0,0,0.1)]">
-        <h1 className="text-xl font-bold text-[#0b0b0b]">Detail Produk</h1>
+        <div className="flex items-center gap-3">
+          <BackButton fallbackHref="/home" />
+          <h1 className="text-xl font-bold text-[#0b0b0b]">Detail Produk</h1>
+        </div>
       </section>
 
       <section className="overflow-hidden rounded-[15px] border border-black/5 bg-[#fffbfb] shadow-[0_14px_24px_rgba(0,0,0,0.12)]">
