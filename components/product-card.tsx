@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { formatCurrency } from "@/lib/format";
 import type { Product } from "@/lib/products";
 import { useCartStore } from "@/store/cart";
@@ -24,7 +24,7 @@ export function ProductCard({ product, compact = false }: ProductCardProps) {
   return (
     <article className="overflow-hidden rounded-[15px] border border-black/5 bg-[#fffbfb] shadow-[0_10px_18px_rgba(0,0,0,0.12)] transition hover:-translate-y-1 hover:shadow-[0_16px_24px_rgba(0,0,0,0.16)]">
       <Link href={`/product/${product.id}`} className="block">
-        <div className={compact ? "h-[100px]" : "h-[108px]"}>
+        <div className={compact ? "h-[126px]" : "h-[108px]"}>
           <img
             src={product.imageUrl}
             alt={product.title}
@@ -37,17 +37,44 @@ export function ProductCard({ product, compact = false }: ProductCardProps) {
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#6c757d]">{product.category}</p>
               <h3 className="mt-0.5 line-clamp-1 text-sm font-semibold leading-5 text-[#343a40]">{product.title}</h3>
             </div>
-            <button
-              type="button"
-              aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
-              onClick={(event) => {
-                event.preventDefault();
-                toggleFavorite(product);
-              }}
-              className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-[#495057] transition hover:bg-slate-200"
-            >
-              <FontAwesomeIcon icon={faHeart} className={isFavorite ? "h-4 w-4 text-[#ef4444]" : "h-4 w-4 text-[#495057]"} />
-            </button>
+            {compact ? (
+              <div className="flex shrink-0 items-center gap-1">
+                <button
+                  type="button"
+                  aria-label="Masukan keranjang"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    addItem(product);
+                  }}
+                  className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-[#495057] transition hover:bg-slate-200"
+                >
+                  <FontAwesomeIcon icon={faCartShopping} className="h-4 w-4" />
+                </button>
+                <button
+                  type="button"
+                  aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    toggleFavorite(product);
+                  }}
+                  className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-[#495057] transition hover:bg-slate-200"
+                >
+                  <FontAwesomeIcon icon={faHeart} className={isFavorite ? "h-4 w-4 text-[#ef4444]" : "h-4 w-4 text-[#495057]"} />
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+                onClick={(event) => {
+                  event.preventDefault();
+                  toggleFavorite(product);
+                }}
+                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-[#495057] transition hover:bg-slate-200"
+              >
+                <FontAwesomeIcon icon={faHeart} className={isFavorite ? "h-4 w-4 text-[#ef4444]" : "h-4 w-4 text-[#495057]"} />
+              </button>
+            )}
           </div>
 
           <div className="flex items-center justify-between gap-2 border-t border-black/5 pt-1">
@@ -62,11 +89,13 @@ export function ProductCard({ product, compact = false }: ProductCardProps) {
         </div>
       </Link>
 
-      <div className="px-3 pb-3">
-        <Button className="h-9 w-full text-xs" onClick={() => addItem(product)} type="button">
-          Add to cart
-        </Button>
-      </div>
+      {!compact ? (
+        <div className="px-3 pb-3">
+          <Button className="h-9 w-full text-xs" onClick={() => addItem(product)} type="button">
+            Masukan keranjang
+          </Button>
+        </div>
+      ) : null}
     </article>
   );
 }
