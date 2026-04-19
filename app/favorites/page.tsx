@@ -12,10 +12,10 @@ export default function FavoritesPage() {
 
   return (
     <PageShell>
-      <section className="mb-5 rounded-[28px] bg-[#0f172a] px-4 py-4 text-white shadow-[0_24px_70px_rgba(15,23,42,0.25)]">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/55">Favorites</p>
-        <h1 className="mt-2 text-2xl font-semibold tracking-tight">Produk tersimpan</h1>
-        <p className="mt-2 text-sm text-white/70">Daftar ini disimpan di local storage sehingga tetap ada saat halaman dimuat ulang.</p>
+      <section className="mb-5 rounded-[15px] bg-[#6c757d] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/70">Favorites</p>
+        <h1 className="mt-2 text-2xl font-semibold tracking-tight">Favorit Saya</h1>
+        <p className="mt-2 text-sm text-white/80">Daftar ini disimpan di local storage sehingga tetap ada saat halaman dimuat ulang.</p>
       </section>
 
       {items.length === 0 ? (
@@ -28,7 +28,7 @@ export default function FavoritesPage() {
       ) : (
         <>
           <div className="mb-4 flex items-center justify-between gap-3">
-            <p className="text-sm text-slate-600">{items.length} item tersimpan</p>
+            <p className="text-sm text-[#5f6771]">{items.length} item tersimpan</p>
             <Button type="button" variant="ghost" onClick={clearFavorites}>
               Hapus semua
             </Button>

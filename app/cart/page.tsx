@@ -16,8 +16,8 @@ export default function CartPage() {
 
   return (
     <PageShell>
-      <section className="mb-5 rounded-[28px] bg-[#0f172a] px-4 py-4 text-white shadow-[0_24px_70px_rgba(15,23,42,0.25)]">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/55">Cart</p>
+      <section className="mb-5 rounded-[15px] bg-[#6c757d] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/70">Cart</p>
         <h1 className="mt-2 text-2xl font-semibold tracking-tight">Keranjang belanja</h1>
       </section>
 
@@ -32,17 +32,17 @@ export default function CartPage() {
         <>
           <div className="grid gap-3">
             {items.map((item) => (
-              <article key={item.id} className="glass-card overflow-hidden rounded-[26px] p-4">
+              <article key={item.id} className="overflow-hidden rounded-[15px] border border-black/5 bg-white p-4 shadow-[0_12px_28px_rgba(0,0,0,0.08)]">
                 <div className="flex gap-4">
-                  <img src={item.imageUrl} alt={item.title} className="h-24 w-24 rounded-2xl object-cover" />
+                  <img src={item.imageUrl} alt={item.title} className="h-24 w-24 rounded-[12px] object-cover" />
                   <div className="min-w-0 flex-1">
-                    <p className="text-sm font-semibold text-slate-950">{item.title}</p>
-                    <p className="mt-1 text-xs text-slate-500">{formatCurrency(item.price)}</p>
+                    <p className="text-sm font-semibold text-[#343a40]">{item.title}</p>
+                    <p className="mt-1 text-xs text-[#6c757d]">{formatCurrency(item.price)}</p>
                     <div className="mt-4 flex items-center gap-2">
                       <Button type="button" variant="secondary" onClick={() => updateQuantity(item.id, item.quantity - 1)} className="h-9 px-3">
                         -
                       </Button>
-                      <span className="min-w-10 text-center text-sm font-semibold text-slate-900">{item.quantity}</span>
+                      <span className="min-w-10 text-center text-sm font-semibold text-[#343a40]">{item.quantity}</span>
                       <Button type="button" variant="secondary" onClick={() => updateQuantity(item.id, item.quantity + 1)} className="h-9 px-3">
                         +
                       </Button>
@@ -50,7 +50,7 @@ export default function CartPage() {
                   </div>
                 </div>
                 <div className="mt-4 flex items-center justify-between gap-3">
-                  <p className="text-sm font-semibold text-slate-900">{formatCurrency(item.price * item.quantity)}</p>
+                  <p className="text-sm font-semibold text-[#343a40]">{formatCurrency(item.price * item.quantity)}</p>
                   <Button type="button" variant="ghost" onClick={() => removeItem(item.id)}>
                     Hapus
                   </Button>
@@ -59,18 +59,18 @@ export default function CartPage() {
             ))}
           </div>
 
-          <section className="glass-card mt-5 rounded-[28px] p-5">
-            <div className="flex items-center justify-between gap-3 text-sm text-slate-600">
+          <section className="mt-5 rounded-[15px] border border-black/5 bg-white p-5 shadow-[0_12px_28px_rgba(0,0,0,0.08)]">
+            <div className="flex items-center justify-between gap-3 text-sm text-[#6c757d]">
               <span>Subtotal</span>
-              <span className="font-semibold text-slate-950">{formatCurrency(subtotal)}</span>
+              <span className="font-semibold text-[#343a40]">{formatCurrency(subtotal)}</span>
             </div>
-            <div className="mt-3 flex items-center justify-between gap-3 text-sm text-slate-600">
+            <div className="mt-3 flex items-center justify-between gap-3 text-sm text-[#6c757d]">
               <span>Ongkir</span>
-              <span className="font-semibold text-emerald-600">Gratis</span>
+              <span className="font-semibold text-[#495057]">Gratis</span>
             </div>
             <div className="mt-4 flex items-center justify-between gap-3 border-t border-black/5 pt-4 text-base">
-              <span className="font-semibold text-slate-950">Total</span>
-              <span className="font-semibold text-slate-950">{formatCurrency(subtotal)}</span>
+              <span className="font-semibold text-[#343a40]">Total</span>
+              <span className="font-semibold text-[#343a40]">{formatCurrency(subtotal)}</span>
             </div>
             <div className="mt-5 grid gap-3">
               <Button asChild>

@@ -98,8 +98,8 @@ export default function ProfilePage() {
   if (loading) {
     return (
       <PageShell>
-        <section className="mb-5 rounded-[28px] bg-[#0f172a] px-4 py-4 text-white shadow-[0_24px_70px_rgba(15,23,42,0.25)]">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/55">Profile</p>
+        <section className="mb-5 rounded-[15px] bg-[#6c757d] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/70">Profile</p>
           <h1 className="mt-2 text-2xl font-semibold tracking-tight">Akun saya</h1>
         </section>
         <EmptyState title="Memuat profil" description="Mengambil sesi aktif dari Supabase..." />
@@ -110,8 +110,8 @@ export default function ProfilePage() {
   if (!profile) {
     return (
       <PageShell>
-        <section className="mb-5 rounded-[28px] bg-[#0f172a] px-4 py-4 text-white shadow-[0_24px_70px_rgba(15,23,42,0.25)]">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/55">Profile</p>
+        <section className="mb-5 rounded-[15px] bg-[#6c757d] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/70">Profile</p>
           <h1 className="mt-2 text-2xl font-semibold tracking-tight">Akun saya</h1>
         </section>
         <EmptyState
@@ -126,31 +126,31 @@ export default function ProfilePage() {
 
   return (
     <PageShell>
-      <section className="mb-5 rounded-[28px] bg-[#0f172a] px-4 py-4 text-white shadow-[0_24px_70px_rgba(15,23,42,0.25)]">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/55">Profile</p>
+      <section className="mb-5 rounded-[15px] bg-[#6c757d] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/70">Profile</p>
         <h1 className="mt-2 text-2xl font-semibold tracking-tight">Akun saya</h1>
       </section>
 
-      <section className="glass-card rounded-[28px] p-5">
+      <section className="rounded-[15px] border border-black/5 bg-white p-5 shadow-[0_12px_28px_rgba(0,0,0,0.08)]">
         <div className="mb-5 flex items-center gap-4">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#e9ecef] text-[#495057]">
             <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8">
               <circle cx="12" cy="8" r="3.5" />
               <path d="M5.5 19c1.7-3.2 4.1-4.8 6.5-4.8s4.8 1.6 6.5 4.8" />
             </svg>
           </div>
           <div>
-            <p className="text-sm font-semibold text-slate-950">{profile.fullName}</p>
-            <p className="text-sm text-slate-500">{profile.email}</p>
+            <p className="text-sm font-semibold text-[#343a40]">{profile.fullName}</p>
+            <p className="text-sm text-[#6c757d]">{profile.email}</p>
           </div>
         </div>
 
         <div className="grid gap-2">
-          <label className="text-sm font-medium text-slate-700" htmlFor="profile-name">Nama</label>
+          <label className="text-sm font-medium text-[#5f6771]" htmlFor="profile-name">Nama</label>
           <Input id="profile-name" value={name} onChange={(event) => setName(event.target.value)} />
         </div>
 
-        {message ? <p className="mt-4 rounded-2xl bg-slate-100 px-4 py-3 text-sm text-slate-700">{message}</p> : null}
+        {message ? <p className="mt-4 rounded-2xl bg-slate-100 px-4 py-3 text-sm text-[#495057]">{message}</p> : null}
 
         <div className="mt-5 grid gap-3">
           <Button type="button" onClick={handleSave}>
