@@ -13,12 +13,12 @@ export default function WelcomePage() {
       </div>
 
       <div
-        className="absolute rounded-full bg-white"
+        className="absolute rounded-full bg-white shadow-xl/30"
         style={{ width: 160, height: 160, top: -50, right: -50, opacity: 0.95 }}
       />
 
       <div
-        className="absolute rounded-full bg-white"
+        className="absolute rounded-full bg-white shadow-xl/30"
         style={{ width: 140, height: 140, bottom: -45, left: -45, opacity: 0.95 }}
       />
 
