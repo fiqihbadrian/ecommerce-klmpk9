@@ -20,8 +20,8 @@ export default function CheckoutPage() {
   if (items.length === 0 && !complete) {
     return (
       <PageShell>
-        <section className="mb-5 rounded-[28px] bg-[#0f172a] px-4 py-4 text-white shadow-[0_24px_70px_rgba(15,23,42,0.25)]">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/55">Checkout</p>
+        <section className="mb-5 rounded-[15px] bg-[#6c757d] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/70">Checkout</p>
           <h1 className="mt-2 text-2xl font-semibold tracking-tight">Selesaikan pesanan</h1>
         </section>
         <EmptyState
@@ -36,8 +36,8 @@ export default function CheckoutPage() {
 
   return (
     <PageShell>
-      <section className="mb-5 rounded-[28px] bg-[#0f172a] px-4 py-4 text-white shadow-[0_24px_70px_rgba(15,23,42,0.25)]">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/55">Checkout</p>
+      <section className="mb-5 rounded-[15px] bg-[#6c757d] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/70">Checkout</p>
         <h1 className="mt-2 text-2xl font-semibold tracking-tight">Selesaikan pesanan</h1>
       </section>
 
@@ -50,23 +50,23 @@ export default function CheckoutPage() {
         />
       ) : (
         <>
-          <section className="glass-card rounded-[28px] p-5">
-            <div className="space-y-3 text-sm text-slate-600">
+          <section className="rounded-[15px] border border-black/5 bg-white p-5 shadow-[0_12px_28px_rgba(0,0,0,0.08)]">
+            <div className="space-y-3 text-sm text-[#6c757d]">
               <div className="flex items-center justify-between gap-3">
                 <span>Items</span>
-                <span className="font-semibold text-slate-950">{items.length}</span>
+                <span className="font-semibold text-[#343a40]">{items.length}</span>
               </div>
               <div className="flex items-center justify-between gap-3">
                 <span>Subtotal</span>
-                <span className="font-semibold text-slate-950">{formatCurrency(subtotal)}</span>
+                <span className="font-semibold text-[#343a40]">{formatCurrency(subtotal)}</span>
               </div>
               <div className="flex items-center justify-between gap-3">
                 <span>Ongkir</span>
-                <span className="font-semibold text-emerald-600">Gratis</span>
+                <span className="font-semibold text-[#495057]">Gratis</span>
               </div>
               <div className="flex items-center justify-between gap-3 border-t border-black/5 pt-3 text-base">
-                <span className="font-semibold text-slate-950">Total</span>
-                <span className="font-semibold text-slate-950">{formatCurrency(grandTotal)}</span>
+                <span className="font-semibold text-[#343a40]">Total</span>
+                <span className="font-semibold text-[#343a40]">{formatCurrency(grandTotal)}</span>
               </div>
             </div>
 

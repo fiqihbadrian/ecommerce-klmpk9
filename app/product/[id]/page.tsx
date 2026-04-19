@@ -30,24 +30,24 @@ export default async function ProductDetailPage({
 
   return (
     <PageShell>
-      <section className="overflow-hidden rounded-[30px] bg-white shadow-[0_24px_70px_rgba(15,23,42,0.08)]">
+      <section className="overflow-hidden rounded-[20px] border border-black/5 bg-white shadow-[0_14px_34px_rgba(0,0,0,0.12)]">
         <img src={product.imageUrl} alt={product.title} className="aspect-[1.02] w-full object-cover" />
         <div className="p-5">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary/70">{product.category}</p>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#6c757d]">{product.category}</p>
           <div className="mt-2 flex items-start justify-between gap-4">
             <div>
-              <h1 className="text-2xl font-semibold tracking-tight text-slate-950">{product.title}</h1>
-              <p className="mt-2 text-sm text-slate-500">{product.description}</p>
+              <h1 className="text-2xl font-semibold tracking-tight text-[#343a40]">{product.title}</h1>
+              <p className="mt-2 text-sm text-[#5f6771]">{product.description}</p>
             </div>
-            <p className="rounded-full bg-secondary px-3 py-1 text-sm font-semibold text-slate-700">★ {product.rating.toFixed(1)}</p>
+            <p className="rounded-full bg-[#e9ecef] px-3 py-1 text-sm font-semibold text-[#495057]">★ {product.rating.toFixed(1)}</p>
           </div>
 
           <div className="mt-5 flex items-end justify-between gap-4">
             <div>
-              <p className="text-sm text-slate-500">Harga</p>
-              <p className="text-2xl font-semibold text-slate-950">{formatCurrency(product.price)}</p>
+              <p className="text-sm text-[#6c757d]">Harga</p>
+              <p className="text-2xl font-semibold text-[#343a40]">{formatCurrency(product.price)}</p>
             </div>
-            <p className="text-sm text-slate-500">Stok {product.stock}</p>
+            <p className="text-sm text-[#6c757d]">Stok {product.stock}</p>
           </div>
 
           <div className="mt-5">
@@ -59,8 +59,8 @@ export default async function ProductDetailPage({
       <section className="mt-6">
         <div className="mb-4 flex items-end justify-between gap-3">
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary/70">Rekomendasi</p>
-            <h2 className="mt-1 text-xl font-semibold tracking-tight text-slate-950">Produk serupa</h2>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#6c757d]">Rekomendasi</p>
+            <h2 className="mt-1 text-xl font-semibold tracking-tight text-[#343a40]">Produk serupa</h2>
           </div>
         </div>
 
