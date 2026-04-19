@@ -123,7 +123,7 @@ export function BottomNav() {
                 >
                   <FontAwesomeIcon
                     icon={item.icon}
-                    className={active ? "text-xl text-transparent" : "text-xl text-gray-400"}
+                    className={active ? "h-5 w-5 text-transparent" : "h-5 w-5 text-gray-400"}
                   />
                 </Link>
               );
@@ -137,7 +137,7 @@ export function BottomNav() {
               transition: bubbleTransition ? "left 0.4s cubic-bezier(0.4, 0, 0.2, 1)" : "none",
             }}
           >
-            <FontAwesomeIcon icon={activeIcon} className="text-xl text-white" />
+            <FontAwesomeIcon icon={activeIcon} className="h-5 w-5 text-white" />
           </div>
         </div>
       </div>
