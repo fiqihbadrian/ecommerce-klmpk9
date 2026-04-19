@@ -31,7 +31,7 @@ export function ProductActions({ product }: ProductActionsProps) {
       </div>
 
       <div className="grid grid-cols-2 gap-3">
-        <Button asChild className="w-full text-white">
+        <Button asChild className="w-full text-white text-center">
           <Link href="/checkout">Checkout sekarang</Link>
         </Button>
         <Button onClick={() => addItem(product)} variant="secondary" className="w-full text-[#343a40]">
