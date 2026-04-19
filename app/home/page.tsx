@@ -42,13 +42,16 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="mb-6 h-[205px] rounded-[15px] bg-white p-4 shadow-[0_10px_22px_rgba(0,0,0,0.14)]">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#6c757d]">K9 Mart</p>
-        <h1 className="mt-3 text-2xl font-semibold leading-tight text-[#343a40]">Belanja cepat, tampilan clean, checkout praktis.</h1>
-        <div className="mt-5 grid grid-cols-3 gap-2 text-center">
-          <div className="rounded-xl bg-[#f3f4f6] px-2 py-2 text-xs font-semibold text-[#495057]">{products.length} Produk</div>
-          <div className="rounded-xl bg-[#f3f4f6] px-2 py-2 text-xs font-semibold text-[#495057]">Gratis Ongkir</div>
-          <div className="rounded-xl bg-[#f3f4f6] px-2 py-2 text-xs font-semibold text-[#495057]">Mode Demo</div>
+      <section className="mb-6 overflow-hidden rounded-[15px] bg-white shadow-[0_10px_22px_rgba(0,0,0,0.14)]">
+        <div className="relative aspect-[416/205] w-full">
+          <img
+            src="/aha.png"
+            alt="Banner promo K9 Mart"
+            className="h-full w-full object-cover"
+          />
+          <div className="pointer-events-none absolute left-3 top-3 rounded-full bg-black/55 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
+            Banner 416 x 205
+          </div>
         </div>
       </section>
 

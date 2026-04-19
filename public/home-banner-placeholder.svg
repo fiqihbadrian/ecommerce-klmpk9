@@ -1,0 +1,14 @@
+<svg width="416" height="205" viewBox="0 0 416 205" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="416" y2="205" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4B5563"/>
+      <stop offset="1" stop-color="#1F2937"/>
+    </linearGradient>
+  </defs>
+  <rect width="416" height="205" rx="18" fill="url(#bg)"/>
+  <circle cx="351" cy="-18" r="84" fill="white" fill-opacity="0.12"/>
+  <circle cx="38" cy="222" r="88" fill="white" fill-opacity="0.1"/>
+  <text x="28" y="78" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="2.6">K9 MART BANNER</text>
+  <text x="28" y="114" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="700">Pasang Banner Promo Kamu</text>
+  <text x="28" y="142" fill="white" fill-opacity="0.86" font-family="Arial, sans-serif" font-size="13">Ukuran desain: 416 x 205 px (rasio 2.03:1)</text>
+</svg>
