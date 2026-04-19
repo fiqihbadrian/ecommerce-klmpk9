@@ -87,7 +87,7 @@ export function BottomNav() {
 
   return (
     <nav className="fixed inset-x-0 bottom-0 z-40 pb-[max(0.35rem,env(safe-area-inset-bottom))]">
-      <div ref={containerRef} className="mx-auto w-full max-w-md px-4">
+      <div ref={containerRef} className="mx-auto w-full max-w-md">
         <div className="relative h-16 w-full">
           <svg
             className="absolute bottom-0 left-0 h-16 w-full overflow-visible"
@@ -103,7 +103,7 @@ export function BottomNav() {
             <path d={buildCurvePath(bubbleLeft, navWidth)} fill="white" filter="url(#bottom-nav-shadow)" />
           </svg>
 
-          <div className="absolute bottom-0 left-0 right-0 flex h-[60px] items-center justify-around px-2">
+          <div className="absolute bottom-0 left-0 right-0 grid h-[60px] grid-cols-4 items-center">
             {items.map((item, index) => {
               const active = index === activeIndex;
 
@@ -111,7 +111,7 @@ export function BottomNav() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="relative z-10 flex h-12 w-14 items-center justify-center"
+                  className="relative z-10 flex h-12 w-full items-center justify-center"
                   aria-label={item.label}
                 >
                   <FontAwesomeIcon
