@@ -4,7 +4,7 @@ import { InstallAppButton } from "@/components/install-app-button";
 export default function WelcomePage() {
   return (
     <main
-      className="relative mx-auto flex min-h-screen w-full max-w-md flex-col items-center justify-between overflow-hidden px-7 pb-12"
+      className="relative mx-auto flex h-[100dvh] w-full max-w-md flex-col items-center justify-between overflow-hidden px-7 py-8"
       style={{ backgroundColor: "#6C757D" }}
     >
       <div className="absolute left-5 top-5 z-10 flex items-end gap-1.5">
@@ -35,7 +35,7 @@ export default function WelcomePage() {
         </h1>
       </div>
 
-      <div className="z-10 flex w-full max-w-xs flex-col gap-3.5">
+      <div className="z-10 flex w-full max-w-xs flex-col gap-3">
         <Link
           href="/login"
           className="w-full rounded-full bg-white py-4 text-center text-base font-bold text-[#546070] transition-all duration-150 hover:bg-gray-100 active:scale-95"
