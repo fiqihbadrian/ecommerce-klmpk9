@@ -33,6 +33,7 @@ export function BottomNav() {
   const pathname = usePathname();
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const [bubbleVisible, setBubbleVisible] = useState(false);
   const [navWidth, setNavWidth] = useState(320);
   const activeIndex = useMemo(() => {
     const idx = items.findIndex((item) => pathname === item.href || pathname.startsWith(`${item.href}/`));
@@ -42,18 +43,6 @@ export function BottomNav() {
   const itemWidth = navWidth / items.length;
   const bubbleLeft = itemWidth * activeIndex + itemWidth / 2;
   const activeIcon: IconDefinition = items[activeIndex]?.icon ?? faHouse;
-
-  const [bubbleTransition, setBubbleTransition] = useState(false);
-
-  useEffect(() => {
-    const id = window.setTimeout(() => {
-      setBubbleTransition(true);
-    }, 50);
-
-    return () => {
-      window.clearTimeout(id);
-    };
-  }, []);
 
   useEffect(() => {
     const node = containerRef.current;
@@ -83,6 +72,16 @@ export function BottomNav() {
 
     return () => {
       observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    const id = window.requestAnimationFrame(() => {
+      setBubbleVisible(true);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(id);
     };
   }, []);
 
@@ -131,10 +130,9 @@ export function BottomNav() {
           </div>
 
           <div
-            className="pointer-events-none absolute top-0 z-20 flex h-[50px] w-[50px] -translate-x-1/2 items-center justify-center rounded-full bg-gray-900"
+            className={`pointer-events-none absolute top-0 z-20 flex h-[50px] w-[50px] -translate-x-1/2 items-center justify-center rounded-full bg-gray-900 transition-[opacity,transform] duration-300 ease-out ${bubbleVisible ? "scale-100 opacity-100" : "scale-90 opacity-0"}`}
             style={{
               left: `${bubbleLeft}px`,
-              transition: bubbleTransition ? "left 0.4s cubic-bezier(0.4, 0, 0.2, 1)" : "none",
             }}
           >
             <FontAwesomeIcon icon={activeIcon} className="h-5 w-5 text-white" />
