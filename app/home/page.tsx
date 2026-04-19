@@ -1,4 +1,6 @@
 import { EmptyState } from "@/components/empty-state";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { PageShell } from "@/components/layout/page-shell";
 import { ProductCard } from "@/components/product-card";
 import { fetchProducts, type Product } from "@/lib/products";
@@ -34,11 +36,7 @@ export default async function HomePage() {
           aria-label="Open cart"
           className="flex h-[50px] w-[50px] items-center justify-center rounded-[31px] bg-white text-[#495057] shadow-[0_8px_16px_rgba(0,0,0,0.12)]"
         >
-          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
-            <path d="M3.5 5h2l2.2 10.5a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.5l1.6-7.1H7" />
-            <circle cx="10" cy="20" r="1.4" />
-            <circle cx="17" cy="20" r="1.4" />
-          </svg>
+          <FontAwesomeIcon icon={faCartShopping} className="h-5 w-5" />
         </a>
       </section>
 

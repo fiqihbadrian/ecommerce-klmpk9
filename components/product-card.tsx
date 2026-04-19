@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { formatCurrency } from "@/lib/format";
 import type { Product } from "@/lib/products";
 import { useCartStore } from "@/store/cart";
@@ -44,9 +46,7 @@ export function ProductCard({ product, compact = false }: ProductCardProps) {
               }}
               className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-[#495057] transition hover:bg-slate-200"
             >
-              <svg viewBox="0 0 24 24" className={isFavorite ? "h-4 w-4 fill-[#ef4444] stroke-[#ef4444]" : "h-4 w-4 stroke-current"} fill="none" strokeWidth="1.8">
-                <path d="M20 8.5c0 4.6-8 10.8-8 10.8S4 13.1 4 8.5A4.5 4.5 0 0 1 12 6a4.5 4.5 0 0 1 8 2.5Z" />
-              </svg>
+              <FontAwesomeIcon icon={faHeart} className={isFavorite ? "h-4 w-4 text-[#ef4444]" : "h-4 w-4 text-[#495057]"} />
             </button>
           </div>
 

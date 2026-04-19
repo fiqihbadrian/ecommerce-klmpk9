@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useCartStore } from "@/store/cart";
 
 type StorefrontHeaderProps = {
@@ -25,10 +27,7 @@ export function StorefrontHeader({
           href="/search"
           className="flex h-12 flex-1 items-center gap-2 rounded-[31px] bg-white px-4 text-sm font-semibold text-[#b2b8bf]"
         >
-          <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0 text-[#8f97a0]" fill="none" stroke="currentColor" strokeWidth="1.8">
-            <circle cx="11" cy="11" r="6.5" />
-            <path d="m16 16 4 4" />
-          </svg>
+          <FontAwesomeIcon icon={faMagnifyingGlass} className="h-4 w-4 shrink-0 text-[#8f97a0]" />
           <span className="truncate">Masukan teks</span>
         </Link>
 
@@ -37,11 +36,7 @@ export function StorefrontHeader({
           aria-label="Open cart"
           className="relative flex h-12 w-12 items-center justify-center rounded-[18px] bg-white text-[#495057] transition hover:bg-white/90"
         >
-          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
-            <path d="M3.5 5h2l2.2 10.5a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.5l1.6-7.1H7" />
-            <circle cx="10" cy="20" r="1.4" />
-            <circle cx="17" cy="20" r="1.4" />
-          </svg>
+          <FontAwesomeIcon icon={faCartShopping} className="h-5 w-5" />
           {itemCount > 0 ? (
             <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#ef4444] px-1 text-[10px] font-bold text-white">
               {itemCount > 99 ? "99+" : itemCount}

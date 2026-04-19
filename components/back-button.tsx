@@ -1,6 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 type BackButtonProps = {
   fallbackHref?: string;
@@ -31,9 +33,7 @@ export function BackButton({ fallbackHref = "/home", className = "" }: BackButto
       aria-label="Kembali"
       className={className || "flex h-9 w-9 items-center justify-center rounded-full bg-[#f3f4f6] text-[#343a40] transition hover:bg-[#e9ecef]"}
     >
-      <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="m15 18-6-6 6-6" />
-      </svg>
+      <FontAwesomeIcon icon={faChevronLeft} className="h-4 w-4" />
     </button>
   );
 }
