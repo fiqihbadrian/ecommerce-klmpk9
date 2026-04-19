@@ -18,11 +18,33 @@ type ProductRow = {
   image_url: string;
 };
 
+const CREATE_PRODUCTS_TABLE_SQL = `create table if not exists public.products (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  description text default '',
+  category text not null,
+  price integer not null default 0,
+  stock integer not null default 0,
+  rating numeric(2,1) not null default 4.8,
+  image_url text default '/placeholder-product.svg',
+  created_at timestamptz not null default now()
+);`;
+
+function isMissingProductsTable(message: string | null) {
+  if (!message) {
+    return false;
+  }
+
+  return /could not find the table ['\"]?public\.products['\"]?/i.test(message);
+}
+
 export default function AdminPage() {
   const [products, setProducts] = useState<ProductRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAdding, setIsAdding] = useState(false);
   const [message, setMessage] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const hasMissingTableError = isMissingProductsTable(error);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -41,18 +63,35 @@ export default function AdminPage() {
   }, []);
 
   async function loadProducts() {
-    const supabase = getSupabaseClient();
-    if (!supabase) return;
+    try {
+      setError(null);
+      const supabase = getSupabaseClient();
+      if (!supabase) {
+        const msg = "Supabase client not initialized";
+        console.error(msg);
+        setError(msg);
+        setLoading(false);
+        return;
+      }
 
-    const { data, error } = await supabase.from("products").select("*").order("id", { ascending: false });
+      const { data, error: dbError } = await supabase.from("products").select("*").order("id", { ascending: false });
 
-    if (error) {
-      console.error(error);
-      return;
+      if (dbError) {
+        const msg = `Database error: ${dbError.message || JSON.stringify(dbError)}`;
+        console.error(msg);
+        setError(msg);
+        setLoading(false);
+        return;
+      }
+
+      setProducts(data || []);
+    } catch (err) {
+      const msg = `Error: ${err instanceof Error ? err.message : String(err)}`;
+      console.error(msg);
+      setError(msg);
+    } finally {
+      setLoading(false);
     }
-
-    setProducts(data || []);
-    setLoading(false);
   }
 
   async function handleAddProduct(e: React.FormEvent) {
@@ -84,10 +123,13 @@ export default function AdminPage() {
       image_url: formData.image_url || "/placeholder-product.svg",
     };
 
-    const { error } = await supabase.from("products").insert([newProduct]);
+    const { error: dbError } = await supabase.from("products").insert([newProduct]);
 
-    if (error) {
-      setMessage(`❌ Error: ${error.message}`);
+    if (dbError) {
+      if (isMissingProductsTable(dbError.message)) {
+        setError(`Database error: ${dbError.message}`);
+      }
+      setMessage(`❌ Error: ${dbError.message}`);
       setIsAdding(false);
       return;
     }
@@ -106,10 +148,13 @@ export default function AdminPage() {
     const supabase = getSupabaseClient();
     if (!supabase) return;
 
-    const { error } = await supabase.from("products").delete().eq("id", id);
+    const { error: dbError } = await supabase.from("products").delete().eq("id", id);
 
-    if (error) {
-      setMessage(`❌ Error: ${error.message}`);
+    if (dbError) {
+      if (isMissingProductsTable(dbError.message)) {
+        setError(`Database error: ${dbError.message}`);
+      }
+      setMessage(`❌ Error: ${dbError.message}`);
       return;
     }
 
@@ -137,6 +182,24 @@ export default function AdminPage() {
           <div className="mb-4 rounded-lg bg-slate-700 px-4 py-2 text-sm text-white">
             {message}
           </div>
+        )}
+
+        {error && (
+          <div className="mb-4 rounded-lg bg-red-500/20 px-4 py-2 text-sm text-red-300">
+            {error}
+          </div>
+        )}
+
+        {hasMissingTableError && (
+          <section className="mb-6 rounded-2xl bg-amber-500/10 p-4 text-amber-100">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-200">Setup Required</h2>
+            <p className="mt-2 text-sm text-amber-100/90">
+              Table <strong>public.products</strong> belum ada. Jalankan SQL ini di Supabase SQL Editor, lalu refresh halaman admin.
+            </p>
+            <pre className="mt-3 overflow-x-auto rounded-xl bg-slate-950/70 p-3 text-xs leading-relaxed text-amber-50">
+              <code>{CREATE_PRODUCTS_TABLE_SQL}</code>
+            </pre>
+          </section>
         )}
 
         {/* Add Product Form */}
