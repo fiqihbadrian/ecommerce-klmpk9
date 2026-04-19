@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { InstallAppButton } from "@/components/install-app-button";
 
 export default function WelcomePage() {
   return (
@@ -50,6 +51,7 @@ export default function WelcomePage() {
         <Link href="/home" className="pt-1 text-center text-sm font-semibold text-white/90 transition hover:text-white">
           Lihat katalog dulu
         </Link>
+        <InstallAppButton />
       </div>
     </main>
   );
