@@ -85,6 +85,19 @@ export async function fetchProducts() {
 export async function fetchProductById(id: string) {
   const supabase = getSupabaseClient();
 
+  const normalizedId = String(id ?? "").trim();
+
+  if (!normalizedId) {
+    return null;
+  }
+
+  const uuidPattern =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+  if (!uuidPattern.test(normalizedId)) {
+    return null;
+  }
+
   if (!supabase) {
     return null;
   }
@@ -92,10 +105,14 @@ export async function fetchProductById(id: string) {
   const { data, error } = await supabase
     .from("products")
     .select("*")
-    .eq("id", id)
+    .eq("id", normalizedId)
     .maybeSingle();
 
   if (error) {
+    if (/invalid input syntax for type uuid/i.test(error.message)) {
+      return null;
+    }
+
     throw new Error(error.message);
   }
 

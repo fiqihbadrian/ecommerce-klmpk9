@@ -1,0 +1,190 @@
+import ellipse3 from "./ellipse-3.svg";
+import image from "./image.svg";
+import vector from "./vector.svg";
+import vector2 from "./vector-2.svg";
+import vector3 from "./vector-3.svg";
+import vector4 from "./vector-4.svg";
+import vector5 from "./vector-5.svg";
+import vector6 from "./vector-6.svg";
+import vector7 from "./vector-7.svg";
+import vector8 from "./vector-8.svg";
+import vector9 from "./vector-9.svg";
+import vector10 from "./vector-10.svg";
+import vector11 from "./vector-11.svg";
+import vector12 from "./vector-12.svg";
+import vector13 from "./vector-13.svg";
+import vector14 from "./vector-14.svg";
+import vector15 from "./vector-15.svg";
+import vector16 from "./vector-16.svg";
+import vector17 from "./vector-17.svg";
+
+export const Favorit = (): JSX.Element => {
+  return (
+    <div className="bg-white w-full min-w-[402px] min-h-[874px] relative">
+      <div className="absolute top-0 left-0 w-[402px] h-[874px] bg-[#6c757d]" />
+      <div className="absolute top-[-5px] left-0 w-[402px] h-[60px] bg-[#fffbfb]" />
+      <div className="absolute top-[9px] left-[61px] w-[135px] h-8 flex items-center justify-center [font-family:'Poppins-Bold',Helvetica] font-bold text-[#0b0b0b] text-xl text-center tracking-[0] leading-[normal]">
+        Favorit Saya
+      </div>
+      <div className="absolute top-[76px] left-[15px] w-[182px] h-[177px]">
+        <div className="absolute top-0 left-px w-[177px] h-[177px] bg-[#fffbfb] rounded-[15px]" />
+        <div className="absolute top-[11px] left-[15px] w-[150px] h-[100px] bg-[#964444] rounded-[15px]" />
+        <div className="absolute top-[111px] left-[9px] w-[117px] h-8 flex items-center justify-center [font-family:'Poppins-Regular',Helvetica] font-normal text-[#494646] text-base text-center tracking-[0] leading-[normal]">
+          Detail Produk
+        </div>
+        <div className="absolute top-[130px] left-0 w-[117px] h-8 flex items-center justify-center [font-family:'Poppins-Regular',Helvetica] font-normal text-[#676464] text-base text-center tracking-[0] leading-[normal]">
+          Rp 250.000
+        </div>
+        <img
+          className="absolute w-[17.58%] h-[10.73%] top-[89.27%] left-[82.42%]"
+          alt="Vector"
+          src={vector4}
+        />
+        <img
+          className="absolute w-[91.76%] h-[7.34%] top-[92.66%] left-[8.24%]"
+          alt="Vector"
+          src={vector5}
+        />
+      </div>
+      <div className="absolute top-[76px] left-52 w-[182px] h-[177px]">
+        <div className="absolute top-0 left-px w-[177px] h-[177px] bg-[#fffbfb] rounded-[15px]" />
+        <div className="absolute top-[11px] left-[15px] w-[150px] h-[100px] bg-[#964444] rounded-[15px]" />
+        <div className="absolute top-[111px] left-[9px] w-[117px] h-8 flex items-center justify-center [font-family:'Poppins-Regular',Helvetica] font-normal text-[#494646] text-base text-center tracking-[0] leading-[normal]">
+          Detail Produk
+        </div>
+        <div className="absolute top-[130px] left-0 w-[117px] h-8 flex items-center justify-center [font-family:'Poppins-Regular',Helvetica] font-normal text-[#676464] text-base text-center tracking-[0] leading-[normal]">
+          Rp 250.000
+        </div>
+        <img
+          className="absolute w-[17.58%] h-[10.73%] top-[89.27%] left-[82.42%]"
+          alt="Vector"
+          src={vector6}
+        />
+        <img
+          className="absolute w-[91.76%] h-[7.34%] top-[92.66%] left-[8.24%]"
+          alt="Vector"
+          src={vector7}
+        />
+      </div>
+      <div className="absolute top-[274px] left-[15px] w-[182px] h-[177px]">
+        <div className="absolute top-0 left-px w-[177px] h-[177px] bg-[#fffbfb] rounded-[15px]" />
+        <div className="absolute top-[11px] left-[15px] w-[150px] h-[100px] bg-[#964444] rounded-[15px]" />
+        <div className="absolute top-[111px] left-[9px] w-[117px] h-8 flex items-center justify-center [font-family:'Poppins-Regular',Helvetica] font-normal text-[#494646] text-base text-center tracking-[0] leading-[normal]">
+          Detail Produk
+        </div>
+        <div className="absolute top-[130px] left-0 w-[117px] h-8 flex items-center justify-center [font-family:'Poppins-Regular',Helvetica] font-normal text-[#676464] text-base text-center tracking-[0] leading-[normal]">
+          Rp 250.000
+        </div>
+        <img
+          className="absolute w-[17.58%] h-[10.73%] top-[89.27%] left-[82.42%]"
+          alt="Vector"
+          src={vector8}
+        />
+        <img
+          className="absolute w-[91.76%] h-[7.34%] top-[92.66%] left-[8.24%]"
+          alt="Vector"
+          src={vector9}
+        />
+      </div>
+      <div className="absolute top-[274px] left-52 w-[182px] h-[177px]">
+        <div className="absolute top-0 left-px w-[177px] h-[177px] bg-[#fffbfb] rounded-[15px]" />
+        <div className="absolute top-[11px] left-[15px] w-[150px] h-[100px] bg-[#964444] rounded-[15px]" />
+        <div className="absolute top-[111px] left-[9px] w-[117px] h-8 flex items-center justify-center [font-family:'Poppins-Regular',Helvetica] font-normal text-[#494646] text-base text-center tracking-[0] leading-[normal]">
+          Detail Produk
+        </div>
+        <div className="absolute top-[130px] left-0 w-[117px] h-8 flex items-center justify-center [font-family:'Poppins-Regular',Helvetica] font-normal text-[#676464] text-base text-center tracking-[0] leading-[normal]">
+          Rp 250.000
+        </div>
+        <img
+          className="absolute w-[17.58%] h-[10.73%] top-[89.27%] left-[82.42%]"
+          alt="Vector"
+          src={vector10}
+        />
+        <img
+          className="absolute w-[91.76%] h-[7.34%] top-[92.66%] left-[8.24%]"
+          alt="Vector"
+          src={vector11}
+        />
+      </div>
+      <div className="absolute top-[472px] left-4 w-[182px] h-[177px]">
+        <div className="absolute top-0 left-px w-[177px] h-[177px] bg-[#fffbfb] rounded-[15px]" />
+        <div className="absolute top-[11px] left-[15px] w-[150px] h-[100px] bg-[#964444] rounded-[15px]" />
+        <div className="absolute top-[111px] left-[9px] w-[117px] h-8 flex items-center justify-center [font-family:'Poppins-Regular',Helvetica] font-normal text-[#494646] text-base text-center tracking-[0] leading-[normal]">
+          Detail Produk
+        </div>
+        <div className="absolute top-[130px] left-0 w-[117px] h-8 flex items-center justify-center [font-family:'Poppins-Regular',Helvetica] font-normal text-[#676464] text-base text-center tracking-[0] leading-[normal]">
+          Rp 250.000
+        </div>
+        <img
+          className="absolute w-[17.58%] h-[10.73%] top-[89.27%] left-[82.42%]"
+          alt="Vector"
+          src={vector12}
+        />
+        <img
+          className="absolute w-[91.76%] h-[7.34%] top-[92.66%] left-[8.24%]"
+          alt="Vector"
+          src={vector13}
+        />
+      </div>
+      <div className="absolute top-[472px] left-52 w-[182px] h-[177px]">
+        <div className="absolute top-0 left-px w-[177px] h-[177px] bg-[#fffbfb] rounded-[15px]" />
+        <div className="absolute top-[11px] left-[15px] w-[150px] h-[100px] bg-[#964444] rounded-[15px]" />
+        <div className="absolute top-[111px] left-[9px] w-[117px] h-8 flex items-center justify-center [font-family:'Poppins-Regular',Helvetica] font-normal text-[#494646] text-base text-center tracking-[0] leading-[normal]">
+          Detail Produk
+        </div>
+        <div className="absolute top-[130px] left-0 w-[117px] h-8 flex items-center justify-center [font-family:'Poppins-Regular',Helvetica] font-normal text-[#676464] text-base text-center tracking-[0] leading-[normal]">
+          Rp 250.000
+        </div>
+        <img
+          className="absolute w-[17.58%] h-[10.73%] top-[89.27%] left-[82.42%]"
+          alt="Vector"
+          src={vector14}
+        />
+        <img
+          className="absolute w-[91.76%] h-[7.34%] top-[92.66%] left-[8.24%]"
+          alt="Vector"
+          src={vector15}
+        />
+      </div>
+      <div className="absolute top-[799px] left-0 w-[402px] h-[75px]">
+        <div className="absolute top-[15px] left-0 w-[402px] h-[60px] bg-[#fffbfb]" />
+        <img
+          className="absolute w-[64.68%] h-[56.00%] top-[44.00%] left-[35.32%]"
+          alt="Vector"
+          src={vector}
+        />
+        <img
+          className="absolute w-[16.92%] h-[56.00%] top-[44.00%] left-[83.08%]"
+          alt="Vector"
+          src={vector2}
+        />
+        <img
+          className="absolute top-[13px] left-[201px] w-[100px] h-[37px]"
+          alt="Ellipse"
+          src={ellipse3}
+        />
+        <div className="absolute top-0 left-[229px] w-11 h-11 flex bg-[#343a40] rounded-[60px] shadow-[0px_4px_4px_#00000040]">
+          <img className="flex-1 w-6" alt="Vector" src={image} />
+        </div>
+      </div>
+      <img
+        className="absolute w-[10.20%] h-[98.40%] top-0 left-[89.80%]"
+        alt="Vector"
+        src={vector3}
+      />
+      <div className="absolute top-[849px] left-[223px] h-[18px] flex items-center justify-center [font-family:'Poppins-Regular',Helvetica] font-normal text-[#343a40] text-xs text-center tracking-[0] leading-[normal]">
+        Favorites
+      </div>
+      <img
+        className="absolute w-[94.28%] h-[99.08%] top-0 left-[5.72%]"
+        alt="Vector"
+        src={vector16}
+      />
+      <img
+        className="absolute w-[89.55%] h-[4.92%] top-[95.08%] left-[10.45%]"
+        alt="Vector"
+        src={vector17}
+      />
+    </div>
+  );
+};

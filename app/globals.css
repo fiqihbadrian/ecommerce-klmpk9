@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f7fb;
-  --foreground: #102033;
+  --background: #6c757d;
+  --foreground: #1f2933;
   --card: #ffffff;
-  --muted: #6b7280;
-  --line: rgba(16, 32, 51, 0.08);
-  --primary: #0f766e;
-  --primary-foreground: #f8fffe;
-  --secondary: #f3efe6;
-  --shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+  --muted: #5f6771;
+  --line: rgba(17, 24, 39, 0.1);
+  --primary: #495057;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f3f5;
+  --shadow: 0 24px 64px rgba(0, 0, 0, 0.18);
 }
 
 @theme inline {
@@ -37,9 +37,9 @@ body {
   margin: 0;
   color: var(--foreground);
   background:
-    radial-gradient(circle at top left, rgba(15, 118, 110, 0.14), transparent 34%),
-    radial-gradient(circle at top right, rgba(245, 158, 11, 0.12), transparent 30%),
-    linear-gradient(180deg, #ffffff 0%, var(--background) 38%, #eef3f8 100%);
+    radial-gradient(circle at -10% -5%, rgba(255, 255, 255, 0.35), transparent 24%),
+    radial-gradient(circle at 110% 105%, rgba(255, 255, 255, 0.22), transparent 28%),
+    linear-gradient(180deg, #79828a 0%, var(--background) 42%, #626b73 100%);
   font-family: var(--font-space-grotesk), sans-serif;
 }
 
@@ -60,10 +60,10 @@ select {
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.82);
-  border: 1px solid rgba(16, 32, 51, 0.08);
+  background: #ffffff;
+  border: 1px solid rgba(17, 24, 39, 0.08);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(6px);
 }
 
 .safe-padding-bottom {
