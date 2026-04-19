@@ -1,46 +1,56 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-
-const highlights = ["Login cepat", "Produk dari database", "Cart & favorites tersimpan"];
 
 export default function WelcomePage() {
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-md flex-col bg-[#6c757d] px-3 py-4">
-      <section className="glass-card relative flex flex-1 flex-col justify-between overflow-hidden rounded-[42px] p-6">
-        <div className="pointer-events-none absolute -left-14 -top-14 h-36 w-36 rounded-full bg-[#dce0e4]" />
-        <div className="pointer-events-none absolute -bottom-12 -right-12 h-40 w-40 rounded-full bg-[#dce0e4]" />
-        <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#6c757d]">K9 Mart</p>
-          <h1 className="mt-4 max-w-[12ch] text-4xl font-semibold leading-[1.02] tracking-tight text-[#495057]">
-            Belanja mobile yang terasa cepat dan rapi.
-          </h1>
-          <p className="mt-4 max-w-sm text-sm leading-6 text-[#5f6771]">
-            Demo e-commerce ini memakai Next.js App Router, Supabase, dan Zustand untuk alur login, katalog,
-            cart, favorites, sampai checkout.
-          </p>
+    <main
+      className="relative mx-auto flex min-h-screen w-full max-w-md flex-col items-center justify-between overflow-hidden px-7 pb-12"
+      style={{ backgroundColor: "#6C757D" }}
+    >
+      <div className="absolute left-5 top-5 z-10 flex items-end gap-1.5">
+        <div className="w-2.5 rounded-full opacity-85" style={{ height: 36, backgroundColor: "#8fa0ae" }} />
+        <div className="w-2.5 rounded-full opacity-65" style={{ height: 50, backgroundColor: "#9eb0bc" }} />
+        <div className="w-2.5 rounded-full opacity-85" style={{ height: 36, backgroundColor: "#8fa0ae" }} />
+      </div>
 
-          <div className="mt-6 grid gap-3">
-            {highlights.map((item) => (
-              <div key={item} className="flex items-center gap-3 rounded-[20px] border border-[#d8dde2] bg-white px-4 py-3 text-sm text-[#4d5560]">
-                <span className="h-2.5 w-2.5 rounded-full bg-[#6c757d]" />
-                <span>{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+      <div
+        className="absolute rounded-full bg-white"
+        style={{ width: 160, height: 160, top: -50, right: -50, opacity: 0.95 }}
+      />
 
-        <div className="mt-8 grid gap-3">
-          <Button asChild className="w-full">
-            <Link href="/login">Masuk</Link>
-          </Button>
-          <Button asChild variant="secondary" className="w-full">
-            <Link href="/register">Daftar</Link>
-          </Button>
-          <Link href="/home" className="text-center text-sm font-semibold text-[#5f6771] transition hover:text-[#495057]">
-            Lihat katalog dulu
-          </Link>
-        </div>
-      </section>
+      <div
+        className="absolute rounded-full bg-white"
+        style={{ width: 140, height: 140, bottom: -45, left: -45, opacity: 0.95 }}
+      />
+
+      <div className="absolute bottom-6 right-5 z-10 flex items-end gap-1.5">
+        <div className="w-2.5 rounded-full opacity-85" style={{ height: 36, backgroundColor: "#8fa0ae" }} />
+        <div className="w-2.5 rounded-full opacity-65" style={{ height: 50, backgroundColor: "#9eb0bc" }} />
+        <div className="w-2.5 rounded-full opacity-85" style={{ height: 36, backgroundColor: "#8fa0ae" }} />
+      </div>
+
+      <div className="z-10 flex w-full flex-1 items-center justify-center">
+        <h1 className="text-white font-bold text-4xl tracking-tight ">
+          WELCOME
+        </h1>
+      </div>
+
+      <div className="z-10 flex w-full max-w-xs flex-col gap-3.5">
+        <Link
+          href="/login"
+          className="w-full rounded-full bg-white py-4 text-center text-base font-bold text-[#546070] transition-all duration-150 hover:bg-gray-100 active:scale-95"
+        >
+          Masuk
+        </Link>
+        <Link
+          href="/register"
+          className="w-full rounded-full bg-white py-4 text-center text-base font-bold text-[#546070] transition-all duration-150 hover:bg-gray-100 active:scale-95"
+        >
+          Daftar
+        </Link>
+        <Link href="/home" className="pt-1 text-center text-sm font-semibold text-white/90 transition hover:text-white">
+          Lihat katalog dulu
+        </Link>
+      </div>
     </main>
   );
 }

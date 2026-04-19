@@ -45,13 +45,26 @@ export default function AdminPage() {
   const [products, setProducts] = useState<ProductRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAdding, setIsAdding] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState<"success" | "error" | "info">("info");
   const [error, setError] = useState<string | null>(null);
   const hasMissingTableError = isMissingProductsTable(error);
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   // Form state
   const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    long_description: "",
+    category: "",
+    price: "",
+    stock: "",
+    rating: "4.8",
+    image_url: "",
+  });
+
+  const [editFormData, setEditFormData] = useState({
     title: "",
     description: "",
     long_description: "",
@@ -172,6 +185,83 @@ export default function AdminPage() {
     setMessageType("success");
     setMessage("Produk berhasil dihapus.");
     loadProducts();
+    setTimeout(() => setMessage(""), 3000);
+  }
+
+  function handleStartEdit(product: ProductRow) {
+    setEditingId(product.id);
+    setEditFormData({
+      title: product.title ?? "",
+      description: product.description ?? "",
+      long_description: product.long_description ?? "",
+      category: product.category ?? "",
+      price: String(product.price ?? 0),
+      stock: String(product.stock ?? 0),
+      rating: String(product.rating ?? 4.8),
+      image_url: product.image_url ?? "",
+    });
+  }
+
+  function handleCancelEdit() {
+    setEditingId(null);
+  }
+
+  async function handleUpdateProduct(e: React.FormEvent) {
+    e.preventDefault();
+
+    if (!editingId) {
+      return;
+    }
+
+    setIsUpdating(true);
+    setMessage("");
+
+    const supabase = getSupabaseClient();
+    if (!supabase) {
+      setMessageType("error");
+      setMessage("Supabase env tidak tersedia.");
+      setIsUpdating(false);
+      return;
+    }
+
+    if (!editFormData.title || !editFormData.price || !editFormData.category) {
+      setMessageType("error");
+      setMessage("Isi semua field wajib: judul, kategori, dan harga.");
+      setIsUpdating(false);
+      return;
+    }
+
+    const payload = {
+      title: editFormData.title,
+      description: editFormData.description || "Belum ada deskripsi",
+      long_description:
+        editFormData.long_description ||
+        editFormData.description ||
+        "Deskripsi lengkap belum tersedia.",
+      category: editFormData.category,
+      price: parseInt(editFormData.price) || 0,
+      stock: parseInt(editFormData.stock) || 0,
+      rating: parseFloat(editFormData.rating) || 4.8,
+      image_url: editFormData.image_url || "/placeholder-product.svg",
+    };
+
+    const { error: dbError } = await supabase
+      .from("products")
+      .update(payload)
+      .eq("id", editingId);
+
+    if (dbError) {
+      setMessageType("error");
+      setMessage(`Error: ${dbError.message}`);
+      setIsUpdating(false);
+      return;
+    }
+
+    setMessageType("success");
+    setMessage("Produk berhasil diperbarui.");
+    setEditingId(null);
+    await loadProducts();
+    setIsUpdating(false);
     setTimeout(() => setMessage(""), 3000);
   }
 
@@ -301,22 +391,105 @@ export default function AdminPage() {
         ) : (
           <div className="space-y-2">
             {products.map((product) => (
-              <div
-                key={product.id}
-                className="flex items-center justify-between gap-3 rounded-xl border border-[#ebedf0] bg-[#f8f9fa] px-3 py-3"
-              >
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-semibold text-[#343a40]">{product.title}</p>
-                  <p className="text-xs text-[#5f6771]">
-                    {formatCurrency(product.price)} • Stok: {product.stock} • Rating: {product.rating}
-                  </p>
+              <div key={product.id} className="rounded-xl border border-[#ebedf0] bg-[#f8f9fa] px-3 py-3">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-semibold text-[#343a40]">{product.title}</p>
+                    <p className="text-xs text-[#5f6771]">
+                      {formatCurrency(product.price)} • Stok: {product.stock} • Rating: {product.rating}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => handleStartEdit(product)}
+                      className="rounded-full bg-[#495057] px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-[#343a40]"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDeleteProduct(product.id)}
+                      className="rounded-full bg-[#ef4444] px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-[#dc2626]"
+                    >
+                      Hapus
+                    </button>
+                  </div>
                 </div>
-                <button
-                  onClick={() => handleDeleteProduct(product.id)}
-                  className="rounded-full bg-[#ef4444] px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-[#dc2626]"
-                >
-                  Hapus
-                </button>
+
+                {editingId === product.id ? (
+                  <form onSubmit={handleUpdateProduct} className="mt-3 space-y-3 rounded-xl border border-[#d6d9dd] bg-white p-3">
+                    <div className="grid gap-2 sm:grid-cols-2">
+                      <Input
+                        placeholder="Judul produk*"
+                        value={editFormData.title}
+                        onChange={(e) => setEditFormData({ ...editFormData, title: e.target.value })}
+                        className="h-10 border-[#d6d9dd] bg-white text-[#343a40]"
+                      />
+                      <Input
+                        placeholder="Kategori*"
+                        value={editFormData.category}
+                        onChange={(e) => setEditFormData({ ...editFormData, category: e.target.value })}
+                        className="h-10 border-[#d6d9dd] bg-white text-[#343a40]"
+                      />
+                    </div>
+
+                    <textarea
+                      placeholder="Deskripsi"
+                      value={editFormData.description}
+                      onChange={(e) => setEditFormData({ ...editFormData, description: e.target.value })}
+                      className="w-full rounded-xl border border-[#d6d9dd] bg-white px-3 py-2 text-[#343a40] focus:outline-none focus:ring-2 focus:ring-[#6c757d]/40"
+                      rows={3}
+                    />
+
+                    <textarea
+                      placeholder="Deskripsi panjang"
+                      value={editFormData.long_description}
+                      onChange={(e) => setEditFormData({ ...editFormData, long_description: e.target.value })}
+                      className="w-full rounded-xl border border-[#d6d9dd] bg-white px-3 py-2 text-[#343a40] focus:outline-none focus:ring-2 focus:ring-[#6c757d]/40"
+                      rows={4}
+                    />
+
+                    <div className="grid gap-2 sm:grid-cols-3">
+                      <Input
+                        placeholder="Harga*"
+                        type="number"
+                        value={editFormData.price}
+                        onChange={(e) => setEditFormData({ ...editFormData, price: e.target.value })}
+                        className="h-10 border-[#d6d9dd] bg-white text-[#343a40]"
+                      />
+                      <Input
+                        placeholder="Stok"
+                        type="number"
+                        value={editFormData.stock}
+                        onChange={(e) => setEditFormData({ ...editFormData, stock: e.target.value })}
+                        className="h-10 border-[#d6d9dd] bg-white text-[#343a40]"
+                      />
+                      <Input
+                        placeholder="Rating"
+                        type="number"
+                        step="0.1"
+                        value={editFormData.rating}
+                        onChange={(e) => setEditFormData({ ...editFormData, rating: e.target.value })}
+                        className="h-10 border-[#d6d9dd] bg-white text-[#343a40]"
+                      />
+                    </div>
+
+                    <Input
+                      placeholder="Image URL"
+                      value={editFormData.image_url}
+                      onChange={(e) => setEditFormData({ ...editFormData, image_url: e.target.value })}
+                      className="h-10 border-[#d6d9dd] bg-white text-[#343a40]"
+                    />
+
+                    <div className="flex gap-2">
+                      <Button type="submit" className="h-9 text-xs" disabled={isUpdating}>
+                        {isUpdating ? "Menyimpan..." : "Simpan perubahan"}
+                      </Button>
+                      <Button type="button" variant="secondary" className="h-9 text-xs" onClick={handleCancelEdit}>
+                        Batal
+                      </Button>
+                    </div>
+                  </form>
+                ) : null}
               </div>
             ))}
           </div>
