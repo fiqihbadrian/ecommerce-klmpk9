@@ -128,7 +128,7 @@ export default function AdminPage() {
             <p className="mt-1 text-sm text-slate-400">Manage produk di database</p>
           </div>
           <Link href="/home">
-            <Button variant="outline">Back</Button>
+            <Button variant="ghost">Back</Button>
           </Link>
         </div>
 
