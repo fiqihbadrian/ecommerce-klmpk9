@@ -5,6 +5,8 @@ import type { Product } from "@/lib/products";
 import { Button } from "./ui/button";
 import { useCartStore } from "@/store/cart";
 import { useFavoritesStore } from "@/store/favorites";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 type ProductActionsProps = {
   product: Product;
@@ -24,14 +26,7 @@ export function ProductActions({ product }: ProductActionsProps) {
           onClick={() => toggleFavorite(product)}
           className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f3f4f6] text-[#495057] transition hover:bg-[#e9ecef]"
         >
-          <svg
-            viewBox="0 0 24 24"
-            className={isFavorite ? "h-5 w-5 fill-[#ef4444] stroke-[#ef4444]" : "h-5 w-5 stroke-current"}
-            fill="none"
-            strokeWidth="1.8"
-          >
-            <path d="M20 8.5c0 4.6-8 10.8-8 10.8S4 13.1 4 8.5A4.5 4.5 0 0 1 12 6a4.5 4.5 0 0 1 8 2.5Z" />
-          </svg>
+          <FontAwesomeIcon icon={faHeart} className={isFavorite ? "h-5 w-5 text-[#ef4444]" : "h-5 w-5 text-[#495057]"} />
         </button>
       </div>
 

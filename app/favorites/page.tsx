@@ -1,6 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { EmptyState } from "@/components/empty-state";
 import { PageShell } from "@/components/layout/page-shell";
 import { ProductCard } from "@/components/product-card";
@@ -37,10 +39,7 @@ export default function FavoritesPage() {
             onClick={() => setShowSearch((value) => !value)}
             className="flex h-9 w-9 items-center justify-center rounded-full bg-[#f3f4f6] text-[#343a40]"
           >
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.4">
-              <circle cx="11" cy="11" r="6.5" />
-              <path d="m16 16 4 4" />
-            </svg>
+            <FontAwesomeIcon icon={faMagnifyingGlass} className="h-4 w-4" />
           </button>
         </div>
         <p className="mt-1 text-xs text-[#6c757d]">Cari hanya di daftar produk favorit kamu.</p>

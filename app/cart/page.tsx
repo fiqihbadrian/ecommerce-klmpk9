@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft, faHeart, faMessage } from "@fortawesome/free-solid-svg-icons";
 import { EmptyState } from "@/components/empty-state";
 import { PageShell } from "@/components/layout/page-shell";
 import { Button } from "@/components/ui/button";
@@ -139,9 +141,7 @@ export default function CartPage() {
             aria-label="Kembali ke halaman sebelumnya"
             className="flex h-9 w-9 items-center justify-center rounded-full bg-[#f3f4f6] text-[#343a40] transition hover:bg-[#e9ecef]"
           >
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="m15 18-6-6 6-6" />
-            </svg>
+            <FontAwesomeIcon icon={faChevronLeft} className="h-4 w-4" />
           </button>
           <h1 className="flex-1 text-xl font-bold text-[#0b0b0b]">Keranjang Saya</h1>
 
@@ -150,9 +150,7 @@ export default function CartPage() {
             aria-label="Buka pesan"
             className="flex h-9 w-9 items-center justify-center rounded-full bg-[#f3f4f6] text-[#343a40] transition hover:bg-[#e9ecef]"
           >
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.4">
-              <path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7A2.5 2.5 0 0 1 17.5 16h-7l-3.8 3.2c-.7.6-1.7.1-1.7-.8V16.1A2.5 2.5 0 0 1 4 13.5Z" />
-            </svg>
+            <FontAwesomeIcon icon={faMessage} className="h-4 w-4" />
           </button>
 
           <Link
@@ -160,9 +158,7 @@ export default function CartPage() {
             aria-label="Buka favorit"
             className="flex h-9 w-9 items-center justify-center rounded-full bg-[#f3f4f6] text-[#343a40] transition hover:bg-[#e9ecef]"
           >
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.4">
-              <path d="M20 8.5c0 4.6-8 10.8-8 10.8S4 13.1 4 8.5A4.5 4.5 0 0 1 12 6a4.5 4.5 0 0 1 8 2.5Z" />
-            </svg>
+            <FontAwesomeIcon icon={faHeart} className="h-4 w-4" />
           </Link>
         </div>
         <p className="mt-1 text-xs text-[#6c757d]">Atur jumlah item sebelum checkout.</p>
