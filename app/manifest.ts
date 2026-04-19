@@ -2,9 +2,9 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "K9 Mart",
-    short_name: "K9 Mart",
-    description: "Mobile-first e-commerce demo built with Next.js, Supabase, and Zustand.",
+    name: "KLMPK9 Mart",
+    short_name: "KLMPK9 Mart",
+    description: "E-commerce app for KLMPK9 Mart",
     start_url: "/welcome",
     scope: "/",
     display: "standalone",
