@@ -13,9 +13,10 @@ export default function CartPage() {
   const removeItem = useCartStore((state) => state.removeItem);
   const updateQuantity = useCartStore((state) => state.updateQuantity);
   const subtotal = useCartStore((state) => state.getSubtotal());
+  const totalBought = items.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <PageShell>
+    <PageShell showBottomNav={false} className="pb-44">
       <section className="-mx-4 mb-5 bg-[#fffbfb] px-4 py-3 shadow-[0_8px_16px_rgba(0,0,0,0.1)]">
         <h1 className="text-xl font-bold text-[#0b0b0b]">Keranjang Saya</h1>
         <p className="mt-1 text-xs text-[#6c757d]">Atur jumlah item sebelum checkout.</p>
@@ -58,31 +59,34 @@ export default function CartPage() {
               </article>
             ))}
           </div>
+        </>
+      )}
 
-          <section className="mt-5 rounded-[15px] border border-black/5 bg-[#fffbfb] p-5 shadow-[0_10px_20px_rgba(0,0,0,0.12)]">
-            <div className="flex items-center justify-between gap-3 text-sm text-[#6c757d]">
-              <span>Subtotal</span>
-              <span className="font-semibold text-[#343a40]">{formatCurrency(subtotal)}</span>
+      {items.length > 0 ? (
+        <section className="fixed inset-x-0 bottom-0 z-30 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+          <div className="mx-auto w-full max-w-md bg-white px-4 py-3 shadow-[0_-10px_24px_rgba(0,0,0,0.18)]">
+            <div className="grid grid-cols-2 gap-3 rounded-[12px] bg-[#f4f5f7] px-3 py-2">
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#6c757d]">Total checkout</p>
+                <p className="mt-1 text-sm font-bold text-[#343a40]">{formatCurrency(subtotal)}</p>
+              </div>
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#6c757d]">Total dibeli</p>
+                <p className="mt-1 text-sm font-bold text-[#343a40]">{totalBought} item</p>
+              </div>
             </div>
-            <div className="mt-3 flex items-center justify-between gap-3 text-sm text-[#6c757d]">
-              <span>Ongkir</span>
-              <span className="font-semibold text-[#495057]">Gratis</span>
-            </div>
-            <div className="mt-4 flex items-center justify-between gap-3 border-t border-black/5 pt-4 text-base">
-              <span className="font-semibold text-[#343a40]">Total</span>
-              <span className="font-semibold text-[#343a40]">{formatCurrency(subtotal)}</span>
-            </div>
-            <div className="mt-5 grid gap-3">
-              <Button asChild>
+
+            <div className="mt-3 grid grid-cols-2 gap-2 text-white">
+              <Button asChild className="h-10 text-xs">
                 <Link href="/checkout">Lanjut checkout</Link>
               </Button>
-              <Button type="button" variant="secondary" onClick={clearCart}>
+              <Button type="button" variant="secondary" className="h-10 text-xs" onClick={clearCart}>
                 Kosongkan cart
               </Button>
             </div>
-          </section>
-        </>
-      )}
+          </div>
+        </section>
+      ) : null}
     </PageShell>
   );
 }
