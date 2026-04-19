@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -31,6 +31,7 @@ function buildCurvePath(centerX: number, navWidth: number) {
 
 export function BottomNav() {
   const pathname = usePathname();
+  const router = useRouter();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [navWidth, setNavWidth] = useState(320);
   const activeIndex = useMemo(() => {
@@ -113,6 +114,12 @@ export function BottomNav() {
                   href={item.href}
                   className="relative z-10 flex h-12 w-full items-center justify-center"
                   aria-label={item.label}
+                  onClick={(event) => {
+                    if (active) {
+                      event.preventDefault();
+                      router.refresh();
+                    }
+                  }}
                 >
                   <FontAwesomeIcon
                     icon={item.icon}
@@ -124,7 +131,7 @@ export function BottomNav() {
           </div>
 
           <div
-            className="absolute top-0 z-20 flex h-[50px] w-[50px] -translate-x-1/2 items-center justify-center rounded-full bg-gray-900"
+            className="pointer-events-none absolute top-0 z-20 flex h-[50px] w-[50px] -translate-x-1/2 items-center justify-center rounded-full bg-gray-900"
             style={{
               left: `${bubbleLeft}px`,
               transition: bubbleTransition ? "left 0.4s cubic-bezier(0.4, 0, 0.2, 1)" : "none",

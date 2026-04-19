@@ -78,7 +78,7 @@ export default async function SearchPage({
           actionHref="/home"
         />
       ) : (
-        <div className="grid gap-4">
+        <div className="grid grid-cols-2 gap-3">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} compact />
           ))}
