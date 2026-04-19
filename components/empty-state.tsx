@@ -21,7 +21,7 @@ export function EmptyState({ title, description, actionLabel, actionHref }: Empt
       <h2 className="mt-4 text-lg font-semibold text-slate-900">{title}</h2>
       <p className="mt-2 text-sm leading-6 text-slate-500">{description}</p>
       {actionLabel && actionHref ? (
-        <Button asChild className="mt-5 w-full">
+        <Button asChild variant="primary" className="mt-5 w-full">
           <Link href={actionHref}>{actionLabel}</Link>
         </Button>
       ) : null}
