@@ -12,6 +12,7 @@ export default function FavoritesPage() {
   const items = useFavoritesStore((state) => state.items);
   const clearFavorites = useFavoritesStore((state) => state.clearFavorites);
   const [query, setQuery] = useState("");
+  const [showSearch, setShowSearch] = useState(false);
 
   const filteredItems = useMemo(() => {
     const keyword = query.trim().toLowerCase();
@@ -33,23 +34,26 @@ export default function FavoritesPage() {
           <button
             type="button"
             aria-label="Cari produk favorit"
+            onClick={() => setShowSearch((value) => !value)}
             className="flex h-9 w-9 items-center justify-center rounded-full bg-[#f3f4f6] text-[#343a40]"
           >
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.4">
               <circle cx="11" cy="11" r="6.5" />
               <path d="m16 16 4 4" />
             </svg>
           </button>
         </div>
         <p className="mt-1 text-xs text-[#6c757d]">Cari hanya di daftar produk favorit kamu.</p>
-        <div className="mt-3">
-          <Input
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Cari produk favorit..."
-            className="h-11 border-[#d6d9dd] bg-white text-[#343a40]"
-          />
-        </div>
+        {showSearch ? (
+          <div className="mt-3">
+            <Input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Cari produk favorit..."
+              className="h-11 border-[#d6d9dd] bg-white text-[#343a40]"
+            />
+          </div>
+        ) : null}
       </section>
 
       {items.length === 0 ? (
