@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHouse,
@@ -19,11 +19,10 @@ const items = [
   { href: "/profile", label: "Profile", icon: faUser },
 ];
 
-const navWidth = 320;
 const navHeight = 65;
 const flatY = 5;
 
-function buildCurvePath(centerX: number) {
+function buildCurvePath(centerX: number, navWidth: number) {
   const r = 30;
   const dip = 20;
 
@@ -32,6 +31,8 @@ function buildCurvePath(centerX: number) {
 
 export function BottomNav() {
   const pathname = usePathname();
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [navWidth, setNavWidth] = useState(320);
   const activeIndex = useMemo(() => {
     const idx = items.findIndex((item) => pathname === item.href || pathname.startsWith(`${item.href}/`));
     return idx >= 0 ? idx : 0;
@@ -53,13 +54,44 @@ export function BottomNav() {
     };
   }, []);
 
+  useEffect(() => {
+    const node = containerRef.current;
+
+    if (!node) {
+      return;
+    }
+
+    function updateWidth() {
+      const currentNode = containerRef.current;
+
+      if (!currentNode) {
+        return;
+      }
+
+      const nextWidth = Math.max(260, Math.floor(currentNode.clientWidth));
+      setNavWidth(nextWidth);
+    }
+
+    updateWidth();
+
+    const observer = new ResizeObserver(() => {
+      updateWidth();
+    });
+
+    observer.observe(node);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <nav className="fixed inset-x-0 bottom-0 z-40 pb-[max(0.35rem,env(safe-area-inset-bottom))]">
-      <div className="mx-auto w-[320px]">
-        <div className="relative h-16">
+      <div ref={containerRef} className="mx-auto w-full max-w-md px-4">
+        <div className="relative h-16 w-full">
           <svg
             className="absolute bottom-0 left-0 h-16 w-full overflow-visible"
-            viewBox="0 0 320 65"
+            viewBox={`0 0 ${navWidth} 65`}
             preserveAspectRatio="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -68,7 +100,7 @@ export function BottomNav() {
                 <feDropShadow dx="0" dy="-2" stdDeviation="3" floodColor="rgba(0,0,0,0.08)" />
               </filter>
             </defs>
-            <path d={buildCurvePath(bubbleLeft)} fill="white" filter="url(#bottom-nav-shadow)" />
+            <path d={buildCurvePath(bubbleLeft, navWidth)} fill="white" filter="url(#bottom-nav-shadow)" />
           </svg>
 
           <div className="absolute bottom-0 left-0 right-0 flex h-[60px] items-center justify-around px-2">
