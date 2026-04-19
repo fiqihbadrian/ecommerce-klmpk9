@@ -60,9 +60,9 @@ export default function CartPage() {
   }
 
   return (
-    <PageShell showBottomNav={false} className="pb-44">
+    <PageShell showBottomNav={false} className="pb-44 pt-0">
     
-      <section className="-mx-4 mb-5 bg-[#fffbfb] px-4 py-3 shadow-[0_8px_16px_rgba(0,0,0,0.1)]">
+      <section className="sticky top-0 z-20 -mx-4 mb-5 bg-[#fffbfb] px-4 py-3 shadow-[0_8px_16px_rgba(0,0,0,0.1)]">
         <div className="flex items-center gap-3">
           <button
             type="button"
@@ -120,7 +120,7 @@ export default function CartPage() {
       )}
 
       {items.length > 0 ? (
-        <section className="fixed inset-x-0 bottom-0 z-30 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+        <section className="fixed inset-x-0 bottom-0 z-30">
           <div className="mx-auto w-full max-w-md bg-white px-4 py-3 shadow-[0_-10px_24px_rgba(0,0,0,0.18)]">
             <div className="grid grid-cols-2 gap-3 rounded-[12px] bg-[#f4f5f7] px-3 py-2">
               <div>
