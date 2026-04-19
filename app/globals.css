@@ -19,8 +19,8 @@
   --color-muted: var(--muted);
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
-  --font-sans: var(--font-space-grotesk);
-  --font-mono: var(--font-ibm-plex-mono);
+  --font-sans: var(--font-poppins);
+  --font-mono: var(--font-poppins);
 }
 
 * {
@@ -40,7 +40,7 @@ body {
     radial-gradient(circle at -10% -5%, rgba(255, 255, 255, 0.35), transparent 24%),
     radial-gradient(circle at 110% 105%, rgba(255, 255, 255, 0.22), transparent 28%),
     linear-gradient(180deg, #79828a 0%, var(--background) 42%, #626b73 100%);
-  font-family: var(--font-space-grotesk), sans-serif;
+  font-family: var(--font-poppins), sans-serif;
 }
 
 a {
@@ -53,6 +53,23 @@ input,
 textarea,
 select {
   font: inherit;
+}
+
+button,
+a,
+input,
+textarea,
+select,
+div,
+span,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: inherit;
 }
 
 ::selection {

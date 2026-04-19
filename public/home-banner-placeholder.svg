@@ -8,7 +8,7 @@
   <rect width="416" height="205" rx="18" fill="url(#bg)"/>
   <circle cx="351" cy="-18" r="84" fill="white" fill-opacity="0.12"/>
   <circle cx="38" cy="222" r="88" fill="white" fill-opacity="0.1"/>
-  <text x="28" y="78" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="2.6">K9 MART BANNER</text>
-  <text x="28" y="114" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="700">Pasang Banner Promo Kamu</text>
-  <text x="28" y="142" fill="white" fill-opacity="0.86" font-family="Arial, sans-serif" font-size="13">Ukuran desain: 416 x 205 px (rasio 2.03:1)</text>
+  <text x="28" y="78" fill="white" font-family="Poppins, sans-serif" font-size="14" font-weight="700" letter-spacing="2.6">K9 MART BANNER</text>
+  <text x="28" y="114" fill="white" font-family="Poppins, sans-serif" font-size="24" font-weight="700">Pasang Banner Promo Kamu</text>
+  <text x="28" y="142" fill="white" fill-opacity="0.86" font-family="Poppins, sans-serif" font-size="13">Ukuran desain: 416 x 205 px (rasio 2.03:1)</text>
 </svg>
