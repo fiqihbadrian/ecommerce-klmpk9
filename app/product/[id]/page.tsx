@@ -29,7 +29,7 @@ export default async function ProductDetailPage({
   const relatedProducts: Product[] = await fetchRelatedProducts(product);
 
   return (
-    <PageShell className="pt-0">
+    <PageShell noTopPadding>
       <section className="sticky top-0 z-20 -mx-4 mb-4 bg-[#fffbfb] px-4 py-3 shadow-[0_8px_16px_rgba(0,0,0,0.1)]">
         <h1 className="text-xl font-bold text-[#0b0b0b]">Detail Produk</h1>
       </section>

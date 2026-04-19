@@ -60,7 +60,7 @@ export default function CartPage() {
   }
 
   return (
-    <PageShell showBottomNav={false} className="pb-44 pt-0">
+    <PageShell showBottomNav={false} noTopPadding className="pb-44">
     
       <section className="sticky top-0 z-20 -mx-4 mb-5 bg-[#fffbfb] px-4 py-3 shadow-[0_8px_16px_rgba(0,0,0,0.1)]">
         <div className="flex items-center gap-3">
