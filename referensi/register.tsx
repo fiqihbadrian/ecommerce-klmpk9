@@ -52,33 +52,41 @@ export default function RegisterPage() {
   return (
     <main
       className="mx-auto flex min-h-screen w-full max-w-sm flex-col"
-      style={{ fontFamily: "'Poppins', sans-serif", backgroundColor: "#6C757D" }}
+      style={{ fontFamily: "'Poppins', sans-serif", backgroundColor: "#6b7280" }}
     >
+      {/* Top area with Back */}
       <div className="relative flex-shrink-0 px-4 pt-4" style={{ height: "140px" }}>
+        {/* Back: transparent, icon + white text */}
         <div className="flex items-center gap-1">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18L9 12L15 6" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
           <Link
             href="/login"
-            className="flex items-center gap-1 transition-opacity duration-200 hover:opacity-80"
+            className="text-sm font-semibold text-white"
+            style={{ fontFamily: "'Poppins', sans-serif" }}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15 18L9 12L15 6" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <span className="text-sm font-semibold text-white" style={{ fontFamily: "'Poppins', sans-serif" }}>
-              Back
-            </span>
+            Back
           </Link>
         </div>
       </div>
 
-      <div className="flex-1 rounded-t-[40px] bg-white px-6 pt-10 pb-8 shadow-[0_-6px_34px_rgba(0,0,0,0.18)]">
+      {/* White card */}
+      <div
+        className="flex-1 rounded-t-[40px] bg-white px-6 pt-10 pb-8"
+        style={{ boxShadow: "0 -4px 30px rgba(0,0,0,0.15)" }}
+      >
+        {/* Title */}
         <h1
-          className="mb-6 text-center text-3xl font-bold text-gray-500"
+          className="text-center text-3xl font-bold text-gray-500 mb-6"
           style={{ letterSpacing: "0.05em" }}
         >
           SIGN UP
         </h1>
 
+        {/* Form */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          {/* Name */}
           <div className="flex flex-col gap-1">
             <label htmlFor="name" className="text-sm font-bold text-gray-700">
               Full Name
@@ -91,11 +99,12 @@ export default function RegisterPage() {
               placeholder="Masukan Nama Lengkap"
               autoComplete="name"
               required
-              className="w-full rounded-full border border-gray-300 px-5 py-3 text-sm text-gray-400 placeholder-gray-400 outline-none transition-all duration-200 hover:border-gray-400 hover:shadow-[0_6px_18px_rgba(0,0,0,0.06)] focus:border-gray-400 focus:shadow-[0_6px_18px_rgba(0,0,0,0.08)] focus:ring-0"
+              className="w-full rounded-full border border-gray-300 px-5 py-3 text-sm text-gray-400 placeholder-gray-400 outline-none focus:border-gray-400 focus:ring-0"
               style={{ fontFamily: "'Poppins', sans-serif" }}
             />
           </div>
 
+          {/* Email */}
           <div className="flex flex-col gap-1">
             <label htmlFor="email" className="text-sm font-bold text-gray-700">
               Email
@@ -108,11 +117,12 @@ export default function RegisterPage() {
               placeholder="Masukan Email"
               autoComplete="email"
               required
-              className="w-full rounded-full border border-gray-300 px-5 py-3 text-sm text-gray-400 placeholder-gray-400 outline-none transition-all duration-200 hover:border-gray-400 hover:shadow-[0_6px_18px_rgba(0,0,0,0.06)] focus:border-gray-400 focus:shadow-[0_6px_18px_rgba(0,0,0,0.08)] focus:ring-0"
+              className="w-full rounded-full border border-gray-300 px-5 py-3 text-sm text-gray-400 placeholder-gray-400 outline-none focus:border-gray-400 focus:ring-0"
               style={{ fontFamily: "'Poppins', sans-serif" }}
             />
           </div>
 
+          {/* Password */}
           <div className="flex flex-col gap-1">
             <label htmlFor="password" className="text-sm font-bold text-gray-700">
               Password
@@ -125,11 +135,12 @@ export default function RegisterPage() {
               placeholder="Masukan Password"
               autoComplete="new-password"
               required
-              className="w-full rounded-full border border-gray-300 px-5 py-3 text-sm text-gray-400 placeholder-gray-400 outline-none transition-all duration-200 hover:border-gray-400 hover:shadow-[0_6px_18px_rgba(0,0,0,0.06)] focus:border-gray-400 focus:shadow-[0_6px_18px_rgba(0,0,0,0.08)] focus:ring-0"
+              className="w-full rounded-full border border-gray-300 px-5 py-3 text-sm text-gray-400 placeholder-gray-400 outline-none focus:border-gray-400 focus:ring-0"
               style={{ fontFamily: "'Poppins', sans-serif" }}
             />
           </div>
 
+          {/* Confirm Password */}
           <div className="flex flex-col gap-1">
             <label htmlFor="confirmPassword" className="text-sm font-bold text-gray-700">
               Confirm Password
@@ -142,21 +153,23 @@ export default function RegisterPage() {
               placeholder="Ulangi Password"
               autoComplete="new-password"
               required
-              className="w-full rounded-full border border-gray-300 px-5 py-3 text-sm text-gray-400 placeholder-gray-400 outline-none transition-all duration-200 hover:border-gray-400 hover:shadow-[0_6px_18px_rgba(0,0,0,0.06)] focus:border-gray-400 focus:shadow-[0_6px_18px_rgba(0,0,0,0.08)] focus:ring-0"
+              className="w-full rounded-full border border-gray-300 px-5 py-3 text-sm text-gray-400 placeholder-gray-400 outline-none focus:border-gray-400 focus:ring-0"
               style={{ fontFamily: "'Poppins', sans-serif" }}
             />
           </div>
 
+          {/* Error / success message */}
           {message && (
             <p className="rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700">
               {message}
             </p>
           )}
 
+          {/* Sign Up Button */}
           <button
             type="submit"
             disabled={isSubmitting}
-            className="mt-1 w-full rounded-full py-4 text-base font-semibold text-white shadow-[0_10px_18px_rgba(75,85,99,0.18)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_14px_22px_rgba(75,85,99,0.24)] disabled:translate-y-0 disabled:opacity-70 disabled:shadow-[0_10px_18px_rgba(75,85,99,0.18)]"
+            className="w-full rounded-full py-4 text-base font-semibold text-white disabled:opacity-70 mt-1"
             style={{
               backgroundColor: "#4b5563",
               fontFamily: "'Poppins', sans-serif",
@@ -166,40 +179,46 @@ export default function RegisterPage() {
           </button>
         </form>
 
+        {/* Divider */}
         <div className="my-6 flex items-center gap-3">
           <div className="h-px flex-1 bg-gray-800" />
           <span className="text-xs font-medium text-gray-700">Or Sign up with</span>
           <div className="h-px flex-1 bg-gray-800" />
         </div>
 
-        <div className="mb-6 flex justify-center gap-8">
-          <button className="flex h-12 w-12 items-center justify-center rounded-full transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_18px_rgba(0,0,0,0.12)]">
+        {/* Social Icons */}
+        <div className="flex justify-center gap-8 mb-6">
+          {/* Facebook */}
+          <button className="flex h-12 w-12 items-center justify-center">
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="20" cy="20" r="20" fill="#1877F2" />
-              <path d="M27 20H22.5V30H18.5V20H16V16.5H18.5V14.5C18.5 11.8 20.1 10 23 10L26 10.03V13.4H24C22.9 13.4 22.5 13.9 22.5 14.8V16.5H26L27 20Z" fill="white" />
+              <circle cx="20" cy="20" r="20" fill="#1877F2"/>
+              <path d="M27 20H22.5V30H18.5V20H16V16.5H18.5V14.5C18.5 11.8 20.1 10 23 10L26 10.03V13.4H24C22.9 13.4 22.5 13.9 22.5 14.8V16.5H26L27 20Z" fill="white"/>
             </svg>
           </button>
 
-          <button className="flex h-12 w-12 items-center justify-center rounded-full transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_18px_rgba(0,0,0,0.12)]">
+          {/* Google */}
+          <button className="flex h-12 w-12 items-center justify-center">
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M39.6 20.45C39.6 19.03 39.48 17.66 39.26 16.36H20.4V24.08H31.18C30.7 26.58 29.24 28.7 27.06 30.12V35.12H33.58C37.36 31.63 39.6 26.48 39.6 20.45Z" fill="#4285F4" />
-              <path d="M20.4 40C25.8 40 30.34 38.18 33.58 35.12L27.06 30.12C25.24 31.34 22.96 32.08 20.4 32.08C15.18 32.08 10.76 28.54 9.14 23.78H2.42V28.94C5.64 35.34 12.52 40 20.4 40Z" fill="#34A853" />
-              <path d="M9.14 23.78C8.74 22.56 8.52 21.26 8.52 19.92C8.52 18.58 8.74 17.28 9.14 16.06V10.9H2.42C1.06 13.6 0.4 16.68 0.4 19.92C0.4 23.16 1.06 26.24 2.42 28.94L9.14 23.78Z" fill="#FBBC05" />
-              <path d="M20.4 7.76C23.2 7.76 25.72 8.72 27.7 10.6L33.72 4.58C30.34 1.46 25.8 -0.08 20.4 0C12.52 0 5.64 4.66 2.42 11.06L9.14 16.22C10.76 11.46 15.18 7.76 20.4 7.76Z" fill="#EA4335" />
+              <path d="M39.6 20.45C39.6 19.03 39.48 17.66 39.26 16.36H20.4V24.08H31.18C30.7 26.58 29.24 28.7 27.06 30.12V35.12H33.58C37.36 31.63 39.6 26.48 39.6 20.45Z" fill="#4285F4"/>
+              <path d="M20.4 40C25.8 40 30.34 38.18 33.58 35.12L27.06 30.12C25.24 31.34 22.96 32.08 20.4 32.08C15.18 32.08 10.76 28.54 9.14 23.78H2.42V28.94C5.64 35.34 12.52 40 20.4 40Z" fill="#34A853"/>
+              <path d="M9.14 23.78C8.74 22.56 8.52 21.26 8.52 19.92C8.52 18.58 8.74 17.28 9.14 16.06V10.9H2.42C1.06 13.6 0.4 16.68 0.4 19.92C0.4 23.16 1.06 26.24 2.42 28.94L9.14 23.78Z" fill="#FBBC05"/>
+              <path d="M20.4 7.76C23.2 7.76 25.72 8.72 27.7 10.6L33.72 4.58C30.34 1.46 25.8 -0.08 20.4 0C12.52 0 5.64 4.66 2.42 11.06L9.14 16.22C10.76 11.46 15.18 7.76 20.4 7.76Z" fill="#EA4335"/>
             </svg>
           </button>
 
-          <button className="flex h-12 w-12 items-center justify-center rounded-full transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_18px_rgba(0,0,0,0.12)]">
+          {/* Apple */}
+          <button className="flex h-12 w-12 items-center justify-center">
             <svg width="36" height="40" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M29.76 21.28C29.74 17.86 31.48 15.3 35 13.44C33.06 10.7 30.12 9.2 26.3 8.92C22.68 8.64 18.72 11.06 17.3 11.06C15.8 11.06 12.32 9.02 9.5 9.02C3.68 9.12 -0.2 13.5 -0.2 21.4C-0.2 26.04 1.64 30.96 4 34.3C6.02 37.1 7.76 39.36 10.26 39.32C12.66 39.28 13.56 37.78 16.76 37.78C19.94 37.78 20.72 39.32 23.26 39.28C25.84 39.24 27.36 37.06 29.34 34.26C31.66 31.02 32.6 27.9 32.64 27.72C32.56 27.7 29.78 26.62 29.76 21.28Z" fill="#1D1D1F" />
-              <path d="M24.1 5.76C25.74 3.78 26.88 1.06 26.56 -1.68C24.18 -1.56 21.34 -0.06 19.64 1.92C18.1 3.7 16.74 6.5 17.12 9.14C19.74 9.34 22.42 7.78 24.1 5.76Z" fill="#1D1D1F" />
+              <path d="M29.76 21.28C29.74 17.86 31.48 15.3 35 13.44C33.06 10.7 30.12 9.2 26.3 8.92C22.68 8.64 18.72 11.06 17.3 11.06C15.8 11.06 12.32 9.02 9.5 9.02C3.68 9.12 -0.2 13.5 -0.2 21.4C-0.2 26.04 1.64 30.96 4 34.3C6.02 37.1 7.76 39.36 10.26 39.32C12.66 39.28 13.56 37.78 16.76 37.78C19.94 37.78 20.72 39.32 23.26 39.28C25.84 39.24 27.36 37.06 29.34 34.26C31.66 31.02 32.6 27.9 32.64 27.72C32.56 27.7 29.78 26.62 29.76 21.28Z" fill="#1D1D1F"/>
+              <path d="M24.1 5.76C25.74 3.78 26.88 1.06 26.56 -1.68C24.18 -1.56 21.34 -0.06 19.64 1.92C18.1 3.7 16.74 6.5 17.12 9.14C19.74 9.34 22.42 7.78 24.1 5.76Z" fill="#1D1D1F"/>
             </svg>
           </button>
         </div>
 
+        {/* Login link */}
         <p className="text-center text-xs font-bold text-gray-700">
           Already have an account?{" "}
-          <Link href="/login" className="font-bold text-gray-800 transition-opacity duration-200 hover:opacity-80">
+          <Link href="/login" className="font-bold text-gray-800">
             Sign in!
           </Link>
         </p>
