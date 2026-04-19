@@ -161,8 +161,6 @@ export default function CartPage() {
             <FontAwesomeIcon icon={faHeart} className="h-4 w-4" />
           </Link>
         </div>
-        <p className="mt-1 text-xs text-[#6c757d]">Atur jumlah item sebelum checkout.</p>
-
         {items.length > 0 ? (
           <label className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-[#343a40]">
             <input
