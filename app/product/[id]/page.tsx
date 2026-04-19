@@ -30,7 +30,11 @@ export default async function ProductDetailPage({
 
   return (
     <PageShell>
-      <section className="overflow-hidden rounded-[20px] border border-black/5 bg-white shadow-[0_14px_34px_rgba(0,0,0,0.12)]">
+      <section className="-mx-4 mb-4 bg-[#fffbfb] px-4 py-3 shadow-[0_8px_16px_rgba(0,0,0,0.1)]">
+        <h1 className="text-xl font-bold text-[#0b0b0b]">Detail Produk</h1>
+      </section>
+
+      <section className="overflow-hidden rounded-[15px] border border-black/5 bg-[#fffbfb] shadow-[0_14px_24px_rgba(0,0,0,0.12)]">
         <img src={product.imageUrl} alt={product.title} className="aspect-[1.02] w-full object-cover" />
         <div className="p-5">
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#6c757d]">{product.category}</p>
@@ -72,7 +76,7 @@ export default async function ProductDetailPage({
             actionHref="/home"
           />
         ) : (
-          <div className="grid gap-4">
+          <div className="grid grid-cols-2 gap-3">
             {relatedProducts.map((item) => (
               <ProductCard key={item.id} product={item} compact />
             ))}

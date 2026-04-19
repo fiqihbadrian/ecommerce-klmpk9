@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bottom Navbar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    .bubble {
+      transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    #pageIcon {
+      transition: opacity 0.2s ease;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <!-- Phone Frame -->
+  <div class="relative w-80 h-[520px] bg-gray-100 rounded-[32px] border-2 border-gray-300 overflow-hidden flex flex-col shadow-xl">
+
+    <!-- Screen -->
+    <div class="flex-1 flex items-center justify-center">
+      <i id="pageIcon" class="fa-solid fa-house text-7xl text-gray-300"></i>
+    </div>
+
+    <!-- Navbar Wrapper -->
+    <div class="relative h-16">
+
+      <!-- SVG Curve Background -->
+      <svg class="absolute bottom-0 left-0 w-full h-16 overflow-visible" viewBox="0 0 320 65" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="shadow">
+            <feDropShadow dx="0" dy="-2" stdDeviation="3" flood-color="rgba(0,0,0,0.08)"/>
+          </filter>
+        </defs>
+        <path id="curvePath" d="" fill="white" filter="url(#shadow)"/>
+      </svg>
+
+      <!-- Nav Items -->
+      <div class="absolute bottom-0 left-0 right-0 h-[60px] flex items-center justify-around px-2">
+
+        <button onclick="switchTab(0)" class="nav-item flex items-center justify-center w-14 h-12 relative z-10">
+          <i class="fa-solid fa-house text-xl text-gray-400 transition-colors duration-300"></i>
+        </button>
+
+        <button onclick="switchTab(1)" class="nav-item flex items-center justify-center w-14 h-12 relative z-10">
+          <i class="fa-solid fa-magnifying-glass text-xl text-gray-400 transition-colors duration-300"></i>
+        </button>
+
+        <button onclick="switchTab(2)" class="nav-item flex items-center justify-center w-14 h-12 relative z-10">
+          <i class="fa-solid fa-star text-xl text-gray-400 transition-colors duration-300"></i>
+        </button>
+
+        <button onclick="switchTab(3)" class="nav-item flex items-center justify-center w-14 h-12 relative z-10">
+          <i class="fa-solid fa-user text-xl text-gray-400 transition-colors duration-300"></i>
+        </button>
+
+      </div>
+
+      <!-- Animated Bubble -->
+      <div id="bubble" class="bubble absolute top-0 w-[50px] h-[50px] bg-gray-900 rounded-full flex items-center justify-center z-20 -translate-x-1/2">
+        <i id="bubbleIcon" class="fa-solid fa-house text-xl text-white"></i>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const tabs = [
+      { faClass: 'fa-solid fa-house',            pageIcon: 'fa-solid fa-house' },
+      { faClass: 'fa-solid fa-magnifying-glass', pageIcon: 'fa-solid fa-magnifying-glass' },
+      { faClass: 'fa-solid fa-star',             pageIcon: 'fa-solid fa-star' },
+      { faClass: 'fa-solid fa-user',             pageIcon: 'fa-solid fa-user' },
+    ];
+
+    const navWidth = 320;
+    const itemW = navWidth / 4;
+    let activeIndex = 0;
+
+    function getTabX(i) {
+      return itemW * i + itemW / 2;
+    }
+
+    function buildCurvePath(cx) {
+      const r = 30, dip = 20, flatY = 5, W = navWidth, H = 65;
+      return `M0,${flatY} L${cx - r * 2},${flatY} Q${cx - r},${flatY} ${cx - r * 0.6},${flatY + dip * 0.6} Q${cx},${flatY + dip + 4} ${cx + r * 0.6},${flatY + dip * 0.6} Q${cx + r},${flatY} ${cx + r * 2},${flatY} L${W},${flatY} L${W},${H} L0,${H} Z`;
+    }
+
+    function switchTab(index) {
+      if (index === activeIndex) return;
+      activeIndex = index;
+
+      const cx = getTabX(index);
+      document.getElementById('bubble').style.left = cx + 'px';
+      document.getElementById('curvePath').setAttribute('d', buildCurvePath(cx));
+      document.getElementById('bubbleIcon').className = `${tabs[index].faClass} text-xl text-white`;
+
+      const icon = document.getElementById('pageIcon');
+      icon.style.opacity = 0;
+      setTimeout(() => {
+        icon.className = `${tabs[index].pageIcon} text-7xl text-gray-300`;
+        icon.style.opacity = 1;
+      }, 200);
+    }
+
+    function init() {
+      const cx = getTabX(0);
+      const bubble = document.getElementById('bubble');
+      bubble.style.transition = 'none';
+      bubble.style.left = cx + 'px';
+      document.getElementById('curvePath').setAttribute('d', buildCurvePath(cx));
+      setTimeout(() => {
+        bubble.style.transition = 'left 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+      }, 50);
+    }
+
+    init();
+  </script>
+</body>
+</html>

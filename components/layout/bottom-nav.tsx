@@ -50,9 +50,10 @@ export function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 px-0 pb-[max(0.4rem,env(safe-area-inset-bottom))]">
-      <div className="mx-auto max-w-md rounded-t-[26px] bg-white px-2 pb-2 pt-1 shadow-[0_-8px_28px_rgba(0,0,0,0.2)]">
-        <div className="flex items-center justify-between gap-1">
+    <nav className="fixed inset-x-0 bottom-0 z-40 pb-[max(0.35rem,env(safe-area-inset-bottom))]">
+      <div className="mx-auto max-w-md px-4">
+        <div className="relative rounded-[18px] bg-white px-3 pb-2 pt-2 shadow-[0_-6px_22px_rgba(0,0,0,0.22)]">
+          <div className="flex items-end justify-between">
         {items.map((item) => {
           const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
           const Icon = item.icon;
@@ -62,17 +63,25 @@ export function BottomNav() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex flex-1 flex-col items-center gap-1 rounded-[20px] px-2 py-2 text-[11px] font-semibold transition",
-                active
-                  ? "bg-[#343a40] text-white shadow-[0_8px_18px_rgba(52,58,64,0.35)]"
-                  : "text-[#6c757d] hover:bg-slate-100",
+                "flex w-[23%] flex-col items-center gap-1 rounded-[14px] px-1 pb-1 text-[11px] font-medium transition",
+                active ? "text-[#343a40]" : "text-[#7a838d] hover:text-[#495057]",
               )}
             >
-              <Icon active={active} />
+              <span
+                className={cn(
+                  "flex h-10 w-10 items-center justify-center rounded-full transition",
+                  active
+                    ? "-mt-6 bg-[#343a40] text-white shadow-[0_6px_14px_rgba(0,0,0,0.25)]"
+                    : "bg-transparent",
+                )}
+              >
+                <Icon active={active} />
+              </span>
               <span>{item.label}</span>
             </Link>
           );
         })}
+          </div>
         </div>
       </div>
     </nav>
