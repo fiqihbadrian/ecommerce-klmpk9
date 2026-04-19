@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faMagnifyingGlass, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { EmptyState } from "@/components/empty-state";
 import { PageShell } from "@/components/layout/page-shell";
 import { ProductCard } from "@/components/product-card";
@@ -12,9 +12,12 @@ import { useFavoritesStore } from "@/store/favorites";
 
 export default function FavoritesPage() {
   const items = useFavoritesStore((state) => state.items);
-  const clearFavorites = useFavoritesStore((state) => state.clearFavorites);
+  const removeFavorite = useFavoritesStore((state) => state.removeFavorite);
   const [query, setQuery] = useState("");
   const [showSearch, setShowSearch] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const suppressClickIdRef = useRef<string | null>(null);
 
   const filteredItems = useMemo(() => {
     const keyword = query.trim().toLowerCase();
@@ -27,6 +30,64 @@ export default function FavoritesPage() {
       [product.title, product.category, product.description].join(" ").toLowerCase().includes(keyword),
     );
   }, [items, query]);
+
+  useEffect(() => {
+    setSelectedIds((current) => current.filter((id) => items.some((item) => item.id === id)));
+  }, [items]);
+
+  useEffect(() => {
+    return () => {
+      if (holdTimerRef.current) {
+        clearTimeout(holdTimerRef.current);
+      }
+    };
+  }, []);
+
+  function toggleSelect(id: string) {
+    setSelectedIds((current) =>
+      current.includes(id) ? current.filter((selectedId) => selectedId !== id) : [...current, id],
+    );
+  }
+
+  function clearHoldTimer() {
+    if (holdTimerRef.current) {
+      clearTimeout(holdTimerRef.current);
+      holdTimerRef.current = null;
+    }
+  }
+
+  function handleLongPressStart(id: string) {
+    if (selectedIds.length > 0) {
+      return;
+    }
+
+    clearHoldTimer();
+    holdTimerRef.current = setTimeout(() => {
+      suppressClickIdRef.current = id;
+      setSelectedIds([id]);
+      holdTimerRef.current = null;
+    }, 450);
+  }
+
+  function handleSelectAll() {
+    const filteredIds = filteredItems.map((item) => item.id);
+    const allFilteredSelected = filteredIds.length > 0 && filteredIds.every((id) => selectedIds.includes(id));
+
+    if (allFilteredSelected) {
+      setSelectedIds((current) => current.filter((id) => !filteredIds.includes(id)));
+      return;
+    }
+
+    setSelectedIds((current) => Array.from(new Set([...current, ...filteredIds])));
+  }
+
+  function handleRemoveSelected() {
+    selectedIds.forEach((id) => removeFavorite(id));
+    setSelectedIds([]);
+  }
+
+  const allFilteredSelected =
+    filteredItems.length > 0 && filteredItems.every((item) => selectedIds.includes(item.id));
 
   return (
     <PageShell noTopPadding>
@@ -73,13 +134,57 @@ export default function FavoritesPage() {
         <>
           <div className="mb-4 flex items-center justify-between gap-3">
             <p className="text-sm text-[#fffbfb]">{filteredItems.length} item tersimpan</p>
-            <Button type="button" variant="danger" onClick={clearFavorites}>
-              Hapus semua
-            </Button>
+            {selectedIds.length > 0 ? (
+              <p className="text-xs font-medium text-[#fffbfb]">{selectedIds.length} dipilih</p>
+            ) : null}
           </div>
+          {selectedIds.length > 0 ? (
+            <div className="mb-4 grid grid-cols-2 gap-2">
+              <Button type="button" variant="secondary" onClick={handleSelectAll}>
+                <FontAwesomeIcon icon={faCheck} className="h-4 w-4" />
+                {allFilteredSelected ? "Batal pilih semua" : "Pilih semua"}
+              </Button>
+              <Button type="button" variant="danger" onClick={handleRemoveSelected}>
+                <FontAwesomeIcon icon={faTrashCan} className="h-4 w-4" />
+                Hapus favorit
+              </Button>
+            </div>
+          ) : null}
           <div className="grid grid-cols-2 gap-3">
             {filteredItems.map((product) => (
-              <div key={product.id} className="relative">
+              <div
+                key={product.id}
+                className="relative"
+                onPointerDown={() => handleLongPressStart(product.id)}
+                onPointerUp={clearHoldTimer}
+                onPointerLeave={clearHoldTimer}
+                onPointerCancel={clearHoldTimer}
+                onClickCapture={(event) => {
+                  if (suppressClickIdRef.current === product.id) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    suppressClickIdRef.current = null;
+                    return;
+                  }
+
+                  if (selectedIds.length > 0) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    toggleSelect(product.id);
+                  }
+                }}
+              >
+                {selectedIds.length > 0 ? (
+                  <div className="pointer-events-none absolute left-2 top-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-white/95 shadow-[0_6px_12px_rgba(0,0,0,0.2)]">
+                    <span
+                      className={
+                        selectedIds.includes(product.id)
+                          ? "h-4 w-4 rounded-full bg-[#495057]"
+                          : "h-4 w-4 rounded-full border border-[#adb5bd] bg-white"
+                      }
+                    />
+                  </div>
+                ) : null}
                 <ProductCard product={product} compact />
               </div>
             ))}
