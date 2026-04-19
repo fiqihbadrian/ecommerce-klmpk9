@@ -36,16 +36,18 @@ export default async function SearchPage({
   }
 
   return (
-    <PageShell>
-      <section className="mb-5 rounded-[15px] bg-[#6c757d] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/70">Search</p>
-        <h1 className="mt-2 text-2xl font-semibold tracking-tight">Cari produk</h1>
-        <form className="mt-4 flex gap-2" action="/search" method="get">
-          <Input name="q" defaultValue={query} placeholder="Ketik nama produk atau kategori" className="border-white bg-white text-[#343a40] placeholder:text-slate-400" />
-          <Button type="submit" className="shrink-0">
-            Cari
-          </Button>
-        </form>
+    <PageShell noTopPadding>
+      <section className="sticky top-0 z-20 -mx-4 mb-5 bg-transparent px-4 py-3">
+        <div className="rounded-[15px] bg-[#6c757d] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/70">Search</p>
+          <h1 className="mt-2 text-2xl font-semibold tracking-tight">Cari produk</h1>
+          <form className="mt-4 flex gap-2" action="/search" method="get">
+            <Input name="q" defaultValue={query} placeholder="Ketik nama produk atau kategori" className="border-white bg-white text-[#343a40] placeholder:text-slate-400" />
+            <Button type="submit" className="shrink-0">
+              Cari
+            </Button>
+          </form>
+        </div>
       </section>
 
       <div className="mb-4 flex items-center justify-between gap-3">
