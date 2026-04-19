@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PageShell } from "@/components/layout/page-shell";
 import { getSupabaseClient } from "@/lib/supabaseClient";
 import { formatCurrency } from "@/lib/format";
 
@@ -43,6 +44,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(true);
   const [isAdding, setIsAdding] = useState(false);
   const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState<"success" | "error" | "info">("info");
   const [error, setError] = useState<string | null>(null);
   const hasMissingTableError = isMissingProductsTable(error);
 
@@ -101,14 +103,16 @@ export default function AdminPage() {
 
     const supabase = getSupabaseClient();
     if (!supabase) {
-      setMessage("❌ Supabase env tidak tersedia");
+      setMessageType("error");
+      setMessage("Supabase env tidak tersedia.");
       setIsAdding(false);
       return;
     }
 
     // Validasi
     if (!formData.title || !formData.price || !formData.category) {
-      setMessage("❌ Isi semua field (title, price, category)");
+      setMessageType("error");
+      setMessage("Isi semua field wajib: judul, kategori, dan harga.");
       setIsAdding(false);
       return;
     }
@@ -129,12 +133,14 @@ export default function AdminPage() {
       if (isMissingProductsTable(dbError.message)) {
         setError(`Database error: ${dbError.message}`);
       }
-      setMessage(`❌ Error: ${dbError.message}`);
+      setMessageType("error");
+      setMessage(`Error: ${dbError.message}`);
       setIsAdding(false);
       return;
     }
 
-    setMessage("✅ Produk berhasil ditambah");
+    setMessageType("success");
+    setMessage("Produk berhasil ditambah.");
     setFormData({ title: "", description: "", category: "", price: "", stock: "", rating: "4.8", image_url: "" });
     loadProducts();
     setIsAdding(false);
@@ -154,153 +160,156 @@ export default function AdminPage() {
       if (isMissingProductsTable(dbError.message)) {
         setError(`Database error: ${dbError.message}`);
       }
-      setMessage(`❌ Error: ${dbError.message}`);
+      setMessageType("error");
+      setMessage(`Error: ${dbError.message}`);
       return;
     }
 
-    setMessage("✅ Produk berhasil dihapus");
+    setMessageType("success");
+    setMessage("Produk berhasil dihapus.");
     loadProducts();
     setTimeout(() => setMessage(""), 3000);
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-4 pb-24">
-      <div className="mx-auto max-w-2xl">
-        {/* Header */}
-        <div className="mb-6 flex items-center justify-between">
+    <PageShell showBottomNav={false}>
+      <section className="mb-5 rounded-[15px] bg-[#6c757d] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
+        <div className="flex items-start justify-between gap-3">
           <div>
-            <h1 className="text-3xl font-bold text-white">Admin Panel</h1>
-            <p className="mt-1 text-sm text-slate-400">Manage produk di database</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/70">Admin</p>
+            <h1 className="mt-2 text-2xl font-semibold tracking-tight">Kelola produk</h1>
+            <p className="mt-1 text-sm text-white/85">Sinkron langsung ke database Supabase.</p>
           </div>
-          <Link href="/home">
-            <Button variant="ghost">Back</Button>
+          <Link href="/home" className="shrink-0">
+            <Button variant="secondary" className="h-10 px-4">Kembali</Button>
           </Link>
         </div>
+      </section>
 
-        {/* Message */}
-        {message && (
-          <div className="mb-4 rounded-lg bg-slate-700 px-4 py-2 text-sm text-white">
-            {message}
-          </div>
-        )}
-
-        {error && (
-          <div className="mb-4 rounded-lg bg-red-500/20 px-4 py-2 text-sm text-red-300">
-            {error}
-          </div>
-        )}
-
-        {hasMissingTableError && (
-          <section className="mb-6 rounded-2xl bg-amber-500/10 p-4 text-amber-100">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-200">Setup Required</h2>
-            <p className="mt-2 text-sm text-amber-100/90">
-              Table <strong>public.products</strong> belum ada. Jalankan SQL ini di Supabase SQL Editor, lalu refresh halaman admin.
-            </p>
-            <pre className="mt-3 overflow-x-auto rounded-xl bg-slate-950/70 p-3 text-xs leading-relaxed text-amber-50">
-              <code>{CREATE_PRODUCTS_TABLE_SQL}</code>
-            </pre>
-          </section>
-        )}
-
-        {/* Add Product Form */}
-        <form onSubmit={handleAddProduct} className="mb-8 space-y-3 rounded-2xl bg-slate-800 p-6 shadow-lg">
-          <h2 className="text-lg font-semibold text-white">Tambah Produk Baru</h2>
-
-          <div className="grid gap-3 sm:grid-cols-2">
-            <Input
-              placeholder="Judul produk*"
-              value={formData.title}
-              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-              className="bg-slate-700 text-white placeholder-slate-400"
-            />
-            <Input
-              placeholder="Kategori*"
-              value={formData.category}
-              onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-              className="bg-slate-700 text-white placeholder-slate-400"
-            />
-          </div>
-
-          <textarea
-            placeholder="Deskripsi (opsional)"
-            value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-            className="w-full rounded-lg bg-slate-700 px-3 py-2 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
-            rows={2}
-          />
-
-          <div className="grid gap-3 sm:grid-cols-3">
-            <Input
-              placeholder="Harga*"
-              type="number"
-              value={formData.price}
-              onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-              className="bg-slate-700 text-white placeholder-slate-400"
-            />
-            <Input
-              placeholder="Stock"
-              type="number"
-              value={formData.stock}
-              onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
-              className="bg-slate-700 text-white placeholder-slate-400"
-            />
-            <Input
-              placeholder="Rating"
-              type="number"
-              step="0.1"
-              value={formData.rating}
-              onChange={(e) => setFormData({ ...formData, rating: e.target.value })}
-              className="bg-slate-700 text-white placeholder-slate-400"
-            />
-          </div>
-
-          <Input
-            placeholder="Image URL (opsional)"
-            value={formData.image_url}
-            onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-            className="bg-slate-700 text-white placeholder-slate-400"
-          />
-
-          <Button type="submit" disabled={isAdding} className="w-full">
-            {isAdding ? "Menambah..." : "Tambah Produk"}
-          </Button>
-        </form>
-
-        {/* Products List */}
-        <div>
-          <h2 className="mb-4 text-lg font-semibold text-white">
-            Daftar Produk ({products.length})
-          </h2>
-
-          {loading ? (
-            <p className="text-slate-400">Loading...</p>
-          ) : products.length === 0 ? (
-            <p className="text-slate-400">Belum ada produk. Tambahkan yang pertama!</p>
-          ) : (
-            <div className="space-y-2">
-              {products.map((product) => (
-                <div
-                  key={product.id}
-                  className="flex items-center justify-between rounded-lg bg-slate-700 px-4 py-3"
-                >
-                  <div className="flex-1 min-w-0">
-                    <p className="font-medium text-white truncate">{product.title}</p>
-                    <p className="text-sm text-slate-400">
-                      {formatCurrency(product.price)} • Stock: {product.stock} • Rating: {product.rating}
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => handleDeleteProduct(product.id)}
-                    className="ml-2 rounded bg-red-500/20 px-3 py-1 text-sm text-red-300 hover:bg-red-500/30"
-                  >
-                    Hapus
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
+      {message ? (
+        <div
+          className={
+            messageType === "error"
+              ? "mb-4 rounded-[14px] border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700"
+              : "mb-4 rounded-[14px] border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700"
+          }
+        >
+          {message}
         </div>
-      </div>
-    </div>
+      ) : null}
+
+      {error ? (
+        <div className="mb-4 rounded-[14px] border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          {error}
+        </div>
+      ) : null}
+
+      {hasMissingTableError ? (
+        <section className="mb-6 rounded-[15px] border border-amber-200 bg-amber-50 p-4 text-[#5f4b00] shadow-[0_10px_18px_rgba(0,0,0,0.08)]">
+          <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-700">Setup Required</h2>
+          <p className="mt-2 text-sm leading-6 text-amber-900">
+            Table <strong>public.products</strong> belum ada. Jalankan SQL berikut di Supabase SQL Editor, lalu refresh halaman admin.
+          </p>
+          <pre className="mt-3 overflow-x-auto rounded-xl border border-amber-200 bg-white p-3 text-xs leading-relaxed text-amber-900">
+            <code>{CREATE_PRODUCTS_TABLE_SQL}</code>
+          </pre>
+        </section>
+      ) : null}
+
+      <form onSubmit={handleAddProduct} className="mb-6 space-y-3 rounded-[15px] border border-black/5 bg-white p-5 shadow-[0_12px_28px_rgba(0,0,0,0.08)]">
+        <h2 className="text-base font-semibold text-[#343a40]">Tambah produk baru</h2>
+
+        <div className="grid gap-3 sm:grid-cols-2">
+          <Input
+            placeholder="Judul produk*"
+            value={formData.title}
+            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+            className="h-11 border-[#d6d9dd] bg-white text-[#343a40] placeholder:text-[#98a0a8]"
+          />
+          <Input
+            placeholder="Kategori*"
+            value={formData.category}
+            onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+            className="h-11 border-[#d6d9dd] bg-white text-[#343a40] placeholder:text-[#98a0a8]"
+          />
+        </div>
+
+        <textarea
+          placeholder="Deskripsi (opsional)"
+          value={formData.description}
+          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+          className="w-full rounded-xl border border-[#d6d9dd] bg-white px-3 py-2 text-[#343a40] placeholder:text-[#98a0a8] focus:outline-none focus:ring-2 focus:ring-[#6c757d]/40"
+          rows={3}
+        />
+
+        <div className="grid gap-3 sm:grid-cols-3">
+          <Input
+            placeholder="Harga*"
+            type="number"
+            value={formData.price}
+            onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+            className="h-11 border-[#d6d9dd] bg-white text-[#343a40] placeholder:text-[#98a0a8]"
+          />
+          <Input
+            placeholder="Stok"
+            type="number"
+            value={formData.stock}
+            onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
+            className="h-11 border-[#d6d9dd] bg-white text-[#343a40] placeholder:text-[#98a0a8]"
+          />
+          <Input
+            placeholder="Rating"
+            type="number"
+            step="0.1"
+            value={formData.rating}
+            onChange={(e) => setFormData({ ...formData, rating: e.target.value })}
+            className="h-11 border-[#d6d9dd] bg-white text-[#343a40] placeholder:text-[#98a0a8]"
+          />
+        </div>
+
+        <Input
+          placeholder="Image URL (opsional)"
+          value={formData.image_url}
+          onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+          className="h-11 border-[#d6d9dd] bg-white text-[#343a40] placeholder:text-[#98a0a8]"
+        />
+
+        <Button type="submit" disabled={isAdding} className="w-full">
+          {isAdding ? "Menambah produk..." : "Tambah produk"}
+        </Button>
+      </form>
+
+      <section className="rounded-[15px] border border-black/5 bg-white p-5 shadow-[0_12px_28px_rgba(0,0,0,0.08)]">
+        <h2 className="mb-3 text-base font-semibold text-[#343a40]">Daftar produk ({products.length})</h2>
+
+        {loading ? (
+          <p className="text-sm text-[#5f6771]">Memuat data produk...</p>
+        ) : products.length === 0 ? (
+          <p className="text-sm text-[#5f6771]">Belum ada produk. Tambahkan produk pertama dari form di atas.</p>
+        ) : (
+          <div className="space-y-2">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="flex items-center justify-between gap-3 rounded-xl border border-[#ebedf0] bg-[#f8f9fa] px-3 py-3"
+              >
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-semibold text-[#343a40]">{product.title}</p>
+                  <p className="text-xs text-[#5f6771]">
+                    {formatCurrency(product.price)} • Stok: {product.stock} • Rating: {product.rating}
+                  </p>
+                </div>
+                <button
+                  onClick={() => handleDeleteProduct(product.id)}
+                  className="rounded-full bg-[#ef4444] px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-[#dc2626]"
+                >
+                  Hapus
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+    </PageShell>
   );
 }
