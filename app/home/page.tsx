@@ -20,26 +20,26 @@ export default async function HomePage() {
     <PageShell>
       <StorefrontHeader />
 
-      <section className="grid grid-cols-3 gap-3">
-        <div className="rounded-[24px] bg-white p-3 shadow-[0_12px_36px_rgba(15,23,42,0.06)]">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">Produk</p>
-          <p className="mt-2 text-lg font-semibold text-slate-900">{products.length}</p>
+      <section className="grid grid-cols-2 gap-3">
+        <div className="rounded-[15px] border border-black/5 bg-white p-3 shadow-[0_12px_28px_rgba(0,0,0,0.08)]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#6c757d]">Produk</p>
+          <p className="mt-1 text-lg font-semibold text-[#343a40]">{products.length}</p>
         </div>
-        <div className="rounded-[24px] bg-white p-3 shadow-[0_12px_36px_rgba(15,23,42,0.06)]">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">Pengiriman</p>
-          <p className="mt-2 text-lg font-semibold text-slate-900">Gratis</p>
+        <div className="rounded-[15px] border border-black/5 bg-white p-3 shadow-[0_12px_28px_rgba(0,0,0,0.08)]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#6c757d]">Pengiriman</p>
+          <p className="mt-1 text-lg font-semibold text-[#343a40]">Gratis</p>
         </div>
-        <div className="rounded-[24px] bg-white p-3 shadow-[0_12px_36px_rgba(15,23,42,0.06)]">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">Mode</p>
-          <p className="mt-2 text-lg font-semibold text-slate-900">Demo</p>
+        <div className="col-span-2 rounded-[15px] border border-black/5 bg-white p-3 shadow-[0_12px_28px_rgba(0,0,0,0.08)]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#6c757d]">Mode</p>
+          <p className="mt-1 text-lg font-semibold text-[#343a40]">Demo</p>
         </div>
       </section>
 
       <section className="mt-6">
         <div className="mb-4 flex items-end justify-between gap-3">
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary/70">Katalog</p>
-            <h2 className="mt-1 text-xl font-semibold tracking-tight text-slate-950">Produk terbaru</h2>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#6c757d]">Katalog</p>
+            <h2 className="mt-1 text-xl font-semibold tracking-tight text-[#343a40]">Produk terbaru</h2>
           </div>
         </div>
 

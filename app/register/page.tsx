@@ -95,37 +95,42 @@ export default function RegisterPage() {
   }
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-md flex-col justify-center px-4 py-6">
-      <section className="glass-card rounded-[32px] p-6">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-primary/70">Bergabung</p>
-        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950">Buat akun baru</h1>
-        <p className="mt-2 text-sm leading-6 text-slate-500">Daftar untuk menyimpan favorites, cart, dan profilmu.</p>
+    <main className="mx-auto flex min-h-screen w-full max-w-md flex-col bg-[#6c757d] px-3 py-4">
+      <section className="relative flex min-h-[calc(100vh-2rem)] flex-col overflow-hidden rounded-[44px] bg-[#6c757d] p-3">
+        <div className="absolute -left-10 -top-14 h-36 w-36 rounded-full bg-white/90 shadow-[3px_9px_24px_rgba(0,0,0,0.35)]" />
+        <div className="absolute -bottom-12 -right-12 h-40 w-40 rounded-full bg-white/85 shadow-[-8px_-10px_24px_rgba(0,0,0,0.25)]" />
 
-        <form className="mt-6 grid gap-4" onSubmit={handleSubmit}>
+        <div className="mt-auto rounded-[42px] bg-white px-5 pb-8 pt-12 shadow-[-1px_-10px_30px_rgba(0,0,0,0.25)]">
+          <p className="text-center text-[11px] font-semibold uppercase tracking-[0.35em] text-[#6c757d]">Bergabung</p>
+          <h1 className="mt-2 text-center text-4xl font-bold tracking-tight text-[#6c757d]">REGISTER</h1>
+          <p className="mt-2 text-center text-sm leading-6 text-[#5f6771]">Daftar untuk menyimpan favorites, cart, dan profilmu.</p>
+
+          <form className="mt-8 grid gap-4" onSubmit={handleSubmit}>
           <div className="grid gap-2">
-            <label className="text-sm font-medium text-slate-700" htmlFor="name">Nama</label>
+            <label className="text-base font-bold text-[#6c757d]" htmlFor="name">Nama</label>
             <Input id="name" value={name} onChange={(event) => setName(event.target.value)} placeholder="Nama lengkap" autoComplete="name" required />
           </div>
           <div className="grid gap-2">
-            <label className="text-sm font-medium text-slate-700" htmlFor="email">Email</label>
+            <label className="text-base font-bold text-[#6c757d]" htmlFor="email">Email</label>
             <Input id="email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="nama@email.com" autoComplete="email" required />
           </div>
           <div className="grid gap-2">
-            <label className="text-sm font-medium text-slate-700" htmlFor="password">Password</label>
+            <label className="text-base font-bold text-[#6c757d]" htmlFor="password">Password</label>
             <Input id="password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Minimal 6 karakter" autoComplete="new-password" minLength={6} required />
           </div>
 
           {message ? <p className="rounded-2xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{message}</p> : null}
 
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
+          <Button type="submit" className="mt-2 w-full text-lg" disabled={isSubmitting}>
             {isSubmitting ? "Memproses..." : "Daftar"}
           </Button>
-        </form>
+          </form>
 
-        <p className="mt-5 text-center text-sm text-slate-500">
-          Sudah punya akun?{" "}
-          <Link href="/login" className="font-semibold text-primary">Masuk</Link>
-        </p>
+          <p className="mt-6 text-center text-sm text-[#495057]">
+            Sudah punya akun?{" "}
+            <Link href="/login" className="font-semibold text-[#343a40]">Masuk</Link>
+          </p>
+        </div>
       </section>
     </main>
   );
