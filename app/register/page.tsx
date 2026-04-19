@@ -17,6 +17,12 @@ export default function RegisterPage() {
     return /rate limit|email rate limit|too many requests/i.test(errorMessage);
   }
 
+  function isInvalidLoginError(errorMessage: string) {
+    return /invalid login credentials|email not confirmed|user not found|invalid email/i.test(
+      errorMessage,
+    );
+  }
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsSubmitting(true);
@@ -27,6 +33,23 @@ export default function RegisterPage() {
     if (!supabase) {
       setIsSubmitting(false);
       setMessage("Supabase env belum tersedia.");
+      return;
+    }
+
+    const signInResult = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (!signInResult.error) {
+      setIsSubmitting(false);
+      window.location.assign("/home");
+      return;
+    }
+
+    if (!isInvalidLoginError(signInResult.error.message)) {
+      setIsSubmitting(false);
+      setMessage(signInResult.error.message);
       return;
     }
 
@@ -45,18 +68,8 @@ export default function RegisterPage() {
 
     if (error) {
       if (isRateLimitError(error.message)) {
-        const signInResult = await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
-
-        if (!signInResult.error) {
-          window.location.assign("/home");
-          return;
-        }
-
         setMessage(
-          "Email sedang dibatasi Supabase. Jika akun sudah pernah dibuat, coba login. Kalau belum, tunggu beberapa menit lalu daftar lagi.",
+          "Email sedang dibatasi Supabase. Coba login kalau akun sudah pernah dibuat, atau tunggu beberapa menit sebelum daftar lagi.",
         );
         return;
       }

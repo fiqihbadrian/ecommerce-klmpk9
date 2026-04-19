@@ -12,6 +12,18 @@ export default function LoginPage() {
   const [message, setMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  function formatAuthError(errorMessage: string) {
+    if (/invalid login credentials/i.test(errorMessage)) {
+      return "Email atau password salah. Jika akun baru saja dibuat, cek inbox untuk verifikasi email dulu.";
+    }
+
+    if (/email not confirmed/i.test(errorMessage)) {
+      return "Email belum diverifikasi. Cek inbox lalu coba masuk lagi.";
+    }
+
+    return errorMessage;
+  }
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
 
@@ -38,7 +50,7 @@ export default function LoginPage() {
     setIsSubmitting(false);
 
     if (error) {
-      setMessage(error.message);
+      setMessage(formatAuthError(error.message));
       return;
     }
 
