@@ -50,8 +50,9 @@ export function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-      <div className="mx-auto flex max-w-md items-center justify-between rounded-[28px] border border-white/60 bg-white/92 px-2 py-2 shadow-[0_18px_40px_rgba(15,23,42,0.12)] backdrop-blur-xl">
+    <nav className="fixed inset-x-0 bottom-0 z-40 px-0 pb-[max(0.4rem,env(safe-area-inset-bottom))]">
+      <div className="mx-auto max-w-md rounded-t-[26px] bg-white px-2 pb-2 pt-1 shadow-[0_-8px_28px_rgba(0,0,0,0.2)]">
+        <div className="flex items-center justify-between gap-1">
         {items.map((item) => {
           const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
           const Icon = item.icon;
@@ -61,8 +62,10 @@ export function BottomNav() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex flex-1 flex-col items-center gap-1 rounded-2xl px-2 py-2 text-[11px] font-semibold transition",
-                active ? "bg-primary text-white" : "text-slate-500 hover:bg-slate-100",
+                "flex flex-1 flex-col items-center gap-1 rounded-[20px] px-2 py-2 text-[11px] font-semibold transition",
+                active
+                  ? "bg-[#343a40] text-white shadow-[0_8px_18px_rgba(52,58,64,0.35)]"
+                  : "text-[#6c757d] hover:bg-slate-100",
               )}
             >
               <Icon active={active} />
@@ -70,6 +73,7 @@ export function BottomNav() {
             </Link>
           );
         })}
+        </div>
       </div>
     </nav>
   );
