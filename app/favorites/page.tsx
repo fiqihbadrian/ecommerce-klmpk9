@@ -11,8 +11,8 @@ export default function FavoritesPage() {
   const clearFavorites = useFavoritesStore((state) => state.clearFavorites);
 
   return (
-    <PageShell>
-      <section className="-mx-4 mb-5 bg-[#fffbfb] px-4 py-3 shadow-[0_8px_16px_rgba(0,0,0,0.1)]">
+    <PageShell className="pt-0">
+      <section className="sticky top-0 z-20 -mx-4 mb-5 bg-[#fffbfb] px-4 py-3 shadow-[0_8px_16px_rgba(0,0,0,0.1)]">
         <h1 className="text-xl font-bold text-[#0b0b0b]">Favorit Saya</h1>
         <p className="mt-1 text-xs text-[#6c757d]">Daftar ini disimpan di local storage.</p>
       </section>
