@@ -27,8 +27,8 @@ export default function FavoritesPage() {
       ) : (
         <>
           <div className="mb-4 flex items-center justify-between gap-3">
-            <p className="text-sm text-[#5f6771]">{items.length} item tersimpan</p>
-            <Button type="button" variant="ghost" onClick={clearFavorites}>
+            <p className="text-sm text-[#fffbfb]">{items.length} item tersimpan</p>
+            <Button type="button" variant="danger" onClick={clearFavorites}>
               Hapus semua
             </Button>
           </div>
