@@ -5,6 +5,7 @@ export type Product = {
   title: string;
   name: string;
   description: string;
+  longDescription: string;
   category: string;
   price: number;
   rating: number;
@@ -56,6 +57,12 @@ export function normalizeProduct(row: ProductRow): Product {
       toText(row.description) ||
       toText(row.short_description) ||
       "Belum ada deskripsi produk.",
+    longDescription:
+      toText(row.long_description) ||
+      toText(row.longDescription) ||
+      toText(row.description) ||
+      toText(row.short_description) ||
+      "Deskripsi lengkap produk belum tersedia.",
     category: toText(row.category) || "General",
     price: toNumber(row.price) || toNumber(row.amount),
     rating: toNumber(row.rating, 4.8),
@@ -137,7 +144,7 @@ export async function searchProducts(query: string) {
   }
 
   return products.filter((product: Product) => {
-    return [product.title, product.category, product.description]
+    return [product.title, product.category, product.description, product.longDescription]
       .join(" ")
       .toLowerCase()
       .includes(lowered);

@@ -25,11 +25,7 @@ export default function CartPage() {
   useEffect(() => {
     const ids = items.map((item) => item.id);
 
-    setSelectedIds((prev) => {
-      const kept = prev.filter((id) => ids.includes(id));
-      const added = ids.filter((id) => !kept.includes(id));
-      return [...kept, ...added];
-    });
+    setSelectedIds((prev) => prev.filter((id) => ids.includes(id)));
   }, [items]);
 
   const selectedItems = useMemo(
@@ -66,6 +62,16 @@ export default function CartPage() {
 
       return [...prev, id];
     });
+  }
+
+  function handleCardClick(event: React.MouseEvent<HTMLElement>, id: string) {
+    const target = event.target as HTMLElement;
+
+    if (target.closest("button, input, a, label")) {
+      return;
+    }
+
+    toggleSelectItem(id);
   }
 
   function handleCheckoutSelected() {
@@ -185,7 +191,11 @@ export default function CartPage() {
         <>
           <div className="grid gap-3">
             {items.map((item) => (
-              <article key={item.id} className="overflow-hidden rounded-[15px] border border-black/5 bg-[#fffbfb] p-4 shadow-[0_10px_20px_rgba(0,0,0,0.12)]">
+              <article
+                key={item.id}
+                className="overflow-hidden rounded-[15px] border border-black/5 bg-[#fffbfb] p-4 shadow-[0_10px_20px_rgba(0,0,0,0.12)]"
+                onClick={(event) => handleCardClick(event, item.id)}
+              >
                 <div className="flex gap-4">
                   <label className="mt-1 inline-flex h-6 w-6 items-center justify-center">
                     <input

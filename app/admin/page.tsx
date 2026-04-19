@@ -12,6 +12,7 @@ type ProductRow = {
   id: string;
   title: string;
   description: string;
+  long_description: string;
   category: string;
   price: number;
   stock: number;
@@ -23,6 +24,7 @@ const CREATE_PRODUCTS_TABLE_SQL = `create table if not exists public.products (
   id uuid primary key default gen_random_uuid(),
   title text not null,
   description text default '',
+  long_description text default '',
   category text not null,
   price integer not null default 0,
   stock integer not null default 0,
@@ -52,6 +54,7 @@ export default function AdminPage() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
+    long_description: "",
     category: "",
     price: "",
     stock: "",
@@ -120,6 +123,7 @@ export default function AdminPage() {
     const newProduct = {
       title: formData.title,
       description: formData.description || "Belum ada deskripsi",
+      long_description: formData.long_description || formData.description || "Deskripsi lengkap belum tersedia.",
       category: formData.category,
       price: parseInt(formData.price) || 0,
       stock: parseInt(formData.stock) || 0,
@@ -141,7 +145,7 @@ export default function AdminPage() {
 
     setMessageType("success");
     setMessage("Produk berhasil ditambah.");
-    setFormData({ title: "", description: "", category: "", price: "", stock: "", rating: "4.8", image_url: "" });
+    setFormData({ title: "", description: "", long_description: "", category: "", price: "", stock: "", rating: "4.8", image_url: "" });
     loadProducts();
     setIsAdding(false);
 
@@ -240,6 +244,14 @@ export default function AdminPage() {
           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
           className="w-full rounded-xl border border-[#d6d9dd] bg-white px-3 py-2 text-[#343a40] placeholder:text-[#98a0a8] focus:outline-none focus:ring-2 focus:ring-[#6c757d]/40"
           rows={3}
+        />
+
+        <textarea
+          placeholder="Deskripsi panjang (opsional)"
+          value={formData.long_description}
+          onChange={(e) => setFormData({ ...formData, long_description: e.target.value })}
+          className="w-full rounded-xl border border-[#d6d9dd] bg-white px-3 py-2 text-[#343a40] placeholder:text-[#98a0a8] focus:outline-none focus:ring-2 focus:ring-[#6c757d]/40"
+          rows={5}
         />
 
         <div className="grid gap-3 sm:grid-cols-3">

@@ -1,4 +1,7 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { EmptyState } from "@/components/empty-state";
 import { BackButton } from "@/components/back-button";
 import { PageShell } from "@/components/layout/page-shell";
@@ -34,7 +37,14 @@ export default async function ProductDetailPage({
       <section className="sticky top-0 z-20 -mx-4 mb-4 bg-[#fffbfb] px-4 py-3 shadow-[0_8px_16px_rgba(0,0,0,0.1)]">
         <div className="flex items-center gap-3">
           <BackButton fallbackHref="/home" />
-          <h1 className="text-xl font-bold text-[#0b0b0b]">Detail Produk</h1>
+          <h1 className="flex-1 text-xl font-bold text-[#0b0b0b]">Detail Produk</h1>
+          <Link
+            href="/cart"
+            aria-label="Buka keranjang"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#f3f4f6] text-[#343a40] transition hover:bg-[#e9ecef]"
+          >
+            <FontAwesomeIcon icon={faCartShopping} className="h-4 w-4" />
+          </Link>
         </div>
       </section>
 
@@ -56,6 +66,11 @@ export default async function ProductDetailPage({
               <p className="text-2xl font-semibold text-[#343a40]">{formatCurrency(product.price)}</p>
             </div>
             <p className="text-sm text-[#6c757d]">Stok {product.stock}</p>
+          </div>
+
+          <div className="mt-5 rounded-xl bg-[#f8f9fa] px-4 py-3">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#6c757d]">Deskripsi lengkap</p>
+            <p className="mt-2 whitespace-pre-line text-sm leading-6 text-[#495057]">{product.longDescription}</p>
           </div>
 
           <div className="mt-5">
