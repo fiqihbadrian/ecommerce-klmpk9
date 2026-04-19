@@ -1,0 +1,40 @@
+import { useState } from "react";
+
+export const TampilanLogin = (): JSX.Element => {
+  const [_email, _setEmail] = useState("");
+  const [_password, _setPassword] = useState("");
+
+  const handleSignIn = (e: React.FormEvent) => {
+    e.preventDefault();
+  };
+
+  return (
+    <div className="bg-white overflow-hidden w-full min-w-[402px] min-h-[874px] relative">
+      <div className="absolute top-0 left-0 w-[402px] h-[874px] bg-[#6c757d]" />
+      <div className="absolute top-[747px] left-[-94px] w-[207px] h-[207px] bg-white rounded-[103.5px] shadow-[19px_-15px_4px_#00000040]" />
+      <div className="absolute top-[-68px] left-[283px] w-[186px] h-[186px] bg-[#fffdfd] rounded-[93px] shadow-[-16px_13px_4px_#00000040]" />
+      <div className="absolute -top-0.5 left-[-46px] w-44 h-5 bg-[#ffffff80] rounded-[71px] rotate-90" />
+      <div className="absolute top-[-22px] left-[-17px] w-44 h-5 bg-[#ffffff80] rounded-[71px] rotate-90" />
+      <div className="absolute top-[-11px] left-3 w-44 h-5 bg-[#ffffff80] rounded-[71px] rotate-90" />
+      <div className="absolute top-[854px] left-[238px] w-[141px] h-5 bg-[#ffffff80] rounded-[71px] rotate-90" />
+      <div className="absolute top-[838px] left-[266px] w-[141px] h-5 bg-[#ffffff80] rounded-[71px] rotate-90" />
+      <div className="absolute top-[848px] left-[296px] w-[141px] h-5 bg-[#ffffff80] rounded-[71px] rotate-90" />
+      <div className="absolute top-[612px] left-[93px] w-[216px] h-[51px] bg-white rounded-[71px]" />
+      <button
+        type="button"
+        onClick={handleSignIn}
+        className="absolute top-[612px] left-[93px] w-[216px] h-[51px] bg-white rounded-[71px] flex items-center justify-center cursor-pointer hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#6c757d]"
+        aria-label="Sign In"
+      >
+        <span className="[font-family:'Poppins-Bold',Helvetica] font-bold text-[#6c757d] text-2xl tracking-[0] leading-[normal]">
+          Sign In
+        </span>
+      </button>
+      <h1 className="absolute top-[211px] left-[98px] [font-family:'Poppins-ExtraBold',Helvetica] font-extrabold text-white text-[40px] tracking-[0] leading-[normal]">
+        WELCOME
+      </h1>
+    </div>
+  );
+};
+
+export default TampilanLogin;

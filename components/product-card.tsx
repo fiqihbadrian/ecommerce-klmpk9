@@ -14,10 +14,10 @@ type ProductCardProps = {
 
 export function ProductCard({ product, compact = false }: ProductCardProps) {
   const addItem = useCartStore((state) => state.addItem);
-  const favoriteIds = useFavoritesStore((state) => state.items.map((item) => item.id));
+  const isFavorite = useFavoritesStore((state) =>
+    state.items.some((item) => item.id === product.id),
+  );
   const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
-
-  const isFavorite = favoriteIds.includes(product.id);
 
   return (
     <article className="overflow-hidden rounded-[26px] border border-black/5 bg-white shadow-[0_18px_50px_rgba(15,23,42,0.06)] transition hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(15,23,42,0.1)]">

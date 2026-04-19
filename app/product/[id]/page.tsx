@@ -11,9 +11,16 @@ export const dynamic = "force-dynamic";
 export default async function ProductDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id?: string }> | { id?: string };
 }) {
-  const product = await fetchProductById(params.id);
+  const resolvedParams = await Promise.resolve(params);
+  const productId = resolvedParams.id;
+
+  if (!productId) {
+    notFound();
+  }
+
+  const product = await fetchProductById(productId);
 
   if (!product) {
     notFound();
