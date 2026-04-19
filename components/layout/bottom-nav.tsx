@@ -2,85 +2,103 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/cn";
+import { useEffect, useMemo, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHouse,
+  faMagnifyingGlass,
+  faStar,
+  faUser,
+  type IconDefinition,
+} from "@fortawesome/free-solid-svg-icons";
 
 const items = [
-  { href: "/home", label: "Home", icon: HomeIcon },
-  { href: "/search", label: "Search", icon: SearchIcon },
-  { href: "/favorites", label: "Favorites", icon: HeartIcon },
-  { href: "/profile", label: "Profile", icon: UserIcon },
+  { href: "/home", label: "Home", icon: faHouse },
+  { href: "/search", label: "Search", icon: faMagnifyingGlass },
+  { href: "/favorites", label: "Favorites", icon: faStar },
+  { href: "/profile", label: "Profile", icon: faUser },
 ];
 
-function HomeIcon({ active }: { active: boolean }) {
-  return (
-    <svg viewBox="0 0 24 24" className={cn("h-5 w-5", active ? "stroke-current" : "stroke-current/70")} fill="none" strokeWidth="1.8">
-      <path d="M4 11.5 12 4l8 7.5" />
-      <path d="M6.5 10.5V20h11V10.5" />
-    </svg>
-  );
-}
+const navWidth = 320;
+const navHeight = 65;
+const flatY = 5;
 
-function SearchIcon({ active }: { active: boolean }) {
-  return (
-    <svg viewBox="0 0 24 24" className={cn("h-5 w-5", active ? "stroke-current" : "stroke-current/70")} fill="none" strokeWidth="1.8">
-      <circle cx="11" cy="11" r="6.5" />
-      <path d="m16 16 4 4" />
-    </svg>
-  );
-}
+function buildCurvePath(centerX: number) {
+  const r = 30;
+  const dip = 20;
 
-function HeartIcon({ active }: { active: boolean }) {
-  return (
-    <svg viewBox="0 0 24 24" className={cn("h-5 w-5", active ? "stroke-current" : "stroke-current/70")} fill="none" strokeWidth="1.8">
-      <path d="M20 8.5c0 4.6-8 10.8-8 10.8S4 13.1 4 8.5A4.5 4.5 0 0 1 12 6a4.5 4.5 0 0 1 8 2.5Z" />
-    </svg>
-  );
-}
-
-function UserIcon({ active }: { active: boolean }) {
-  return (
-    <svg viewBox="0 0 24 24" className={cn("h-5 w-5", active ? "stroke-current" : "stroke-current/70")} fill="none" strokeWidth="1.8">
-      <circle cx="12" cy="8" r="3.5" />
-      <path d="M5.5 19c1.7-3.2 4.1-4.8 6.5-4.8s4.8 1.6 6.5 4.8" />
-    </svg>
-  );
+  return `M0,${flatY} L${centerX - r * 2},${flatY} Q${centerX - r},${flatY} ${centerX - r * 0.6},${flatY + dip * 0.6} Q${centerX},${flatY + dip + 4} ${centerX + r * 0.6},${flatY + dip * 0.6} Q${centerX + r},${flatY} ${centerX + r * 2},${flatY} L${navWidth},${flatY} L${navWidth},${navHeight} L0,${navHeight} Z`;
 }
 
 export function BottomNav() {
   const pathname = usePathname();
+  const activeIndex = useMemo(() => {
+    const idx = items.findIndex((item) => pathname === item.href || pathname.startsWith(`${item.href}/`));
+    return idx >= 0 ? idx : 0;
+  }, [pathname]);
+
+  const itemWidth = navWidth / items.length;
+  const bubbleLeft = itemWidth * activeIndex + itemWidth / 2;
+  const activeIcon: IconDefinition = items[activeIndex]?.icon ?? faHouse;
+
+  const [bubbleTransition, setBubbleTransition] = useState(false);
+
+  useEffect(() => {
+    const id = window.setTimeout(() => {
+      setBubbleTransition(true);
+    }, 50);
+
+    return () => {
+      window.clearTimeout(id);
+    };
+  }, []);
 
   return (
     <nav className="fixed inset-x-0 bottom-0 z-40 pb-[max(0.35rem,env(safe-area-inset-bottom))]">
-      <div className="mx-auto max-w-md px-4">
-        <div className="relative rounded-[18px] bg-white px-3 pb-2 pt-2 shadow-[0_-6px_22px_rgba(0,0,0,0.22)]">
-          <div className="flex items-end justify-between">
-        {items.map((item) => {
-          const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
-          const Icon = item.icon;
+      <div className="mx-auto w-[320px]">
+        <div className="relative h-16">
+          <svg
+            className="absolute bottom-0 left-0 h-16 w-full overflow-visible"
+            viewBox="0 0 320 65"
+            preserveAspectRatio="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <filter id="bottom-nav-shadow">
+                <feDropShadow dx="0" dy="-2" stdDeviation="3" floodColor="rgba(0,0,0,0.08)" />
+              </filter>
+            </defs>
+            <path d={buildCurvePath(bubbleLeft)} fill="white" filter="url(#bottom-nav-shadow)" />
+          </svg>
 
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "flex w-[23%] flex-col items-center gap-1 rounded-[14px] px-1 pb-1 text-[11px] font-medium transition",
-                active ? "text-[#343a40]" : "text-[#7a838d] hover:text-[#495057]",
-              )}
-            >
-              <span
-                className={cn(
-                  "flex h-10 w-10 items-center justify-center rounded-full transition",
-                  active
-                    ? "-mt-6 bg-[#343a40] text-white shadow-[0_6px_14px_rgba(0,0,0,0.25)]"
-                    : "bg-transparent",
-                )}
-              >
-                <Icon active={active} />
-              </span>
-              <span>{item.label}</span>
-            </Link>
-          );
-        })}
+          <div className="absolute bottom-0 left-0 right-0 flex h-[60px] items-center justify-around px-2">
+            {items.map((item, index) => {
+              const active = index === activeIndex;
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="relative z-10 flex h-12 w-14 items-center justify-center"
+                  aria-label={item.label}
+                >
+                  <FontAwesomeIcon
+                    icon={item.icon}
+                    className={active ? "text-xl text-transparent" : "text-xl text-gray-400"}
+                  />
+                </Link>
+              );
+            })}
+          </div>
+
+          <div
+            className="absolute top-0 z-20 flex h-[50px] w-[50px] -translate-x-1/2 items-center justify-center rounded-full bg-gray-900"
+            style={{
+              left: `${bubbleLeft}px`,
+              transition: bubbleTransition ? "left 0.4s cubic-bezier(0.4, 0, 0.2, 1)" : "none",
+            }}
+          >
+            <FontAwesomeIcon icon={activeIcon} className="text-xl text-white" />
           </div>
         </div>
       </div>
