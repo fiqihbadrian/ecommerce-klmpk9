@@ -16,9 +16,9 @@ export default function CartPage() {
 
   return (
     <PageShell>
-      <section className="mb-5 rounded-[15px] bg-[#6c757d] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/70">Cart</p>
-        <h1 className="mt-2 text-2xl font-semibold tracking-tight">Keranjang belanja</h1>
+      <section className="-mx-4 mb-5 bg-[#fffbfb] px-4 py-3 shadow-[0_8px_16px_rgba(0,0,0,0.1)]">
+        <h1 className="text-xl font-bold text-[#0b0b0b]">Keranjang Saya</h1>
+        <p className="mt-1 text-xs text-[#6c757d]">Atur jumlah item sebelum checkout.</p>
       </section>
 
       {items.length === 0 ? (
@@ -32,7 +32,7 @@ export default function CartPage() {
         <>
           <div className="grid gap-3">
             {items.map((item) => (
-              <article key={item.id} className="overflow-hidden rounded-[15px] border border-black/5 bg-white p-4 shadow-[0_12px_28px_rgba(0,0,0,0.08)]">
+              <article key={item.id} className="overflow-hidden rounded-[15px] border border-black/5 bg-[#fffbfb] p-4 shadow-[0_10px_20px_rgba(0,0,0,0.12)]">
                 <div className="flex gap-4">
                   <img src={item.imageUrl} alt={item.title} className="h-24 w-24 rounded-[12px] object-cover" />
                   <div className="min-w-0 flex-1">
@@ -59,7 +59,7 @@ export default function CartPage() {
             ))}
           </div>
 
-          <section className="mt-5 rounded-[15px] border border-black/5 bg-white p-5 shadow-[0_12px_28px_rgba(0,0,0,0.08)]">
+          <section className="mt-5 rounded-[15px] border border-black/5 bg-[#fffbfb] p-5 shadow-[0_10px_20px_rgba(0,0,0,0.12)]">
             <div className="flex items-center justify-between gap-3 text-sm text-[#6c757d]">
               <span>Subtotal</span>
               <span className="font-semibold text-[#343a40]">{formatCurrency(subtotal)}</span>

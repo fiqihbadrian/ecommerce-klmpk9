@@ -1,6 +1,5 @@
 import { EmptyState } from "@/components/empty-state";
 import { PageShell } from "@/components/layout/page-shell";
-import { StorefrontHeader } from "@/components/layout/storefront-header";
 import { ProductCard } from "@/components/product-card";
 import { fetchProducts, type Product } from "@/lib/products";
 
@@ -18,29 +17,46 @@ export default async function HomePage() {
 
   return (
     <PageShell>
-      <StorefrontHeader />
+      <section className="mb-5 flex items-center gap-3">
+        <div className="flex h-[50px] w-[50px] items-center justify-center rounded-[31px] bg-white shadow-[0_8px_16px_rgba(0,0,0,0.12)]">
+          <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#495057]">K9</span>
+        </div>
 
-      <section className="grid grid-cols-2 gap-3">
-        <div className="rounded-[15px] border border-black/5 bg-white p-3 shadow-[0_12px_28px_rgba(0,0,0,0.08)]">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#6c757d]">Produk</p>
-          <p className="mt-1 text-lg font-semibold text-[#343a40]">{products.length}</p>
-        </div>
-        <div className="rounded-[15px] border border-black/5 bg-white p-3 shadow-[0_12px_28px_rgba(0,0,0,0.08)]">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#6c757d]">Pengiriman</p>
-          <p className="mt-1 text-lg font-semibold text-[#343a40]">Gratis</p>
-        </div>
-        <div className="col-span-2 rounded-[15px] border border-black/5 bg-white p-3 shadow-[0_12px_28px_rgba(0,0,0,0.08)]">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#6c757d]">Mode</p>
-          <p className="mt-1 text-lg font-semibold text-[#343a40]">Demo</p>
+        <a
+          href="/search"
+          className="flex h-[50px] flex-1 items-center rounded-[31px] bg-white px-5 text-[15px] font-semibold text-[#bfc5cb] shadow-[0_8px_16px_rgba(0,0,0,0.1)]"
+        >
+          Masukan teks
+        </a>
+
+        <a
+          href="/cart"
+          aria-label="Open cart"
+          className="flex h-[50px] w-[50px] items-center justify-center rounded-[31px] bg-white text-[#495057] shadow-[0_8px_16px_rgba(0,0,0,0.12)]"
+        >
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <path d="M3.5 5h2l2.2 10.5a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.5l1.6-7.1H7" />
+            <circle cx="10" cy="20" r="1.4" />
+            <circle cx="17" cy="20" r="1.4" />
+          </svg>
+        </a>
+      </section>
+
+      <section className="mb-6 h-[205px] rounded-[15px] bg-white p-4 shadow-[0_10px_22px_rgba(0,0,0,0.14)]">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#6c757d]">K9 Mart</p>
+        <h1 className="mt-3 text-2xl font-semibold leading-tight text-[#343a40]">Belanja cepat, tampilan clean, checkout praktis.</h1>
+        <div className="mt-5 grid grid-cols-3 gap-2 text-center">
+          <div className="rounded-xl bg-[#f3f4f6] px-2 py-2 text-xs font-semibold text-[#495057]">{products.length} Produk</div>
+          <div className="rounded-xl bg-[#f3f4f6] px-2 py-2 text-xs font-semibold text-[#495057]">Gratis Ongkir</div>
+          <div className="rounded-xl bg-[#f3f4f6] px-2 py-2 text-xs font-semibold text-[#495057]">Mode Demo</div>
         </div>
       </section>
 
-      <section className="mt-6">
-        <div className="mb-4 flex items-end justify-between gap-3">
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#6c757d]">Katalog</p>
-            <h2 className="mt-1 text-xl font-semibold tracking-tight text-[#343a40]">Produk terbaru</h2>
-          </div>
+      <section>
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <h2 className="bg-[linear-gradient(90deg,#eaebec_7%,#b2bec3_39%,#eaebec_70%,#b2bec3_100%)] bg-clip-text text-xl font-bold text-transparent">
+            Produk Kami
+          </h2>
         </div>
 
         {errorMessage ? (
@@ -58,7 +74,7 @@ export default async function HomePage() {
             actionHref="/search"
           />
         ) : (
-          <div className="grid gap-4">
+          <div className="grid grid-cols-2 gap-3">
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
