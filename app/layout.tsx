@@ -10,13 +10,13 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "K9 Mart",
-  description: "Mobile-first e-commerce demo built with Next.js, Supabase, and Zustand.",
+  title: "Nine Store",
+  description: "Nine store adalah aplikasi e-commerce yang menjual produk fashion dan ini tugas untuk mata kuliah UI/UX Design.",
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "K9 Mart",
+    title: "Nine Store",
   },
   icons: {
     apple: "/icon-192.png",
