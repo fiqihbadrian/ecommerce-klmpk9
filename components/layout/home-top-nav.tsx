@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useCartStore } from "@/store/cart";
@@ -12,7 +13,7 @@ export function HomeTopNav() {
     <section className="sticky top-0 z-20 -mx-4 mb-5 bg-transparent px-4 py-3">
       <div className="flex items-center gap-3">
         <div className="flex h-[50px] w-[50px] items-center justify-center rounded-[31px] bg-white shadow-[0_8px_16px_rgba(0,0,0,0.12)]">
-          <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#495057]">K9</span>
+          <Image src="/logo.png" alt="Logo" width={30} height={30} />
         </div>
 
         <Link
