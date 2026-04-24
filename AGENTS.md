@@ -108,6 +108,3 @@ This is a demo project but must follow real-world best practices
 Focus on functionality (auth, cart, product flow)
 UI should be clean but not over-engineered
 Do not switch to Pages Router under any circumstances
-
-NEXT_PUBLIC_SUPABASE_URL=https://aaelmacpizmfmbvpcbee.supabase.co
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_RNzGyfxwRRwEx4U60_RsCg__cl3yK1a
