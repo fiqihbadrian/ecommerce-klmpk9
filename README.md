@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# E‑Commerce Mobile‑First – Kelompok 9
 
-## Getting Started
+Aplikasi e‑commerce mobile‑first yang dibangun dengan Next.js (App Router), Tailwind CSS, Zustand, dan Supabase. UI dirancang khusus untuk perangkat mobile dengan lebar maksimum 430px, meniru pengalaman aplikasi seperti Tokopedia.
 
-First, run the development server:
+## 🚀 Cara Menjalankan Proyek
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+1. **Clone repositori**
+   ```bash
+   git clone <repo-url>
+   cd ecommerce-klmpk9
+   ```
+
+2. **Instal dependensi**
+   ```bash
+   npm install
+   # atau
+   yarn install
+   ```
+
+3. **Jalankan server pengembangan**
+   ```bash
+   npm run dev
+   # atau
+   yarn dev
+   ```
+
+4. **Buka di browser**
+   - Buka [http://localhost:3000](http://localhost:3000)
+   - Halaman pertama adalah `/welcome` (landing page login/register)
+
+## 📁 Struktur Folder
+
+```
+/app
+  /welcome          → Halaman landing (login/register)
+  /login            → Halaman login
+  /register         → Halaman registrasi
+  /home             → Daftar produk utama
+  /product/[id]     → Detail produk
+  /search           → Pencarian produk
+  /favorites        → Produk favorit
+  /cart             → Keranjang belanja
+  /checkout         → Halaman checkout (demo)
+  /profile          → Profil pengguna
+  /admin            → Halaman admin (opsional)
+
+/components
+  /layout           → Navbar, bottom‑nav, header
+  /ui               → Button, Input, dll.
+  product‑card.tsx  → Kartu produk
+  empty‑state.tsx   → UI kosong
+
+/lib
+  supabaseClient.js → Klien Supabase
+  products.ts       → Data produk (mock/API)
+  format.ts         → Helper format
+
+/store
+  cart.ts           → State keranjang (Zustand)
+  favorites.ts      → State favorit (Zustand)
+
+/public             → Gambar, logo, ikon PWA
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js 16** (App Router)
+- **Tailwind CSS 4** (mobile‑first)
+- **Zustand** (state management)
+- **Supabase** (auth + database)
+- **TypeScript** (opsional)
+- **PWA** (Progressive Web App)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✨ Fitur Utama
 
-## Learn More
+- ✅ Autentikasi pengguna (login/register via Supabase)
+- ✅ Daftar produk dari database
+- ✅ Halaman detail produk
+- ✅ Tambah ke keranjang
+- ✅ Sistem favorit
+- ✅ Profil pengguna (edit profil)
+- ✅ Alur checkout (demo tanpa gateway pembayaran)
+- ✅ Bottom navigation (Home, Search, Favorites, Profile)
+- ✅ UI mobile‑first (max‑width 430px)
 
-To learn more about Next.js, take a look at the following resources:
+## 🔧 Integrasi Supabase
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Proyek sudah dikonfigurasi dengan kredensial Supabase. Pastikan variabel lingkungan berikut ada di `.env.local`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://aaelmacpizmfmbvpcbee.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_RNzGyfxwRRwEx4U60_RsCg__cl3yK1a
+```
 
-## Deploy on Vercel
+## 📱 UI/UX Guidelines
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Mobile‑first** – semua halaman dirancang untuk lebar maksimum 430px
+- **Layout** – gunakan `max‑w‑md mx‑auto` untuk container
+- **Bottom navigation** – tetap muncul di halaman utama
+- **Clean design** – mengacu pada referensi Figma di folder `layout‑from‑figma`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🧪 Testing & Lint
+
+```bash
+npm run lint      # Jalankan ESLint
+# (belum ada test runner, bisa ditambahkan)
+```
+
+## 📄 Lisensi
+
+Proyek ini dibuat untuk keperluan demo tugas UI/UX. Bebas digunakan dan dimodifikasi.
