@@ -38,7 +38,7 @@ export default async function SearchPage({
   return (
     <PageShell noTopPadding>
       <section className="sticky top-0 z-20 -mx-4 mb-5 bg-transparent px-4 py-3">
-        <div className="rounded-[15px] bg-[#6c757d] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
+        <div className="rounded-[15px] bg-[#6E0D15] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
           <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/70">Search</p>
           <h1 className="mt-2 text-2xl font-semibold tracking-tight">Cari produk</h1>
           <form className="mt-4 flex gap-2" action="/search" method="get">

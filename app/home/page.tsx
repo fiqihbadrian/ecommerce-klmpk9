@@ -35,7 +35,7 @@ export default async function HomePage() {
 
       <section>
         <div className="mb-4 flex items-center justify-between gap-3">
-          <h2 className="bg-[linear-gradient(90deg,#eaebec_7%,#b2bec3_39%,#eaebec_70%,#b2bec3_100%)] bg-clip-text text-xl font-bold text-transparent">
+          <h2 className="text-xl font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.25)]">
             Produk Kami
           </h2>
         </div>

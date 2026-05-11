@@ -267,7 +267,7 @@ export default function AdminPage() {
 
   return (
     <PageShell showBottomNav={false}>
-      <section className="mb-5 rounded-[15px] bg-[#6c757d] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
+      <section className="mb-5 rounded-[15px] bg-[#6E0D15] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
         <div className="flex items-start justify-between gap-3">
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/70">Admin</p>

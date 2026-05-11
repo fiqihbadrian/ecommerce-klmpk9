@@ -19,12 +19,12 @@ export const metadata: Metadata = {
     title: "Nine Store",
   },
   icons: {
-    apple: "/logo.png",
+    apple: "/logo-nine.png",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#6c757d",
+  themeColor: "#6E0D15",
 };
 
 export default function RootLayout({

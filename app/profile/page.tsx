@@ -124,7 +124,7 @@ export default function ProfilePage() {
   if (loading) {
     return (
       <PageShell>
-        <section className="mb-5 rounded-[15px] bg-[#6c757d] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
+        <section className="mb-5 rounded-[15px] bg-[#6E0D15] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
           <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/70">Profile</p>
           <h1 className="mt-2 text-2xl font-semibold tracking-tight">Akun saya</h1>
         </section>
@@ -136,7 +136,7 @@ export default function ProfilePage() {
   if (!profile) {
     return (
       <PageShell>
-        <section className="mb-5 rounded-[15px] bg-[#6c757d] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
+        <section className="mb-5 rounded-[15px] bg-[#6E0D15] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
           <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/70">Profile</p>
           <h1 className="mt-2 text-2xl font-semibold tracking-tight">Akun saya</h1>
         </section>
@@ -152,7 +152,7 @@ export default function ProfilePage() {
 
   return (
     <PageShell>
-      <section className="mb-5 rounded-[15px] bg-[#6c757d] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
+      <section className="mb-5 rounded-[15px] bg-[#6E0D15] px-4 py-4 text-white shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
         <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/70">Profile</p>
         <h1 className="mt-2 text-2xl font-semibold tracking-tight">Akun saya</h1>
       </section>

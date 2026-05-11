@@ -1,15 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #6c757d;
+  --background: #6E0D15;
+  --background-dark: #5C0A11;
+  --background-light: #8B1E28;
   --foreground: #1f2933;
   --card: #ffffff;
   --muted: #5f6771;
   --line: rgba(17, 24, 39, 0.1);
-  --primary: #495057;
+  --primary: #4b5563;
   --primary-foreground: #ffffff;
   --secondary: #f1f3f5;
-  --shadow: 0 24px 64px rgba(0, 0, 0, 0.18);
+  --accent: #8B1E28;
+  --shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
 }
 
 @theme inline {
@@ -39,9 +42,9 @@ body {
   overscroll-behavior-y: none;
   color: var(--foreground);
   background:
-    radial-gradient(circle at -10% -5%, rgba(255, 255, 255, 0.35), transparent 24%),
-    radial-gradient(circle at 110% 105%, rgba(255, 255, 255, 0.22), transparent 28%),
-    linear-gradient(180deg, #79828a 0%, var(--background) 42%, #626b73 100%);
+    radial-gradient(circle at -10% -5%, rgba(255, 255, 255, 0.18), transparent 24%),
+    radial-gradient(circle at 110% 105%, rgba(255, 255, 255, 0.12), transparent 28%),
+    linear-gradient(180deg, #8B1E28 0%, var(--background) 42%, #5C0A11 100%);
   font-family: var(--font-poppins), sans-serif;
 }
 
@@ -75,7 +78,7 @@ h6 {
 }
 
 ::selection {
-  background: rgba(15, 118, 110, 0.18);
+  background: rgba(139, 30, 40, 0.25);
 }
 
 .glass-card {
