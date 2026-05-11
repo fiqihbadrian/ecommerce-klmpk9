@@ -12,8 +12,8 @@ export function HomeTopNav() {
   return (
     <section className="sticky top-0 z-20 -mx-4 mb-5 bg-transparent px-4 py-3">
       <div className="flex items-center gap-3">
-        <div className="flex h-[50px] w-[50px] items-center justify-center rounded-[31px] bg-white shadow-[0_8px_16px_rgba(0,0,0,0.12)]">
-          <Image src="/logo.png" alt="Logo" width={30} height={30} />
+        <div className="flex mt-2 items-center justify-center">
+          <Image src="/logo.png" alt="Logo" width={50} height={50} />
         </div>
 
         <Link

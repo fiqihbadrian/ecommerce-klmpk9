@@ -13,7 +13,7 @@ export function PageShell({ children, className, showBottomNav = true, noTopPadd
   return (
     <div
       className={cn(
-        "mx-auto min-h-screen w-full max-w-md bg-[#6c757d] px-4 pb-28",
+        "mx-auto min-h-screen w-full max-w-md bg-[#6E0D15] px-4 pb-28",
         noTopPadding ? "pt-0" : "pt-4",
         className,
       )}

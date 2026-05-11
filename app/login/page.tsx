@@ -69,7 +69,7 @@ export default function LoginPage() {
   return (
     <main
       className="mx-auto flex min-h-screen w-full max-w-sm flex-col"
-      style={{ fontFamily: "'Poppins', sans-serif", backgroundColor: "#6C757D" }}
+      style={{ fontFamily: "'Poppins', sans-serif", backgroundColor: "#6E0D15" }}
     >
       {/* Top area with Back button */}
       <div className="relative flex-shrink-0 px-4 pt-4" style={{ height: "180px" }}>

@@ -17,7 +17,7 @@ export function StorefrontHeader({
   const itemCount = useCartStore((state) => state.getItemCount());
 
   return (
-    <header className="mb-5 rounded-[28px] bg-[#6c757d] p-3 text-white shadow-[0_24px_60px_rgba(0,0,0,0.2)]">
+    <header className="mb-5 rounded-[28px] bg-[#6E0D15] p-3 text-white shadow-[0_24px_60px_rgba(0,0,0,0.2)]">
       <div className="flex items-center gap-3">
         <div className="flex h-12 w-12 items-center justify-center rounded-[18px] bg-white text-[#495057]">
           <span className="text-[11px] font-bold uppercase tracking-[0.2em]">K9</span>
