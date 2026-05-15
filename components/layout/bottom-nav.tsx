@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHouse,
@@ -19,100 +19,81 @@ const items = [
   { href: "/profile", label: "Profile", icon: faUser },
 ];
 
-const navHeight = 65;
+const navHeight = 70;
 const flatY = 5;
+const bubbleSize = 50;
 
-function buildCurvePath(centerX: number, navWidth: number) {
+function buildNotchPath(centerX: number) {
   const r = 30;
   const dip = 20;
 
-  return `M0,${flatY} L${centerX - r * 2},${flatY} Q${centerX - r},${flatY} ${centerX - r * 0.6},${flatY + dip * 0.6} Q${centerX},${flatY + dip + 4} ${centerX + r * 0.6},${flatY + dip * 0.6} Q${centerX + r},${flatY} ${centerX + r * 2},${flatY} L${navWidth},${flatY} L${navWidth},${navHeight} L0,${navHeight} Z`;
+  return `M${centerX - r * 2},${flatY} Q${centerX - r},${flatY} ${centerX - r * 0.6},${flatY + dip * 0.6} Q${centerX},${flatY + dip + 4} ${centerX + r * 0.6},${flatY + dip * 0.6} Q${centerX + r},${flatY} ${centerX + r * 2},${flatY} Z`;
 }
+
+// legacy: previously used, kept for reference
+
 
 export function BottomNav() {
   const pathname = usePathname();
   const router = useRouter();
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const [bubbleVisible, setBubbleVisible] = useState(false);
-  const [navWidth, setNavWidth] = useState(320);
+  const [canvasWidth, setCanvasWidth] = useState(430);
+  const [horizontalNudge, setHorizontalNudge] = useState(0);
   const activeIndex = useMemo(() => {
     const idx = items.findIndex((item) => pathname === item.href || pathname.startsWith(`${item.href}/`));
     return idx >= 0 ? idx : 0;
   }, [pathname]);
 
-  const itemWidth = navWidth / items.length;
-  const bubbleLeft = itemWidth * activeIndex + itemWidth / 2;
+  const itemWidth = canvasWidth / items.length;
+  const bubbleLeft = itemWidth * activeIndex + itemWidth / 2 + horizontalNudge;
   const activeIcon: IconDefinition = items[activeIndex]?.icon ?? faHouse;
-  
-  // Memoize the SVG path to avoid recalculating on every render
-  const curvePath = useMemo(() => buildCurvePath(bubbleLeft, navWidth), [bubbleLeft, navWidth]);
+
+  const combinedPath = useMemo(() => {
+    // outer rect then notch path (evenodd will cut notch out) — both in canvas coordinates
+    const outer = `M0,${flatY} H${canvasWidth} V${navHeight} H0 Z`;
+    const notch = buildNotchPath(bubbleLeft);
+    return outer + notch;
+  }, [canvasWidth, bubbleLeft]);
 
   useEffect(() => {
-    const node = containerRef.current;
-
-    if (!node) {
-      return;
-    }
-
     function updateWidth() {
-      const currentNode = containerRef.current;
-
-      if (!currentNode) {
-        return;
-      }
-
-      const nextWidth = Math.max(260, Math.floor(currentNode.clientWidth));
-      setNavWidth(nextWidth);
+      const vw = typeof window !== "undefined" ? window.innerWidth : 320;
+      const nextWidth = Math.max(260, Math.min(430, Math.floor(vw)));
+      setCanvasWidth(nextWidth);
+      setHorizontalNudge(vw >= 430 ? -4 : 0);
     }
 
     updateWidth();
 
-    const observer = new ResizeObserver(() => {
-      // Debounce resize updates
-      if (typeof window !== 'undefined') {
-        window.requestAnimationFrame(() => {
-          updateWidth();
-        });
-      }
-    });
-
-    observer.observe(node);
+    window.addEventListener("resize", updateWidth);
 
     return () => {
-      observer.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
-    // Delay bubble animation slightly to avoid initial jank
-    const timer = setTimeout(() => {
-      setBubbleVisible(true);
-    }, 100);
-
-    return () => {
-      clearTimeout(timer);
+      window.removeEventListener("resize", updateWidth);
     };
   }, []);
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 pb-0">
-      <div ref={containerRef} className="mx-auto w-full max-w-md">
-        <div className="relative h-16 w-full">
+    <nav className="pointer-events-none fixed inset-x-0 bottom-0 z-50">
+      <div className="pointer-events-auto mx-auto w-full max-w-[430px]">
+        <div className="relative h-[70px] w-full overflow-visible">
           <svg
-            className="absolute bottom-0 left-0 h-16 w-full overflow-visible"
-            viewBox={`0 0 ${navWidth} 65`}
+            className="absolute bottom-0 left-0 h-[70px] w-full overflow-visible"
+            viewBox={`0 0 ${canvasWidth} ${navHeight}`}
             preserveAspectRatio="none"
             xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
           >
             <defs>
               <filter id="bottom-nav-shadow">
                 <feDropShadow dx="0" dy="-2" stdDeviation="3" floodColor="rgba(0,0,0,0.08)" />
               </filter>
             </defs>
-            <path d={curvePath} fill="white" filter="url(#bottom-nav-shadow)" />
+            <path d={combinedPath} fill="white" fillRule="evenodd" filter="url(#bottom-nav-shadow)" />
           </svg>
 
-          <div className="absolute bottom-0 left-0 right-0 grid h-[60px] grid-cols-4 items-center">
+          <div
+            className="absolute bottom-0 left-0 right-0 grid h-[60px] grid-cols-4 items-center"
+            style={{ transform: `translateX(${horizontalNudge}px)` }}
+          >
             {items.map((item, index) => {
               const active = index === activeIndex;
 
@@ -131,7 +112,7 @@ export function BottomNav() {
                 >
                   <FontAwesomeIcon
                     icon={item.icon}
-                    className={active ? "h-5 w-5 text-transparent" : "h-5 w-5 text-gray-400"}
+                    className={active ? "h-5 w-5 opacity-0" : "h-5 w-5 text-gray-400"}
                   />
                 </Link>
               );
@@ -139,11 +120,13 @@ export function BottomNav() {
           </div>
 
           <div
-            className={`pointer-events-none absolute top-0 z-20 flex h-[50px] w-[50px] -translate-x-1/2 items-center justify-center rounded-full bg-gray-900 transition-opacity duration-300 ease-out ${bubbleVisible ? "opacity-100" : "opacity-0"}`}
+            className="pointer-events-none absolute top-[-2px] z-20 flex items-center justify-center rounded-full bg-slate-900 shadow-[0_12px_24px_rgba(15,23,42,0.24)] transition-[left,transform,opacity] duration-300 ease-out"
             style={{
               left: `${bubbleLeft}px`,
-              transform: `translateX(-50%) scale(${bubbleVisible ? 1 : 0.9})`,
-              willChange: 'opacity',
+              width: `${bubbleSize}px`,
+              height: `${bubbleSize}px`,
+              transform: "translateX(-50%) translateZ(0)",
+              willChange: "left, transform, opacity",
             }}
           >
             <FontAwesomeIcon icon={activeIcon} className="h-5 w-5 text-white" />

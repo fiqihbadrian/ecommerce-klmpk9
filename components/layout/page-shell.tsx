@@ -13,19 +13,19 @@ export function PageShell({ children, className, showBottomNav = true, noTopPadd
   return (
     <div
       className={cn(
-        "mx-auto min-h-screen w-full max-w-md bg-[#6E0D15] px-4 pb-28",
-        noTopPadding ? "pt-0" : "pt-4",
+        "mx-auto min-h-[100dvh] w-full max-w-md bg-[#6E0D15]",
         className,
       )}
-      style={{
-        // Fix screen tearing on mobile
-        transform: 'translateZ(0)',
-        WebkitTransform: 'translateZ(0)',
-        backfaceVisibility: 'hidden',
-        WebkitBackfaceVisibility: 'hidden',
-      }}
     >
-      {children}
+      <div
+        className={cn(
+          "px-4",
+          showBottomNav && "pb-28",
+          noTopPadding ? "pt-0" : "pt-4",
+        )}
+      >
+        {children}
+      </div>
       {showBottomNav ? <BottomNav /> : null}
     </div>
   );

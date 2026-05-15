@@ -35,29 +35,22 @@ html {
   overscroll-behavior-y: none;
   /* Remove smooth scroll for better mobile performance */
   /* scroll-behavior: smooth; */
-  /* Fix screen tearing on mobile */
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
+  transform: none !important;
 }
 
 body {
-  min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
   overscroll-behavior-y: none;
   color: var(--foreground);
   /* Simplified background for mobile performance - no gradients */
   background: var(--background);
-  background-attachment: fixed;
   font-family: var(--font-poppins), sans-serif;
   /* Optimize mobile performance */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
-  /* Fix screen tearing on mobile */
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+  transform: none !important;
 }
 
 a {
