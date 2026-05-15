@@ -139,9 +139,11 @@ export function BottomNav() {
           </div>
 
           <div
-            className={`pointer-events-none absolute top-0 z-20 flex h-[50px] w-[50px] -translate-x-1/2 items-center justify-center rounded-full bg-gray-900 transition-[opacity,transform] duration-300 ease-out ${bubbleVisible ? "scale-100 opacity-100" : "scale-90 opacity-0"}`}
+            className={`pointer-events-none absolute top-0 z-20 flex h-[50px] w-[50px] -translate-x-1/2 items-center justify-center rounded-full bg-gray-900 transition-opacity duration-300 ease-out ${bubbleVisible ? "opacity-100" : "opacity-0"}`}
             style={{
               left: `${bubbleLeft}px`,
+              transform: `translateX(-50%) scale(${bubbleVisible ? 1 : 0.9})`,
+              willChange: 'opacity',
             }}
           >
             <FontAwesomeIcon icon={activeIcon} className="h-5 w-5 text-white" />
