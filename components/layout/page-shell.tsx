@@ -17,6 +17,13 @@ export function PageShell({ children, className, showBottomNav = true, noTopPadd
         noTopPadding ? "pt-0" : "pt-4",
         className,
       )}
+      style={{
+        // Fix screen tearing on mobile
+        transform: 'translateZ(0)',
+        WebkitTransform: 'translateZ(0)',
+        backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
+      }}
     >
       {children}
       {showBottomNav ? <BottomNav /> : null}

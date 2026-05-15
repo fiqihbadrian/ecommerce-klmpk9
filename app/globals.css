@@ -35,6 +35,9 @@ html {
   overscroll-behavior-y: none;
   /* Remove smooth scroll for better mobile performance */
   /* scroll-behavior: smooth; */
+  /* Fix screen tearing on mobile */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 body {
@@ -42,15 +45,19 @@ body {
   margin: 0;
   overscroll-behavior-y: none;
   color: var(--foreground);
-  background:
-    radial-gradient(circle at -10% -5%, rgba(255, 255, 255, 0.18), transparent 24%),
-    radial-gradient(circle at 110% 105%, rgba(255, 255, 255, 0.12), transparent 28%),
-    linear-gradient(180deg, #8B1E28 0%, var(--background) 42%, #5C0A11 100%);
+  /* Simplified background for mobile performance - no gradients */
+  background: var(--background);
+  background-attachment: fixed;
   font-family: var(--font-poppins), sans-serif;
   /* Optimize mobile performance */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
+  /* Fix screen tearing on mobile */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 a {
