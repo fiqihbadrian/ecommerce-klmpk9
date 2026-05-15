@@ -4,7 +4,8 @@ import { PageShell } from "@/components/layout/page-shell";
 import { ProductCard } from "@/components/product-card";
 import { fetchProducts, type Product } from "@/lib/products";
 
-export const dynamic = "force-dynamic";
+// Cache products for 60 seconds to reduce database load
+export const revalidate = 60;
 
 export default async function HomePage() {
   let products: Product[] = [];
@@ -26,6 +27,8 @@ export default async function HomePage() {
             src="/aha.png"
             alt="Banner promo K9 Mart"
             className="h-full w-full object-cover"
+            loading="eager"
+            fetchPriority="high"
           />
           <div className="pointer-events-none absolute left-3 top-3 rounded-full bg-black/55 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
             Banner 416 x 205

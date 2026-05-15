@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { memo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { formatCurrency } from "@/lib/format";
@@ -14,7 +15,8 @@ type ProductCardProps = {
   compact?: boolean;
 };
 
-export function ProductCard({ product, compact = false }: ProductCardProps) {
+// Memoized component to prevent unnecessary re-renders
+export const ProductCard = memo(function ProductCard({ product, compact = false }: ProductCardProps) {
   const addItem = useCartStore((state) => state.addItem);
   // Optimize: only check if favorite, don't subscribe to entire items array
   const isFavorite = useFavoritesStore((state) => state.isFavorite(product.id));
@@ -28,6 +30,7 @@ export function ProductCard({ product, compact = false }: ProductCardProps) {
             src={product.imageUrl}
             alt={product.title}
             className="h-full w-full object-cover"
+            loading="lazy"
           />
         </div>
         <div className="space-y-1 px-3 pb-2 pt-2">
@@ -97,4 +100,4 @@ export function ProductCard({ product, compact = false }: ProductCardProps) {
       ) : null}
     </article>
   );
-}
+});

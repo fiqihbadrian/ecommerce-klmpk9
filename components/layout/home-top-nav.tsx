@@ -7,7 +7,8 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useCartStore } from "@/store/cart";
 
 export function HomeTopNav() {
-  const itemCount = useCartStore((state) => state.getItemCount());
+  // Optimize: only subscribe to item count, not entire store
+  const itemCount = useCartStore((state) => state.items.reduce((total, item) => total + item.quantity, 0));
 
   return (
     <section className="sticky top-0 z-20 -mx-4 mb-5 bg-transparent px-4 py-3">
