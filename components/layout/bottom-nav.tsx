@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHouse,
@@ -38,6 +38,7 @@ export function BottomNav() {
   const router = useRouter();
   const [canvasWidth, setCanvasWidth] = useState(430);
   const [horizontalNudge, setHorizontalNudge] = useState(0);
+  const [scale, setScale] = useState(1);
   const activeIndex = useMemo(() => {
     const idx = items.findIndex((item) => pathname === item.href || pathname.startsWith(`${item.href}/`));
     return idx >= 0 ? idx : 0;
@@ -46,6 +47,8 @@ export function BottomNav() {
   const itemWidth = canvasWidth / items.length;
   const bubbleLeft = itemWidth * activeIndex + itemWidth / 2 + horizontalNudge;
   const activeIcon: IconDefinition = items[activeIndex]?.icon ?? faHouse;
+
+  const prevIndexRef = useRef<number | undefined>(undefined);
 
   const combinedPath = useMemo(() => {
     // outer rect then notch path (evenodd will cut notch out) — both in canvas coordinates
@@ -70,6 +73,20 @@ export function BottomNav() {
       window.removeEventListener("resize", updateWidth);
     };
   }, []);
+
+  // Zoom-in effect on activeIndex change to avoid visual "patah-patah"
+  useEffect(() => {
+    if (prevIndexRef.current === undefined) {
+      prevIndexRef.current = activeIndex;
+      return;
+    }
+
+    setScale(0.9);
+    const t1 = window.setTimeout(() => setScale(1), 120);
+
+    prevIndexRef.current = activeIndex;
+    return () => window.clearTimeout(t1);
+  }, [activeIndex]);
 
   return (
     <nav className="pointer-events-none fixed inset-x-0 bottom-0 z-50">
@@ -120,13 +137,14 @@ export function BottomNav() {
           </div>
 
           <div
-            className="pointer-events-none absolute top-[-2px] z-20 flex items-center justify-center rounded-full bg-slate-900 shadow-[0_12px_24px_rgba(15,23,42,0.24)] transition-[left,transform,opacity] duration-300 ease-out"
+            className="pointer-events-none absolute top-[-2px] z-20 flex items-center justify-center rounded-full bg-slate-900 shadow-[0_12px_24px_rgba(15,23,42,0.24)]"
             style={{
-              left: `${bubbleLeft}px`,
+              left: 0,
               width: `${bubbleSize}px`,
               height: `${bubbleSize}px`,
-              transform: "translateX(-50%) translateZ(0)",
-              willChange: "left, transform, opacity",
+              transform: `translateX(${bubbleLeft}px) translateX(-50%) translateZ(0) scale(${scale})`,
+              transition: "transform 220ms cubic-bezier(.2,.9,.3,1), opacity 160ms ease-out",
+              willChange: "transform, opacity",
             }}
           >
             <FontAwesomeIcon icon={activeIcon} className="h-5 w-5 text-white" />
