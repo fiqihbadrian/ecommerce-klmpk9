@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHouse,
@@ -48,7 +48,6 @@ export function BottomNav() {
   const bubbleLeft = itemWidth * activeIndex + itemWidth / 2 + horizontalNudge;
   const activeIcon: IconDefinition = items[activeIndex]?.icon ?? faHouse;
 
-  const prevIndexRef = useRef<number | undefined>(undefined);
 
   const combinedPath = useMemo(() => {
     // outer rect then notch path (evenodd will cut notch out) — both in canvas coordinates
@@ -76,15 +75,8 @@ export function BottomNav() {
 
   // Zoom-in effect on activeIndex change to avoid visual "patah-patah"
   useEffect(() => {
-    if (prevIndexRef.current === undefined) {
-      prevIndexRef.current = activeIndex;
-      return;
-    }
-
     setScale(0.9);
     const t1 = window.setTimeout(() => setScale(1), 120);
-
-    prevIndexRef.current = activeIndex;
     return () => window.clearTimeout(t1);
   }, [activeIndex]);
 
