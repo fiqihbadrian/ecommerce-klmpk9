@@ -21,7 +21,7 @@ export function ProductCard({ product, compact = false }: ProductCardProps) {
   const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
 
   return (
-    <article className="overflow-hidden rounded-[15px] border border-black/5 bg-[#fffbfb] shadow-[0_10px_18px_rgba(0,0,0,0.12)] transition hover:-translate-y-1 hover:shadow-[0_16px_24px_rgba(0,0,0,0.16)]">
+    <article className="overflow-hidden rounded-[15px] border border-black/5 bg-[#fffbfb] shadow-[0_10px_18px_rgba(0,0,0,0.12)] transition-shadow hover:shadow-[0_16px_24px_rgba(0,0,0,0.16)]" style={{ willChange: 'auto' }}>
       <Link href={`/product/${product.id}`} className="block">
         <div className={compact ? "h-[126px]" : "h-[108px]"}>
           <img
