@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import type { CSSProperties } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHouse,
@@ -38,7 +39,6 @@ export function BottomNav() {
   const router = useRouter();
   const [canvasWidth, setCanvasWidth] = useState(430);
   const [horizontalNudge, setHorizontalNudge] = useState(0);
-  const [scale, setScale] = useState(1);
   const activeIndex = useMemo(() => {
     const idx = items.findIndex((item) => pathname === item.href || pathname.startsWith(`${item.href}/`));
     return idx >= 0 ? idx : 0;
@@ -72,13 +72,6 @@ export function BottomNav() {
       window.removeEventListener("resize", updateWidth);
     };
   }, []);
-
-  // Zoom-in effect on activeIndex change to avoid visual "patah-patah"
-  useEffect(() => {
-    setScale(0.9);
-    const t1 = window.setTimeout(() => setScale(1), 120);
-    return () => window.clearTimeout(t1);
-  }, [activeIndex]);
 
   return (
     <nav className="pointer-events-none fixed inset-x-0 bottom-0 z-50">
@@ -129,15 +122,18 @@ export function BottomNav() {
           </div>
 
           <div
-            className="pointer-events-none absolute top-[-2px] z-20 flex items-center justify-center rounded-full bg-slate-900 shadow-[0_12px_24px_rgba(15,23,42,0.24)]"
+            key={activeIndex}
+            className="pointer-events-none absolute top-[-2px] z-20 flex items-center justify-center rounded-full bg-slate-900 shadow-[0_12px_24px_rgba(15,23,42,0.24)] md:transition-transform"
             style={{
+              ["--bubble-x" as string]: `${bubbleLeft}px`,
               left: 0,
               width: `${bubbleSize}px`,
               height: `${bubbleSize}px`,
-              transform: `translateX(${bubbleLeft}px) translateX(-50%) translateZ(0) scale(${scale})`,
-              transition: "transform 220ms cubic-bezier(.2,.9,.3,1), opacity 160ms ease-out",
+              transform: `translateX(${bubbleLeft}px) translateX(-50%) translateZ(0)`,
+              transition: "none",
+              animation: "bottom-nav-bubble-zoom 220ms cubic-bezier(.2,.9,.3,1)",
               willChange: "transform, opacity",
-            }}
+            } as CSSProperties}
           >
             <FontAwesomeIcon icon={activeIcon} className="h-5 w-5 text-white" />
           </div>

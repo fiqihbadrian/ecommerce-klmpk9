@@ -19,7 +19,7 @@ export function HomeTopNav() {
 
         <Link
           href="/search"
-          className="flex h-[50px] flex-1 items-center rounded-[31px] bg-white px-5 text-[15px] font-semibold text-[#bfc5cb] shadow-[0_8px_16px_rgba(0,0,0,0.1)]"
+          className="flex h-[50px] flex-1 items-center rounded-[31px] bg-white px-5 text-[15px] font-semibold text-[#bfc5cb] shadow-[0_4px_10px_rgba(0,0,0,0.06)] md:shadow-[0_8px_16px_rgba(0,0,0,0.1)]"
         >
           Masukan teks
         </Link>
@@ -27,7 +27,7 @@ export function HomeTopNav() {
         <Link
           href="/cart"
           aria-label="Open cart"
-          className="relative flex h-[50px] w-[50px] items-center justify-center rounded-[31px] bg-white text-[#495057] shadow-[0_8px_16px_rgba(0,0,0,0.12)]"
+          className="relative flex h-[50px] w-[50px] items-center justify-center rounded-[31px] bg-white text-[#495057] shadow-[0_4px_10px_rgba(0,0,0,0.08)] md:shadow-[0_8px_16px_rgba(0,0,0,0.12)]"
         >
           <FontAwesomeIcon icon={faCartShopping} className="h-5 w-5" />
           {itemCount > 0 ? (
