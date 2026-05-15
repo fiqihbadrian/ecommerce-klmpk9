@@ -43,6 +43,9 @@ export function BottomNav() {
   const itemWidth = navWidth / items.length;
   const bubbleLeft = itemWidth * activeIndex + itemWidth / 2;
   const activeIcon: IconDefinition = items[activeIndex]?.icon ?? faHouse;
+  
+  // Memoize the SVG path to avoid recalculating on every render
+  const curvePath = useMemo(() => buildCurvePath(bubbleLeft, navWidth), [bubbleLeft, navWidth]);
 
   useEffect(() => {
     const node = containerRef.current;
@@ -65,7 +68,12 @@ export function BottomNav() {
     updateWidth();
 
     const observer = new ResizeObserver(() => {
-      updateWidth();
+      // Debounce resize updates
+      if (typeof window !== 'undefined') {
+        window.requestAnimationFrame(() => {
+          updateWidth();
+        });
+      }
     });
 
     observer.observe(node);
@@ -76,12 +84,13 @@ export function BottomNav() {
   }, []);
 
   useEffect(() => {
-    const id = window.requestAnimationFrame(() => {
+    // Delay bubble animation slightly to avoid initial jank
+    const timer = setTimeout(() => {
       setBubbleVisible(true);
-    });
+    }, 100);
 
     return () => {
-      window.cancelAnimationFrame(id);
+      clearTimeout(timer);
     };
   }, []);
 
@@ -100,7 +109,7 @@ export function BottomNav() {
                 <feDropShadow dx="0" dy="-2" stdDeviation="3" floodColor="rgba(0,0,0,0.08)" />
               </filter>
             </defs>
-            <path d={buildCurvePath(bubbleLeft, navWidth)} fill="white" filter="url(#bottom-nav-shadow)" />
+            <path d={curvePath} fill="white" filter="url(#bottom-nav-shadow)" />
           </svg>
 
           <div className="absolute bottom-0 left-0 right-0 grid h-[60px] grid-cols-4 items-center">
