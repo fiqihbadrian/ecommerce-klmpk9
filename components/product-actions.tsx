@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { Product } from "@/lib/products";
 import { Button } from "./ui/button";
@@ -15,7 +16,14 @@ type ProductActionsProps = {
 export function ProductActions({ product }: ProductActionsProps) {
   const addItem = useCartStore((state) => state.addItem);
   const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
-  const isFavorite = useFavoritesStore((state) => state.isFavorite(product.id));
+  const isFavoriteStore = useFavoritesStore((state) => state.isFavorite(product.id));
+  
+  // Prevent hydration mismatch
+  const [isFavorite, setIsFavorite] = useState(false);
+  
+  useEffect(() => {
+    setIsFavorite(isFavoriteStore);
+  }, [isFavoriteStore]);
 
   return (
     <div className="space-y-3">

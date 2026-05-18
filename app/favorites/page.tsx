@@ -150,7 +150,7 @@ export default function FavoritesPage() {
               </Button>
             </div>
           ) : null}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-3 w-full overflow-hidden" style={{ contain: 'layout style' }}>
             {filteredItems.map((product) => (
               <div
                 key={product.id}

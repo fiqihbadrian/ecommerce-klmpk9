@@ -23,9 +23,10 @@ function getQueryValue(q: SearchParams["q"]) {
 export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: SearchParams;
+  searchParams: Promise<SearchParams>;
 }) {
-  const query = getQueryValue(searchParams.q);
+  const params = await searchParams;
+  const query = getQueryValue(params.q);
   let products: Product[] = [];
   let errorMessage: string | null = null;
 
@@ -80,7 +81,7 @@ export default async function SearchPage({
           actionHref="/home"
         />
       ) : (
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 w-full overflow-hidden" style={{ contain: 'layout style' }}>
           {products.map((product) => (
             <ProductCard key={product.id} product={product} compact />
           ))}

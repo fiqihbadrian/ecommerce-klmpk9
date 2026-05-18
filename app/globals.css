@@ -52,6 +52,7 @@ body {
   min-height: 100dvh;
   margin: 0;
   overscroll-behavior-y: none;
+  overflow-x: hidden;
   color: var(--foreground);
   /* Simplified background for mobile performance - no gradients */
   background: var(--background);

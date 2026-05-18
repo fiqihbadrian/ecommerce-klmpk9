@@ -21,8 +21,8 @@ export default async function HomePage() {
     <PageShell noTopPadding>
       <HomeTopNav />
 
-      <section className="mb-6 overflow-hidden rounded-[15px] bg-white shadow-[0_6px_14px_rgba(0,0,0,0.08)] md:shadow-[0_10px_22px_rgba(0,0,0,0.14)]">
-        <div className="relative aspect-[416/205] w-full">
+      <section className="mb-6 overflow-hidden rounded-[15px] bg-white shadow-[0_6px_14px_rgba(0,0,0,0.08)] md:shadow-[0_10px_22px_rgba(0,0,0,0.14)] w-full">
+        <div className="relative aspect-[416/205] w-full overflow-hidden">
           <img
             src="/aha.png"
             alt="Banner promo K9 Mart"
@@ -58,7 +58,7 @@ export default async function HomePage() {
             actionHref="/search"
           />
         ) : (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-3 w-full overflow-hidden" style={{ contain: 'layout style' }}>
             {products.map((product) => (
               <ProductCard key={product.id} product={product} compact />
             ))}

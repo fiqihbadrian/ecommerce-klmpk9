@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faHeart } from "@fortawesome/free-solid-svg-icons";
@@ -16,25 +17,43 @@ type ProductCardProps = {
 
 export function ProductCard({ product, compact = false }: ProductCardProps) {
   const addItem = useCartStore((state) => state.addItem);
-  // Optimize: only check if favorite, don't subscribe to entire items array
-  const isFavorite = useFavoritesStore((state) => state.isFavorite(product.id));
+  const isFavoriteStore = useFavoritesStore((state) => state.isFavorite(product.id));
   const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
+  
+  // Prevent hydration mismatch by only showing favorite state after mount
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
+  
+  useEffect(() => {
+    setIsHydrated(true);
+    setIsFavorite(isFavoriteStore);
+  }, [isFavoriteStore]);
 
   return (
-    <article className="overflow-hidden rounded-[15px] border border-black/5 bg-[#fffbfb] shadow-[0_10px_18px_rgba(0,0,0,0.12)] transition-shadow hover:shadow-[0_16px_24px_rgba(0,0,0,0.16)]" style={{ willChange: 'auto' }}>
+    <article 
+      className="overflow-hidden rounded-[15px] border border-black/5 bg-[#fffbfb] shadow-[0_10px_18px_rgba(0,0,0,0.12)] w-full max-w-full" 
+      style={{ 
+        transform: 'translateZ(0)',
+        willChange: 'transform',
+        contain: 'paint layout'
+      }}
+    >
       <Link href={`/product/${product.id}`} className="block">
-        <div className={compact ? "h-[126px]" : "h-[108px]"}>
+        <div className={compact ? "h-[126px] overflow-hidden" : "h-[108px] overflow-hidden"}>
           <img
             src={product.imageUrl}
             alt={product.title}
             className="h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
+            style={{ transform: 'translateZ(0)' }}
           />
         </div>
         <div className="space-y-1 px-3 pb-2 pt-2">
           <div className="flex items-start justify-between gap-3">
-            <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#6c757d]">{product.category}</p>
-              <h3 className="mt-0.5 line-clamp-1 text-sm font-semibold leading-5 text-[#343a40]">{product.title}</h3>
+            <div className="min-w-0 flex-1">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#6c757d] truncate">{product.category}</p>
+              <h3 className="mt-0.5 line-clamp-1 text-sm font-semibold leading-5 text-[#343a40] break-words">{product.title}</h3>
             </div>
             {compact ? (
               <div className="flex shrink-0 items-center gap-1">
@@ -77,11 +96,11 @@ export function ProductCard({ product, compact = false }: ProductCardProps) {
           </div>
 
           <div className="flex items-center justify-between gap-2 border-t border-black/5 pt-1">
-            <div>
-              <p className="text-sm font-semibold text-[#343a40]">{formatCurrency(product.price)}</p>
-              <p className="text-[11px] text-[#6c757d]">Stok {product.stock}</p>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-semibold text-[#343a40] truncate">{formatCurrency(product.price)}</p>
+              <p className="text-[11px] text-[#6c757d] truncate">Stok {product.stock}</p>
             </div>
-            <p className="rounded-full bg-[#e9ecef] px-2 py-0.5 text-[10px] font-semibold text-[#495057]">
+            <p className="rounded-full bg-[#e9ecef] px-2 py-0.5 text-[10px] font-semibold text-[#495057] shrink-0">
               ★ {product.rating.toFixed(1)}
             </p>
           </div>

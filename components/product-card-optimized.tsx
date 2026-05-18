@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { formatCurrency } from "@/lib/format";
@@ -18,19 +18,34 @@ type ProductCardProps = {
 // Memoized component to prevent unnecessary re-renders
 export const ProductCard = memo(function ProductCard({ product, compact = false }: ProductCardProps) {
   const addItem = useCartStore((state) => state.addItem);
-  // Optimize: only check if favorite, don't subscribe to entire items array
-  const isFavorite = useFavoritesStore((state) => state.isFavorite(product.id));
+  const isFavoriteStore = useFavoritesStore((state) => state.isFavorite(product.id));
   const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
+  
+  // Prevent hydration mismatch
+  const [isFavorite, setIsFavorite] = useState(false);
+  
+  useEffect(() => {
+    setIsFavorite(isFavoriteStore);
+  }, [isFavoriteStore]);
 
   return (
-    <article className="overflow-hidden rounded-[15px] border border-black/5 bg-[#fffbfb] shadow-[0_10px_18px_rgba(0,0,0,0.12)] transition hover:-translate-y-1 hover:shadow-[0_16px_24px_rgba(0,0,0,0.16)]">
+    <article 
+      className="overflow-hidden rounded-[15px] border border-black/5 bg-[#fffbfb] shadow-[0_10px_18px_rgba(0,0,0,0.12)]" 
+      style={{ 
+        transform: 'translateZ(0)',
+        willChange: 'transform',
+        contain: 'paint layout'
+      }}
+    >
       <Link href={`/product/${product.id}`} className="block">
-        <div className={compact ? "h-[126px]" : "h-[108px]"}>
+        <div className={compact ? "h-[126px] overflow-hidden" : "h-[108px] overflow-hidden"}>
           <img
             src={product.imageUrl}
             alt={product.title}
             className="h-full w-full object-cover"
             loading="lazy"
+            decoding="async"
+            style={{ transform: 'translateZ(0)' }}
           />
         </div>
         <div className="space-y-1 px-3 pb-2 pt-2">
