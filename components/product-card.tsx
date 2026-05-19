@@ -32,7 +32,7 @@ export function ProductCard({ product, compact = false, priority = false }: Prod
 
   return (
     <article 
-      className="overflow-hidden rounded-[15px] border border-black/5 bg-[#fffbfb] shadow-[0_10px_18px_rgba(0,0,0,0.12)] w-full max-w-full" 
+      className="overflow-hidden rounded-[15px] bg-[#fffbfb] shadow-[0_10px_18px_rgba(0,0,0,0.12)] w-full max-w-full" 
       style={{ 
         transform: 'translateZ(0)',
         willChange: 'transform',
