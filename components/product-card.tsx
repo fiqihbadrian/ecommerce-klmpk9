@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { formatCurrency } from "@/lib/format";
@@ -13,9 +14,10 @@ import { Button } from "./ui/button";
 type ProductCardProps = {
   product: Product;
   compact?: boolean;
+  priority?: boolean;
 };
 
-export function ProductCard({ product, compact = false }: ProductCardProps) {
+export function ProductCard({ product, compact = false, priority = false }: ProductCardProps) {
   const addItem = useCartStore((state) => state.addItem);
   const isFavoriteStore = useFavoritesStore((state) => state.isFavorite(product.id));
   const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
@@ -39,14 +41,17 @@ export function ProductCard({ product, compact = false }: ProductCardProps) {
       }}
     >
       <Link href={`/product/${product.id}`} className="block">
-        <div className={compact ? "h-[126px] overflow-hidden" : "h-[108px] overflow-hidden"}>
-          <img
+        <div className={compact ? "relative h-[126px] w-full overflow-hidden" : "relative h-[108px] w-full overflow-hidden"}>
+          <Image
             src={product.imageUrl}
             alt={product.title}
-            className="h-full w-full object-cover"
-            loading="lazy"
-            decoding="async"
-            style={{ transform: 'translateZ(0)' }}
+            fill
+            sizes="(max-width: 768px) 50vw, 33vw"
+            className="object-cover"
+            loading={priority ? "eager" : "lazy"}
+            priority={priority}
+            placeholder="blur"
+            blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2YzZjRmNiIvPjwvc3ZnPg=="
           />
         </div>
         <div className="space-y-1 px-3 pb-2 pt-2">

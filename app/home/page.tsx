@@ -60,8 +60,8 @@ export default async function HomePage() {
           />
         ) : (
           <div className="grid grid-cols-2 gap-3 w-full overflow-hidden" style={{ contain: 'layout style' }}>
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} compact />
+            {products.map((product, index) => (
+              <ProductCard key={product.id} product={product} compact priority={index < 4} />
             ))}
           </div>
         )}
