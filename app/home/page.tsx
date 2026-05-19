@@ -4,8 +4,9 @@ import { PageShell } from "@/components/layout/page-shell";
 import { ProductCard } from "@/components/product-card";
 import { fetchProducts, type Product } from "@/lib/products";
 
-// Cache products for 60 seconds to reduce database load
-export const revalidate = 60;
+// Disable caching to show real-time updates from admin
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function HomePage() {
   let products: Product[] = [];
