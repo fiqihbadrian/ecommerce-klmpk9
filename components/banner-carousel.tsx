@@ -19,7 +19,7 @@ export function BannerCarousel() {
   }, []);
 
   return (
-    <div className="relative aspect-[416/205] w-full overflow-hidden rounded-[15px] bg-white shadow-[0_6px_14px_rgba(0,0,0,0.08)] md:shadow-[0_10px_22px_rgba(0,0,0,0.14)]">
+    <div className="relative w-full overflow-hidden rounded-[15px] bg-white shadow-[0_6px_14px_rgba(0,0,0,0.08)] md:shadow-[0_10px_22px_rgba(0,0,0,0.14)]" style={{ aspectRatio: '416/205', minHeight: '200px' }}>
       {/* Slides */}
       <div
         className="flex h-full transition-transform duration-500 ease-in-out"
