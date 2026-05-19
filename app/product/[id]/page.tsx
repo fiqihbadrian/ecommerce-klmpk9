@@ -78,7 +78,7 @@ export default async function ProductDetailPage({
         <div className="mb-4 flex items-end justify-between gap-3">
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#6c757d]">Rekomendasi</p>
-            <h2 className="mt-1 text-xl font-semibold tracking-tight text-[#343a40]">Produk serupa</h2>
+            <h2 className="mt-1 text-xl font-semibold tracking-tight text-white">Produk serupa</h2>
           </div>
         </div>
 
