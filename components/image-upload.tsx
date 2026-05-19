@@ -82,7 +82,18 @@ export function ImageUpload({ onUploadSuccess, currentImageUrl }: ImageUploadPro
 
       {error ? (
         <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-700">
-          {error}
+          <p className="font-semibold">Upload gagal:</p>
+          <p>{error}</p>
+          {error.includes("Bucket not found") ? (
+            <div className="mt-2 rounded border border-red-300 bg-red-100 p-2">
+              <p className="font-semibold">Setup diperlukan:</p>
+              <p className="mt-1">Buat bucket di Supabase Dashboard → Storage → Create bucket:</p>
+              <ul className="ml-4 mt-1 list-disc">
+                <li>Name: <code className="rounded bg-red-200 px-1">product-images</code></li>
+                <li>Public: ✓ Centang</li>
+              </ul>
+            </div>
+          ) : null}
         </div>
       ) : null}
     </div>
