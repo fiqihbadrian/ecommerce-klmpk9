@@ -7,6 +7,7 @@ import { BackButton } from "@/components/back-button";
 import { PageShell } from "@/components/layout/page-shell";
 import { ProductActions } from "@/components/product-actions";
 import { ProductCard } from "@/components/product-card";
+import { ProductDetailCartIcon } from "@/components/product-detail-cart-icon";
 import { formatCurrency } from "@/lib/format";
 import { fetchProductById, fetchRelatedProducts, type Product } from "@/lib/products";
 
@@ -38,13 +39,7 @@ export default async function ProductDetailPage({
         <div className="flex items-center gap-3">
           <BackButton fallbackHref="/home" />
           <h1 className="flex-1 text-xl font-bold text-[#0b0b0b]">Detail Produk</h1>
-          <Link
-            href="/cart"
-            aria-label="Buka keranjang"
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#f3f4f6] text-[#343a40] transition hover:bg-[#e9ecef]"
-          >
-            <FontAwesomeIcon icon={faCartShopping} className="h-4 w-4" />
-          </Link>
+          <ProductDetailCartIcon />
         </div>
       </section>
 

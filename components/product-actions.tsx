@@ -6,6 +6,7 @@ import type { Product } from "@/lib/products";
 import { Button } from "./ui/button";
 import { useCartStore } from "@/store/cart";
 import { useFavoritesStore } from "@/store/favorites";
+import { useToastStore } from "@/store/toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
@@ -17,6 +18,7 @@ export function ProductActions({ product }: ProductActionsProps) {
   const addItem = useCartStore((state) => state.addItem);
   const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
   const isFavoriteStore = useFavoritesStore((state) => state.isFavorite(product.id));
+  const showToast = useToastStore((state) => state.showToast);
   
   // Prevent hydration mismatch
   const [isFavorite, setIsFavorite] = useState(false);
@@ -24,6 +26,11 @@ export function ProductActions({ product }: ProductActionsProps) {
   useEffect(() => {
     setIsFavorite(isFavoriteStore);
   }, [isFavoriteStore]);
+
+  const handleAddToCart = () => {
+    addItem(product);
+    showToast("Berhasil dimasukkan ke keranjang");
+  };
 
   return (
     <div className="space-y-3">
@@ -42,7 +49,7 @@ export function ProductActions({ product }: ProductActionsProps) {
         <Button asChild className="w-full text-white text-center">
           <Link href="/checkout">Checkout sekarang</Link>
         </Button>
-        <Button onClick={() => addItem(product)} variant="secondary" className="w-full text-[#343a40]">
+        <Button onClick={handleAddToCart} variant="secondary" className="w-full text-[#343a40]">
           Masukkan keranjang
         </Button>
       </div>
