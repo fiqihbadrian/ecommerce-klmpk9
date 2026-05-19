@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 
 const slides = [
   { id: 1, image: "/slide1.png", alt: "Banner promo 1" },
@@ -28,13 +27,11 @@ export function BannerCarousel() {
       >
         {slides.map((slide) => (
           <div key={slide.id} className="relative h-full w-full flex-shrink-0">
-            <Image
+            <img
               src={slide.image}
               alt={slide.alt}
-              fill
-              className="object-cover"
-              priority={slide.id === 1}
-              sizes="(max-width: 768px) 100vw, 430px"
+              className="h-full w-full object-cover"
+              loading={slide.id === 1 ? "eager" : "lazy"}
             />
           </div>
         ))}
