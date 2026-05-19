@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { formatCurrency } from "@/lib/format";
@@ -41,17 +40,12 @@ export function ProductCard({ product, compact = false, priority = false }: Prod
       }}
     >
       <Link href={`/product/${product.id}`} className="block">
-        <div className={compact ? "relative h-[126px] w-full overflow-hidden" : "relative h-[108px] w-full overflow-hidden"}>
-          <Image
+        <div className={compact ? "h-[126px] overflow-hidden" : "h-[108px] overflow-hidden"}>
+          <img
             src={product.imageUrl}
             alt={product.title}
-            fill
-            sizes="(max-width: 768px) 50vw, 33vw"
-            className="object-cover"
+            className="h-full w-full object-cover"
             loading={priority ? "eager" : "lazy"}
-            priority={priority}
-            placeholder="blur"
-            blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2YzZjRmNiIvPjwvc3ZnPg=="
           />
         </div>
         <div className="space-y-1 px-3 pb-2 pt-2">
