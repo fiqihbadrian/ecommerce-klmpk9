@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { ImageUpload } from "@/components/image-upload";
 import { PageShell } from "@/components/layout/page-shell";
 import { getSupabaseClient } from "@/lib/supabaseClient";
 import { formatCurrency } from "@/lib/format";
@@ -370,11 +371,19 @@ export default function AdminPage() {
         </div>
 
         <Input
-          placeholder="Image URL (opsional)"
+          placeholder="Image URL (opsional, atau upload gambar di bawah)"
           value={formData.image_url}
           onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
           className="h-11 border-[#d6d9dd] bg-white text-[#343a40] placeholder:text-[#98a0a8]"
         />
+
+        <div className="rounded-xl border border-[#d6d9dd] bg-[#f8f9fa] p-3">
+          <p className="mb-2 text-xs font-semibold text-[#343a40]">Atau upload gambar:</p>
+          <ImageUpload
+            onUploadSuccess={(url) => setFormData({ ...formData, image_url: url })}
+            currentImageUrl={formData.image_url}
+          />
+        </div>
 
         <Button type="submit" disabled={isAdding} className="w-full">
           {isAdding ? "Menambah produk..." : "Tambah produk"}
@@ -479,6 +488,14 @@ export default function AdminPage() {
                       onChange={(e) => setEditFormData({ ...editFormData, image_url: e.target.value })}
                       className="h-10 border-[#d6d9dd] bg-white text-[#343a40]"
                     />
+
+                    <div className="rounded-xl border border-[#d6d9dd] bg-[#f8f9fa] p-3">
+                      <p className="mb-2 text-xs font-semibold text-[#343a40]">Atau upload gambar:</p>
+                      <ImageUpload
+                        onUploadSuccess={(url) => setEditFormData({ ...editFormData, image_url: url })}
+                        currentImageUrl={editFormData.image_url}
+                      />
+                    </div>
 
                     <div className="flex gap-2">
                       <Button type="submit" className="h-9 text-xs" disabled={isUpdating}>
