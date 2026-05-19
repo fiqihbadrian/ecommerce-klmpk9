@@ -30,7 +30,7 @@ export function BannerCarousel() {
             <img
               src={slide.image}
               alt={slide.alt}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain"
               loading={slide.id === 1 ? "eager" : "lazy"}
             />
           </div>
