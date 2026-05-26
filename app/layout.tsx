@@ -19,9 +19,6 @@ export const metadata: Metadata = {
     statusBarStyle: "default",
     title: "Nine Store",
   },
-  icons: {
-    apple: "/logo-aplikasi.png",
-  },
 };
 
 export const viewport: Viewport = {
