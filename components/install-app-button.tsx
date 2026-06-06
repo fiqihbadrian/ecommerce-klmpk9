@@ -44,25 +44,27 @@ export function InstallAppButton() {
     setDeferredPrompt(null);
   };
 
-  // Hide APK download button - masih dalam pengembangan
-  // Hanya tampilkan PWA install prompt
+  // PWA install button - selalu tampilkan dengan fallback
   return (
     <div className="flex flex-col gap-2">
-      {!isStandalone && deferredPrompt && (
+      {!isStandalone && deferredPrompt ? (
         <button
           type="button"
           onClick={handleInstall}
           className="w-full rounded-full border border-white/30 bg-white/15 py-3 text-center text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20 active:scale-95"
         >
-          Install sebagai PWA
+          Install Aplikasi (PWA)
         </button>
-      )}
-      
-      {!isStandalone && !deferredPrompt && (
-        <p className="text-center text-xs font-medium text-white/70">
-          Gunakan browser untuk install PWA
-        </p>
-      )}
+      ) : !isStandalone ? (
+        <div className="w-full rounded-xl border border-white/30 bg-white/10 p-4 backdrop-blur-sm">
+          <p className="mb-2 text-center text-xs font-semibold text-white">Cara Install PWA:</p>
+          <ul className="space-y-1 text-xs text-white/80">
+            <li>• Chrome: Menu (⋮) → Install app</li>
+            <li>• Safari iOS: Share → Add to Home Screen</li>
+            <li>• Browser lain: Cek menu browser</li>
+          </ul>
+        </div>
+      ) : null}
     </div>
   );
 }
