@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">E-Commerce Klmpk9</string>
-    <string name="title_activity_main">E-Commerce Klmpk9</string>
+    <string name="app_name">Nine Store</string>
+    <string name="title_activity_main">Nine Store</string>
     <string name="package_name">com.klmpk9.ecommerce</string>
     <string name="custom_url_scheme">com.klmpk9.ecommerce</string>
 </resources>

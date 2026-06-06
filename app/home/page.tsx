@@ -6,7 +6,7 @@ import { BannerCarousel } from "@/components/banner-carousel";
 import { fetchProducts, type Product } from "@/lib/products";
 
 // Disable caching to show real-time updates from admin
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 export const revalidate = 0;
 
 export default async function HomePage() {
