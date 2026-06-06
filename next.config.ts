@@ -14,6 +14,8 @@ const nextConfig: NextConfig = {
   },
   // Enable React strict mode for better performance warnings
   reactStrictMode: true,
+  // Output static HTML for Capacitor (Android app)
+  output: 'export',
 };
 
 export default nextConfig;

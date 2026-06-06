@@ -44,21 +44,31 @@ export function InstallAppButton() {
     setDeferredPrompt(null);
   };
 
-  if (isStandalone || !deferredPrompt) {
-    return (
-      <p className="pt-1 text-center text-xs font-medium text-white/75">
-        Jika tombol install belum muncul, buka menu browser lalu pilih Add to Home Screen.
-      </p>
-    );
-  }
-
+  // Tombol download APK - selalu tampil
   return (
-    <button
-      type="button"
-      onClick={handleInstall}
-      className="w-full rounded-full border border-white/30 bg-white/15 py-3 text-center text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20 active:scale-95"
-    >
-      Install aplikasi
-    </button>
+    <div className="flex flex-col gap-2">
+      <a
+        href="/app-release.apk"
+        download="Nine-Store.apk"
+        className="w-full rounded-full border border-white/30 bg-white/15 py-3 text-center text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20 active:scale-95"
+      >
+        Download APK (Android)
+      </a>
+      
+      {/* Fallback text untuk PWA */}
+      {!isStandalone && deferredPrompt && (
+        <button
+          type="button"
+          onClick={handleInstall}
+          className="w-full rounded-full border border-white/30 bg-white/10 py-2.5 text-center text-xs font-medium text-white/90 backdrop-blur-sm transition hover:bg-white/15 active:scale-95"
+        >
+          Atau install sebagai PWA
+        </button>
+      )}
+      
+      <p className="pt-1 text-center text-xs font-medium text-white/70">
+        Setelah download, buka file APK untuk install aplikasi
+      </p>
+    </div>
   );
 }
