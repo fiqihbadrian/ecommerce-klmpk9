@@ -1,4 +1,5 @@
-import Link from "next/link";
+"use client";
+
 import { InstallAppButton } from "@/components/install-app-button";
 
 export default function WelcomePage() {
@@ -42,23 +43,25 @@ export default function WelcomePage() {
       </div>
 
       <div className="z-10 flex w-full max-w-xs flex-col gap-3">
-        <Link
+        <a
           href="/login"
+          onClick={(e) => { e.preventDefault(); window.location.href = '/login'; }}
           className="w-full rounded-full bg-white py-4 text-center text-base font-bold transition-all duration-150 hover:bg-gray-100 active:scale-95"
           style={{ color: "#6E0D15" }}
         >
           Masuk
-        </Link>
-        <Link
+        </a>
+        <a
           href="/register"
+          onClick={(e) => { e.preventDefault(); window.location.href = '/register'; }}
           className="w-full rounded-full bg-white py-4 text-center text-base font-bold transition-all duration-150 hover:bg-gray-100 active:scale-95"
           style={{ color: "#6E0D15" }}
         >
           Daftar
-        </Link>
-        <Link href="/home" className="pt-1 text-center text-sm font-semibold text-white/90 transition hover:text-white">
+        </a>
+        <a href="/home" onClick={(e) => { e.preventDefault(); window.location.href = '/home'; }} className="pt-1 text-center text-sm font-semibold text-white/90 transition hover:text-white">
           Lihat katalog dulu
-        </Link>
+        </a>
         <InstallAppButton />
       </div>
     </main>

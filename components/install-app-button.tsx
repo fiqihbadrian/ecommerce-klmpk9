@@ -48,7 +48,7 @@ export function InstallAppButton() {
   return (
     <div className="flex flex-col gap-2">
       <a
-        href="https://github.com/fiqihbadrian/ecommerce-klmpk9-releases/releases/download/v1.0.2/Nine-Store-v1.0.2.apk"
+        href="https://github.com/fiqihbadrian/ecommerce-klmpk9-releases/releases/download/v1.0.3/Nine-Store-v1.0.3.apk"
         download="Nine-Store.apk"
         className="w-full rounded-full border border-white/30 bg-white/15 py-3 text-center text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20 active:scale-95"
       >
