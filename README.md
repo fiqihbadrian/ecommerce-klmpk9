@@ -85,12 +85,14 @@ Aplikasi e‑commerce mobile‑first yang dibangun dengan Next.js (App Router), 
 
 ## 🔧 Integrasi Supabase
 
-Proyek sudah dikonfigurasi dengan kredensial Supabase. Pastikan variabel lingkungan berikut ada di `.env.local`:
+Proyek sudah dikonfigurasi dengan Supabase. Buat file `.env.local` di root folder:
 
 ```env
-NEXT_PUBLIC_SUPABASE_URL=https://aaelmacpizmfmbvpcbee.supabase.co
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=***REDACTED***
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_supabase_anon_key
 ```
+
+Dapatkan credentials dari [Supabase Dashboard](https://supabase.com/dashboard) → Project Settings → API.
 
 ## 📱 UI/UX Guidelines
 
