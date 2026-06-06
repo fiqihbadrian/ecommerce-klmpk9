@@ -1,5 +1,3 @@
-"use client";
-
 import { InstallAppButton } from "@/components/install-app-button";
 
 export default function WelcomePage() {
@@ -45,7 +43,6 @@ export default function WelcomePage() {
       <div className="z-10 flex w-full max-w-xs flex-col gap-3">
         <a
           href="/login"
-          onClick={(e) => { e.preventDefault(); window.location.href = '/login'; }}
           className="w-full rounded-full bg-white py-4 text-center text-base font-bold transition-all duration-150 hover:bg-gray-100 active:scale-95"
           style={{ color: "#6E0D15" }}
         >
@@ -53,13 +50,12 @@ export default function WelcomePage() {
         </a>
         <a
           href="/register"
-          onClick={(e) => { e.preventDefault(); window.location.href = '/register'; }}
           className="w-full rounded-full bg-white py-4 text-center text-base font-bold transition-all duration-150 hover:bg-gray-100 active:scale-95"
           style={{ color: "#6E0D15" }}
         >
           Daftar
         </a>
-        <a href="/home" onClick={(e) => { e.preventDefault(); window.location.href = '/home'; }} className="pt-1 text-center text-sm font-semibold text-white/90 transition hover:text-white">
+        <a href="/home" className="pt-1 text-center text-sm font-semibold text-white/90 transition hover:text-white">
           Lihat katalog dulu
         </a>
         <InstallAppButton />

@@ -44,31 +44,25 @@ export function InstallAppButton() {
     setDeferredPrompt(null);
   };
 
-  // Tombol download APK - selalu tampil
+  // Hide APK download button - masih dalam pengembangan
+  // Hanya tampilkan PWA install prompt
   return (
     <div className="flex flex-col gap-2">
-      <a
-        href="https://github.com/fiqihbadrian/ecommerce-klmpk9-releases/releases/download/v1.0.3/Nine-Store-v1.0.3.apk"
-        download="Nine-Store.apk"
-        className="w-full rounded-full border border-white/30 bg-white/15 py-3 text-center text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20 active:scale-95"
-      >
-        Download APK (Android)
-      </a>
-      
-      {/* Fallback text untuk PWA */}
       {!isStandalone && deferredPrompt && (
         <button
           type="button"
           onClick={handleInstall}
-          className="w-full rounded-full border border-white/30 bg-white/10 py-2.5 text-center text-xs font-medium text-white/90 backdrop-blur-sm transition hover:bg-white/15 active:scale-95"
+          className="w-full rounded-full border border-white/30 bg-white/15 py-3 text-center text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20 active:scale-95"
         >
-          Atau install sebagai PWA
+          Install sebagai PWA
         </button>
       )}
       
-      <p className="pt-1 text-center text-xs font-medium text-white/70">
-        Setelah download, buka file APK untuk install aplikasi
-      </p>
+      {!isStandalone && !deferredPrompt && (
+        <p className="text-center text-xs font-medium text-white/70">
+          Gunakan browser untuk install PWA
+        </p>
+      )}
     </div>
   );
 }

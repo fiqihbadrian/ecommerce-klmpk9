@@ -101,6 +101,26 @@ Dapatkan credentials dari [Supabase Dashboard](https://supabase.com/dashboard) �
 - **Bottom navigation** – tetap muncul di halaman utama
 - **Clean design** – mengacu pada referensi Figma di folder `layout‑from‑figma`
 
+## 📦 Android APK (Beta)
+
+⚠️ **Status: Dalam Pengembangan - Masih Ada Error**
+
+Kami sedang mengembangkan versi Android APK menggunakan Capacitor. Saat ini masih mengalami beberapa issue:
+
+- ❌ Navigation tidak berfungsi dengan baik (buttons tidak bisa diklik)
+- ❌ Login redirect mengalami masalah
+- ⚠️ App icon mungkin tidak muncul dengan benar
+
+**APK releases tersedia di**: [ecommerce-klmpk9-releases](https://github.com/fiqihbadrian/ecommerce-klmpk9-releases)
+
+**Rekomendasi**: Gunakan **versi web** (PWA) yang sudah stabil di [ecommerce-klmpk9.vercel.app](https://ecommerce-klmpk9.vercel.app)
+
+### Dokumentasi Android (untuk developer)
+
+- [README-ANDROID.md](./README-ANDROID.md) - Setup & build Android
+- [WORKFLOW-ANDROID.md](./WORKFLOW-ANDROID.md) - Development workflow
+- [CARA-UPLOAD-APK.md](./CARA-UPLOAD-APK.md) - Upload ke GitHub releases
+
 ## 🧪 Testing & Lint
 
 ```bash
