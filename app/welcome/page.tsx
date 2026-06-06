@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { InstallAppButton } from "@/components/install-app-button";
 
 export default function WelcomePage() {
@@ -38,7 +37,7 @@ export default function WelcomePage() {
           WELCOME
         </h1>
         <div className="flex h-[200px] w-[200px] items-center justify-center">
-          <Image src="/logo-nine.png" alt="Nine Logo" width={220} height={220} className="object-contain" />
+          <img src="/logo-nine.png" alt="Nine Logo" width="220" height="220" className="object-contain" />
         </div>
       </div>
 

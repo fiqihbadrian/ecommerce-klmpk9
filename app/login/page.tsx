@@ -63,7 +63,8 @@ export default function LoginPage() {
       return;
     }
 
-    window.location.assign("/home");
+    // Force full page reload to refresh auth state
+    window.location.href = "/home";
   }
 
   return (
