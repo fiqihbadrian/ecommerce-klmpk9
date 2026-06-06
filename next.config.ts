@@ -14,8 +14,9 @@ const nextConfig: NextConfig = {
   },
   // Enable React strict mode for better performance warnings
   reactStrictMode: true,
-  // Output static HTML for Capacitor (Android app)
-  output: 'export',
+  // Output static HTML ONLY for Android build (not for Vercel)
+  // Use: npm run android:build to enable this
+  output: process.env.BUILD_MODE === 'android' ? 'export' : undefined,
 };
 
 export default nextConfig;

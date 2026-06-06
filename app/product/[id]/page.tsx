@@ -9,16 +9,9 @@ import { ProductActions } from "@/components/product-actions";
 import { ProductCard } from "@/components/product-card";
 import { ProductDetailCartIcon } from "@/components/product-detail-cart-icon";
 import { formatCurrency } from "@/lib/format";
-import { fetchProductById, fetchRelatedProducts, fetchProducts, type Product } from "@/lib/products";
+import { fetchProductById, fetchRelatedProducts, type Product } from "@/lib/products";
 
-export const dynamic = "force-static";
-
-export async function generateStaticParams() {
-  const products = await fetchProducts();
-  return products.map((product: Product) => ({
-    id: product.id,
-  }));
-}
+export const dynamic = "force-dynamic";
 
 export default async function ProductDetailPage({
   params,

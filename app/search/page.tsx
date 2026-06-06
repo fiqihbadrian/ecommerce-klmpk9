@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { searchProducts, type Product } from "@/lib/products";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
 type SearchParams = {
   q?: string | string[];
